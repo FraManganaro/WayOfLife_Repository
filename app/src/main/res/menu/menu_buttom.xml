@@ -9,7 +9,7 @@
     <item
         android:title="Allenamento"
         android:id="@+id/allenamento"
-        android:icon="@drawable/ic_dashboard_black_24dp"/>
+        android:icon="@drawable/ic_baseline_directions_run_24"/>
 
     <item
         android:title="Profilo"

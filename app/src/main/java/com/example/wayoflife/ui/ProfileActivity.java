@@ -16,6 +16,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,8 +27,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.example.wayoflife.BuildConfig;
+import com.example.wayoflife.Constants;
 import com.example.wayoflife.MainActivity2;
 import com.example.wayoflife.NotificationActivity;
 import com.example.wayoflife.PermissionRationalActivity;
@@ -48,8 +51,10 @@ import com.google.android.material.snackbar.Snackbar;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -59,10 +64,8 @@ public class ProfileActivity extends AppCompatActivity {
     /**
      * Oggetti per ActivityRecognition
      */
-
     // Review check for devices with Android 10 (29+).
-    private boolean runningQOrLater =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
+    private boolean runningQOrLater = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
 
     private boolean activityTrackingEnabled;
 
@@ -71,6 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
     // Action fired when transitions are triggered.
     private final String TRANSITIONS_RECEIVER_ACTION =
             BuildConfig.APPLICATION_ID + "TRANSITIONS_RECEIVER_ACTION";
+
 
     private PendingIntent mActivityTransitionsPendingIntent;
     private ProfileActivity.TransitionsReceiver mTransitionsReceiver;
@@ -120,6 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
                 return "UNKNOWN";
         }
     }
+
     /** Stampa nella console */
     private void printToScreen(@NonNull String message) { Log.d(TAG, message); }
 
@@ -186,64 +191,10 @@ public class ProfileActivity extends AppCompatActivity {
         return activityTransitionList;
     }
 
-
-    Button btNotification;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        btNotification = findViewById(R.id.bt_notification);
-        btNotification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String message = "This is a notification";
-
-//                NotificationCompat.Builder builder = new NotificationCompat.Builder(
-//                        MainActivity2.this, NOTIFICATION_CHANNEL);
-//
-//                builder.setSmallIcon(R.drawable.ic_home_black_24dp)
-//                        .setContentTitle("New Notification")
-//                        .setContentText(message)
-//                        .setPriority(NotificationCompat.PRIORITY_HIGH)
-//                        .setAutoCancel(true);
-
-                /**
-                 * Creo l'intent che mi permetterà di viaggiare da un'activity all'altra
-                 */
-                Intent intent = new Intent(ProfileActivity.this, NotificationActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("message", message);
-
-                PendingIntent pendingIntent = PendingIntent.getActivity(ProfileActivity.this,
-                        0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                //builder.setContentIntent(pendingIntent);
-
-                NotificationManagerCompat notificationManagerCompat =
-                        NotificationManagerCompat.from(ProfileActivity.this);
-
-                /**
-                 * Creo la notifica e ci assegno il PendingIntent appena creato
-                 */
-                Notification notification = new NotificationCompat.Builder(
-                        ProfileActivity.this,
-                        NOTIFICATION_CHANNEL)
-                        .setSmallIcon(R.drawable.ic_home_black_24dp)
-                        .setContentTitle("New Notification")
-                        .setContentText(message)
-                        .setPriority(NotificationCompat.PRIORITY_HIGH)
-                        .setCategory(NotificationCompat.CATEGORY_EVENT)
-                        .setContentIntent(pendingIntent)
-                        .build();
-
-                notificationManagerCompat.notify(1, notification);
-
-//                notificationManagerCompat.notify(1, builder.build());
-            }
-        });
 
         /**
          * Controllore della navigation bar in basso
@@ -273,9 +224,28 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        createNotificationChannel();
+        /** Se ho qualcosa da ripristinare lo rispristino da qui */
+        if(savedInstanceState != null) {
+            activityTrackingEnabled = savedInstanceState.getBoolean(Constants.ACTIVITY_TRACKING_STATUS);
 
-        activityTrackingEnabled = false;
+        }else { /** Atrimenti inizializzo gli oggetti da capo */
+            activityTrackingEnabled = false;
+        }
+
+        /** Recupero le informazioni che sono state memorizzate all'interno del file */
+        resumeInformation();
+
+        /**
+         * Serve solo per adesso -> numero flessioni appena fatte
+         */
+        Intent i = getIntent();
+        int counter = i.getIntExtra("FlessioniFatte", 0);
+        TextView tv = findViewById(R.id.number_pushup);
+        tv.setText("Numero di flessioni: "+counter);
+
+        /** ------------------------------------ */
+
+        createNotificationChannel();
 
         // Costruisco la lista delle transazioni da riconoscere
         activityTransitionList = buildTransition();
@@ -294,27 +264,72 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        resumeInformation();
+
         // Registro il BroadcastReceiver per ascoltare le attività
         registerReceiver(mTransitionsReceiver, new IntentFilter(TRANSITIONS_RECEIVER_ACTION));
     }
     @Override
     protected void onPause() {
         // Disable activity transitions when user leaves the app.
+        // Rimuovere il commento per stoppare riconoscimento quando si esce dall'activity
+//        if (activityTrackingEnabled) { disableActivityTransitions(); }
 
-//        if (activityTrackingEnabled) {
-//            disableActivityTransitions();
-//        }
+        resumeInformation();
 
         super.onPause();
     }
     @Override
     protected void onStop() {
-        // TODO: Unregister activity transition receiver when user leaves the app.
-
-        //Tolgo dall'ascolto il Receiver
+        // Unregister activity transition receiver when user leaves the app.
+        // Rimuovere il commento per stoppare riconoscimento quando si esce dall'activity
 //        unregisterReceiver(mTransitionsReceiver);
 
+        resumeInformation();
+
         super.onStop();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putBoolean(Constants.ACTIVITY_TRACKING_STATUS, activityTrackingEnabled);
+    }
+
+    /**
+     * Salvo le informazioni dei bottoni che sono stati premuto oppure no
+     * In questo modo anche se l'applicazione dovesse essere killara avrei lo stesso i progressi
+     */
+    private void saveInformation(){
+        SharedPreferences sharedPref = getSharedPreferences(
+                //Nome del file
+                Constants.PROFILE_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        /**
+         * Salvo se é stato attivato oppure no l'ActivityRecognitionClient
+         */
+        if(activityTrackingEnabled){
+            //Salvo che é stato premuto l'oggetto relativo all'italia
+            editor.putBoolean(Constants.ACTIVITY_TRACKING_STATUS, true);
+        }else{
+            editor.putBoolean(Constants.ACTIVITY_TRACKING_STATUS, false);
+        }
+
+        editor.apply();
+    }
+    private void resumeInformation(){
+        SharedPreferences sharedPref = getSharedPreferences(
+                Constants.PROFILE_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+
+        activityTrackingEnabled = sharedPref.getBoolean(
+                Constants.ACTIVITY_TRACKING_STATUS, false);
+
+        Switch sw = findViewById(R.id.switchAT);
+        sw.setChecked(activityTrackingEnabled);
     }
 
 
@@ -333,14 +348,17 @@ public class ProfileActivity extends AppCompatActivity {
      * {@link BroadcastReceiver}
      */
     private void enableActivityTransitions() {
+        if(activityTrackingEnabled) return;
+
         // TODO: Create request and listen for activity changes.
 
         Snackbar.make(findViewById(android.R.id.content), "ActivityTracker attivato",
                 Snackbar.LENGTH_LONG).show();
+
         Switch myS = findViewById(R.id.switchAT);
         myS.setChecked(true);
 
-        //Abbiamo creato una richiesta passando la lista precedentemente creata nel main
+        //Creo richiesta passando come oggetto la lista precedentemente creata
         ActivityTransitionRequest request = new ActivityTransitionRequest(activityTransitionList);
 
         // Register for Transitions Updates.
@@ -355,8 +373,8 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void result) {
                         activityTrackingEnabled = true;
+                        saveInformation();
                         printToScreen("Transitions Api was successfully registered.");
-
                     }
                 });
         task.addOnFailureListener(
@@ -365,7 +383,6 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         printToScreen("Transitions Api could NOT be registered: " + e);
                         Log.e(TAG, "Transitions Api could NOT be registered: " + e);
-
                     }
                 });
     }
@@ -374,20 +391,21 @@ public class ProfileActivity extends AppCompatActivity {
      * {@link BroadcastReceiver}
      */
     private void disableActivityTransitions() {
-        // TODO: Stop listening for activity changes.
+        // Stop listening for activity changes.
 
         Snackbar.make(findViewById(android.R.id.content), "ActivityTracker disattivato",
                 Snackbar.LENGTH_LONG).show();
+
         Switch myS = findViewById(R.id.switchAT);
         myS.setChecked(false);
 
-        //Rimuovere gli update quando l'applicazione e chiusa
-
+        //Rimuovere gli update quando non più necessari
         ActivityRecognition.getClient(this).removeActivityTransitionUpdates(mActivityTransitionsPendingIntent)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         activityTrackingEnabled = false;
+                        saveInformation();
                         printToScreen("Transitions successfully unregistered.");
                     }
                 })
@@ -395,7 +413,6 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         printToScreen("Transitions could not be unregistered: " + e);
-                        Log.e(TAG,"Transitions could not be unregistered: " + e);
                     }
                 });
     }
@@ -404,7 +421,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void onClickEnableOrDisableActivityRecognition(View view) {
         printToScreen("onClickEnableOrDisableActivityRecognition");
 
-        // TODO: Enable/Disable activity tracking and ask for permissions if needed.
+        // Enable/Disable activity tracking and ask for permissions if needed.
         if (activityRecognitionPermissionApproved()) {
 
             if (activityTrackingEnabled) {
@@ -453,8 +470,11 @@ public class ProfileActivity extends AppCompatActivity {
                             " (" + toTransitionType(event.getTransitionType()) + ")" + "   " +
                             new SimpleDateFormat("HH:mm:ss", Locale.ITALIAN).format(new Date());
 
+
+                    //Stampo nella console transizione di ingresso e di uscite
                     printToScreen(info);
 
+                    //Salvo solo la transazione di INGRESSO
                     if(toTransitionType(event.getTransitionType()).equalsIgnoreCase("ENTER")){
                         enterActivity = toActivityString(event.getActivityType());
                     }
@@ -466,7 +486,7 @@ public class ProfileActivity extends AppCompatActivity {
                 /**
                  * Creo l'intent che mi permetterà di viaggiare da un'activity all'altra
                  */
-                Intent intentOut = new Intent(ProfileActivity.this, NotificationActivity.class);
+                Intent intentOut = new Intent(ProfileActivity.this, NotificationActivity.class); //Da cambiare quando voglio redirectare dalla notifica all'allenamento
                 intentOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentOut.putExtra("message", enterActivity);
 
@@ -496,7 +516,10 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Prememndo il bottone vado al contatore di flessioni
+     * @param v
+     */
     public void goToPushupCounter(View v){
         Intent intent = new Intent(getApplicationContext(), PushupCounterActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);

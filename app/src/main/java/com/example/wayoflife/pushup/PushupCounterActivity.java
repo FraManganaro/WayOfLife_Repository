@@ -2,6 +2,7 @@ package com.example.wayoflife.pushup;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wayoflife.Constants;
 import com.example.wayoflife.MainActivity2;
 import com.example.wayoflife.R;
 import com.example.wayoflife.ui.ProfileActivity;
@@ -122,7 +124,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
 
         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        intent.putExtra("pushup-value", count);
+        intent.putExtra("FlessioniFatte", count);
         startActivity(intent);
     }
 }
