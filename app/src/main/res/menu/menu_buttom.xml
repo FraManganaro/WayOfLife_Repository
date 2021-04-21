@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Home"
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home_black_24dp"/>
+
+    <item
+        android:title="Allenamento"
+        android:id="@+id/allenamento"
+        android:icon="@drawable/ic_dashboard_black_24dp"/>
+
+    <item
+        android:title="Profilo"
+        android:id="@+id/profilo"
+        android:icon="@drawable/ic_baseline_person_outline_24"/>
+
+</menu>

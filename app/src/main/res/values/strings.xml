@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">WayOfLife</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="nome">Nome</string>
+    <string name="cognome">Cognome</string>
+    <string name="activityRecognition">ActivityRecognition</string>
+    <string name="conferma">Conferma</string>
+    <string name="fineAllenamento">Fine Allenamento</string>
+</resources>
