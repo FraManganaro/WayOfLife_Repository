@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WayOfLife">
-        <activity android:name=".ui.ProfileActivity"></activity>
+        <activity android:name=".ui.ProfileActivity"/>
         <activity android:name=".ui.DashboardActivity" />
         <activity android:name=".NotificationActivity" />
         <activity android:name=".pushup.PushupCounterActivity" />
