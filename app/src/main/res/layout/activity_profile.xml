@@ -20,46 +20,6 @@
         app:menu="@menu/menu_buttom"/>
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClickEnableOrDisableActivityRecognition"
-        android:text="@string/activityRecognition"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.135"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_notification"
-        app:layout_constraintVertical_bias="0.848" />
-
-    <Switch
-        android:id="@+id/switchAT"
-        android:layout_width="236dp"
-        android:layout_height="42dp"
-        android:onClick="onClickEnableOrDisableActivityRecognition"
-        android:text="@string/activityRecognition"
-        android:textSize="20dp"
-        android:fontFamily="@font/candara"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.148"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_notification"
-        app:layout_constraintVertical_bias="0.971" />
-
-    <Button
-        android:id="@+id/bt_notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Notification"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.831"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.057" />
-
-    <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
