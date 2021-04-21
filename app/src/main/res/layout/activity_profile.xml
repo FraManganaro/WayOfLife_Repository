@@ -23,11 +23,12 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
         android:onClick="goToPushupCounter"
         android:text="Pushup-Counter"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.809"
+        app:layout_constraintHorizontal_bias="0.863"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.489" />
@@ -36,12 +37,14 @@
         android:id="@+id/number_pushup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Numero di Flessioni: 0"
+        android:layout_marginTop="148dp"
         android:fontFamily="@font/candara"
-        app:layout_constraintBottom_toTopOf="@+id/switchAT"
+        android:text="Numero di Flessioni: 0"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.547" />
+        app:layout_constraintVertical_bias="0.479" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

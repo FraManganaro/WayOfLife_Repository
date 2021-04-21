@@ -10,13 +10,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="726dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
-        tools:context=".ui.DashboardActivity"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:fillViewport="true">
+        tools:context=".ui.DashboardActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,8 +22,8 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="416dp"
+                android:layout_height="39dp"
                 android:background="#00008577"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
@@ -39,38 +36,40 @@
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="24dp"
                 android:text="Allenamenti"
                 android:textSize="30sp"
                 app:fontFamily="@font/candara"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:text="Start a new Journey"
+                android:layout_width="147dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="20dp"
+                android:text="Premi sull'attività per iniziare l'allenamento"
                 app:fontFamily="@font/candara"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                app:srcCompat="@drawable/ic_baseline_person_outline_24" />
+                app:srcCompat="@drawable/ic_braccioflesso" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -100,7 +99,7 @@
                             android:layout_below="@id/bus"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="Walking"
+                            android:text="@string/camminata"
                             android:textSize="24sp"
                             app:fontFamily="@font/candara" />
 
@@ -110,7 +109,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/ic_dashboard_black_24dp" />
+                            app:srcCompat="@drawable/ic_walking" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -131,7 +130,7 @@
                             android:layout_below="@id/imageView3"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="Boating"
+                            android:text="@string/corsa"
                             android:textSize="24sp"
                             app:fontFamily="@font/candara" />
 
@@ -141,7 +140,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/ic_dashboard_black_24dp" />
+                            app:srcCompat="@drawable/ic_running" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
@@ -174,7 +173,7 @@
                             android:layout_below="@id/bus1"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="Bus"
+                            android:text="@string/ciclismo"
                             android:textSize="24sp"
                             app:fontFamily="@font/candara" />
 
@@ -184,7 +183,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/ic_dashboard_black_24dp" />
+                            app:srcCompat="@drawable/ic_cycling" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -196,7 +195,8 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:onClick="goToPushupCounter">
 
                         <TextView
                             android:id="@+id/textView7"
@@ -205,7 +205,7 @@
                             android:layout_below="@id/train"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="Train"
+                            android:text="@string/pushup"
                             android:textSize="24sp"
                             app:fontFamily="@font/candara" />
 
@@ -215,7 +215,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/ic_dashboard_black_24dp" />
+                            app:srcCompat="@drawable/ic_pushup" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
@@ -247,7 +247,7 @@
                             android:layout_below="@id/cycle"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="Bus"
+                            android:text="..."
                             android:textSize="24sp"
                             app:fontFamily="@font/candara" />
 
@@ -278,7 +278,7 @@
                             android:layout_below="@id/airplane"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="Train"
+                            android:text="..."
                             android:textSize="24sp"
                             app:fontFamily="@font/candara" />
 
@@ -309,7 +309,10 @@
             app:itemTextColor="@drawable/navigation_selector"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             app:menu="@menu/menu_buttom" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -9,13 +9,14 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wayoflife.Constants;
-import com.example.wayoflife.MainActivity2;
 import com.example.wayoflife.R;
+import com.example.wayoflife.ui.HomeActivity;
 import com.example.wayoflife.ui.ProfileActivity;
 
 public class PushupCounterActivity extends AppCompatActivity implements SensorEventListener {
@@ -122,7 +123,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
 //            e.printStackTrace();
 //        }
 
-        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("FlessioniFatte", count);
         startActivity(intent);

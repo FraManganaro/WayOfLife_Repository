@@ -8,4 +8,8 @@
     <string name="activityRecognition">ActivityRecognition</string>
     <string name="conferma">Conferma</string>
     <string name="fineAllenamento">Fine Allenamento</string>
+    <string name="ciclismo">Ciclismo</string>
+    <string name="camminata">Camminata</string>
+    <string name="corsa">Corsa</string>
+    <string name="pushup">Flessioni</string>
 </resources>

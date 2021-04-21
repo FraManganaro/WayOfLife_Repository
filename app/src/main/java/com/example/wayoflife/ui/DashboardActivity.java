@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.wayoflife.R;
+import com.example.wayoflife.pushup.PushupCounterActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -45,5 +47,15 @@ public class DashboardActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    /**
+     * Prememndo il bottone vado al contatore di flessioni
+     * @param v
+     */
+    public void goToPushupCounter(View v){
+        Intent intent = new Intent(getApplicationContext(), PushupCounterActivity.class);
+        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
