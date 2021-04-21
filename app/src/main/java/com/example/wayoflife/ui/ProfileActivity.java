@@ -330,6 +330,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         Switch sw = findViewById(R.id.switchAT);
         sw.setChecked(activityTrackingEnabled);
+
+        if(activityTrackingEnabled) enableActivityTransitions();
     }
 
 
