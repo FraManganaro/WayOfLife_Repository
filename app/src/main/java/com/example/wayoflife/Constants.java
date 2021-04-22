@@ -7,5 +7,9 @@ public class Constants {
 
     public static final String ACTIVITY_TRACKING_STATUS = "ActivityTrackingStatus";
 
+    public static final String WALKING_STATUS = "WalkingStatus";
+    public static final String RUNNING_STATUS = "RunningStatus";
+    public static final String CYCLING_STATUS = "CyclingStatus";
+
 
 }

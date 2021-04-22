@@ -62,6 +62,10 @@ public class HomeActivity extends AppCompatActivity {
 
     private boolean activityTrackingEnabled;
 
+    private boolean walkingStatus;
+    private boolean runningStatus;
+    private boolean cyclingStatus;
+
     private List<ActivityTransition> activityTransitionList;
 
     // Action fired when transitions are triggered.
@@ -102,6 +106,8 @@ public class HomeActivity extends AppCompatActivity {
                 return "IN_VEHICLE";
             case DetectedActivity.ON_BICYCLE:
                 return "ON_BICYCLE";
+            case DetectedActivity.RUNNING:
+                return "RUNNING";
             default:
                 return "UNKNOWN";
         }
@@ -143,17 +149,38 @@ public class HomeActivity extends AppCompatActivity {
     private ArrayList buildTransition(){
         ArrayList activityTransitionList = new ArrayList<>();
 
-        //Da rimuovere
-        activityTransitionList.add(new ActivityTransition.Builder()
-                .setActivityType(DetectedActivity.WALKING)
-                .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
-                .build());
-        activityTransitionList.add(new ActivityTransition.Builder()
-                .setActivityType(DetectedActivity.WALKING)
-                .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
-                .build());
+        if(walkingStatus) {
+            activityTransitionList.add(new ActivityTransition.Builder()
+                    .setActivityType(DetectedActivity.WALKING)
+                    .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
+                    .build());
+            activityTransitionList.add(new ActivityTransition.Builder()
+                    .setActivityType(DetectedActivity.WALKING)
+                    .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
+                    .build());
+        }
+        if(runningStatus) {
+            activityTransitionList.add(new ActivityTransition.Builder()
+                    .setActivityType(DetectedActivity.RUNNING)
+                    .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
+                    .build());
+            activityTransitionList.add(new ActivityTransition.Builder()
+                    .setActivityType(DetectedActivity.RUNNING)
+                    .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
+                    .build());
+        }
+        if(cyclingStatus) {
+            activityTransitionList.add(new ActivityTransition.Builder()
+                    .setActivityType(DetectedActivity.ON_BICYCLE)
+                    .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
+                    .build());
+            activityTransitionList.add(new ActivityTransition.Builder()
+                    .setActivityType(DetectedActivity.ON_BICYCLE)
+                    .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
+                    .build());
+        }
 
-        //Da rimuovere
+        /** solo per i test -> da rimuovere */
         activityTransitionList.add(new ActivityTransition.Builder()
                 .setActivityType(DetectedActivity.STILL)
                 .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
@@ -163,6 +190,7 @@ public class HomeActivity extends AppCompatActivity {
                 .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
                 .build());
 
+        /*
         activityTransitionList.add(new ActivityTransition.Builder()
                 .setActivityType(DetectedActivity.IN_VEHICLE)
                 .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
@@ -171,14 +199,7 @@ public class HomeActivity extends AppCompatActivity {
                 .setActivityType(DetectedActivity.IN_VEHICLE)
                 .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
                 .build());
-        activityTransitionList.add(new ActivityTransition.Builder()
-                .setActivityType(DetectedActivity.ON_BICYCLE)
-                .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
-                .build());
-        activityTransitionList.add(new ActivityTransition.Builder()
-                .setActivityType(DetectedActivity.ON_BICYCLE)
-                .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
-                .build());
+         */
 
         return activityTransitionList;
     }
@@ -223,14 +244,19 @@ public class HomeActivity extends AppCompatActivity {
         if(savedInstanceState != null) {
             activityTrackingEnabled = savedInstanceState.getBoolean(Constants.ACTIVITY_TRACKING_STATUS);
 
+            walkingStatus = savedInstanceState.getBoolean(Constants.WALKING_STATUS);
+            runningStatus = savedInstanceState.getBoolean(Constants.RUNNING_STATUS);
+            cyclingStatus = savedInstanceState.getBoolean(Constants.CYCLING_STATUS);
+
         }else { /** Atrimenti inizializzo gli oggetti da capo */
             activityTrackingEnabled = false;
+
+            walkingStatus = false;
+            runningStatus = false;
+            cyclingStatus = false;
         }
 
         createNotificationChannel();
-
-        // Costruisco la lista delle transazioni da riconoscere
-        activityTransitionList = buildTransition();
 
         //Creo un PendingIntent che posso triggerare quando uno ActivityTransition accorre
         Intent intent = new Intent(TRANSITIONS_RECEIVER_ACTION);
@@ -252,7 +278,6 @@ public class HomeActivity extends AppCompatActivity {
         // Registro il BroadcastReceiver per ascoltare le attività
         registerReceiver(mTransitionsReceiver, new IntentFilter(TRANSITIONS_RECEIVER_ACTION));
     }
-
     @Override
     protected void onPause() {
         // Disable activity transitions when user leaves the app.
@@ -275,6 +300,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
 
         outState.putBoolean(Constants.ACTIVITY_TRACKING_STATUS, activityTrackingEnabled);
+
+        outState.putBoolean(Constants.WALKING_STATUS, walkingStatus);
+        outState.putBoolean(Constants.RUNNING_STATUS, runningStatus);
+        outState.putBoolean(Constants.CYCLING_STATUS, cyclingStatus);
     }
 
     /**
@@ -291,12 +320,18 @@ public class HomeActivity extends AppCompatActivity {
         /**
          * Salvo se é stato attivato oppure no l'ActivityRecognitionClient
          */
-        if(activityTrackingEnabled){
-            //Salvo che é stato premuto l'oggetto relativo all'italia
-            editor.putBoolean(Constants.ACTIVITY_TRACKING_STATUS, true);
-        }else{
-            editor.putBoolean(Constants.ACTIVITY_TRACKING_STATUS, false);
-        }
+        editor.putBoolean(Constants.ACTIVITY_TRACKING_STATUS, activityTrackingEnabled);
+
+//        if(activityTrackingEnabled){
+//            //Salvo che é stato premuto l'oggetto relativo all'italia
+//            editor.putBoolean(Constants.ACTIVITY_TRACKING_STATUS, true);
+//        }else{
+//            editor.putBoolean(Constants.ACTIVITY_TRACKING_STATUS, false);
+//        }
+
+        editor.putBoolean(Constants.WALKING_STATUS, walkingStatus);
+        editor.putBoolean(Constants.RUNNING_STATUS, runningStatus);
+        editor.putBoolean(Constants.CYCLING_STATUS, cyclingStatus);
 
         editor.apply();
     }
@@ -308,10 +343,39 @@ public class HomeActivity extends AppCompatActivity {
         activityTrackingEnabled = sharedPref.getBoolean(
                 Constants.ACTIVITY_TRACKING_STATUS, false);
 
-        Switch sw = findViewById(R.id.switchAT);
-        sw.setChecked(activityTrackingEnabled);
+        walkingStatus = sharedPref.getBoolean(
+                Constants.WALKING_STATUS, false);
+        runningStatus = sharedPref.getBoolean(
+                Constants.RUNNING_STATUS, false);
+        cyclingStatus = sharedPref.getBoolean(
+                Constants.CYCLING_STATUS, false);
+
+        manageSwitch();
 
         if(activityTrackingEnabled) enableActivityTransitions();
+    }
+    /**
+     * Gestisco i 3 switch che controllano corsa, camminata e ciclismo
+     */
+    private void manageSwitch(){
+        Switch sw = findViewById(R.id.switchAT);
+
+        Switch swCamminata = findViewById(R.id.swCamminata);
+        Switch swCorsa = findViewById(R.id.swCorsa);
+        Switch swCiclismo = findViewById(R.id.swCiclismo);
+
+        sw.setChecked(activityTrackingEnabled);
+
+        swCamminata.setClickable(activityTrackingEnabled);
+        swCorsa.setClickable(activityTrackingEnabled);
+        swCiclismo.setClickable(activityTrackingEnabled);
+        swCamminata.setEnabled(activityTrackingEnabled);
+        swCorsa.setEnabled(activityTrackingEnabled);
+        swCiclismo.setEnabled(activityTrackingEnabled);
+
+        swCamminata.setChecked(walkingStatus);
+        swCorsa.setChecked(runningStatus);
+        swCiclismo.setChecked(cyclingStatus);
     }
 
 
@@ -332,8 +396,8 @@ public class HomeActivity extends AppCompatActivity {
     private void enableActivityTransitions() {
         // TODO: Create request and listen for activity changes.
 
-        Switch myS = findViewById(R.id.switchAT);
-        myS.setChecked(true);
+        // Costruisco la lista delle transazioni da riconoscere
+        activityTransitionList = buildTransition();
 
         //Creo richiesta passando come oggetto la lista precedentemente creata
         ActivityTransitionRequest request = new ActivityTransitionRequest(activityTransitionList);
@@ -351,6 +415,7 @@ public class HomeActivity extends AppCompatActivity {
                     public void onSuccess(Void result) {
                         activityTrackingEnabled = true;
                         saveInformation();
+                        manageSwitch();
                         printToScreen("Transitions Api was successfully registered.");
                     }
                 });
@@ -373,9 +438,6 @@ public class HomeActivity extends AppCompatActivity {
         Snackbar.make(findViewById(android.R.id.content), "ActivityTracker disattivato",
                 Snackbar.LENGTH_SHORT).show();
 
-        Switch myS = findViewById(R.id.switchAT);
-        myS.setChecked(false);
-
         //Rimuovere gli update quando non più necessari
         ActivityRecognition.getClient(this).removeActivityTransitionUpdates(mActivityTransitionsPendingIntent)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -383,6 +445,7 @@ public class HomeActivity extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         activityTrackingEnabled = false;
                         saveInformation();
+                        manageSwitch();
                         printToScreen("Transitions successfully unregistered.");
                     }
                 })
@@ -396,7 +459,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void onClickEnableOrDisableActivityRecognition(View view) {
-        printToScreen("onClickEnableOrDisableActivityRecognition");
 
         // Enable/Disable activity tracking and ask for permissions if needed.
         if (activityRecognitionPermissionApproved()) {
@@ -493,5 +555,41 @@ public class HomeActivity extends AppCompatActivity {
                 notificationManagerCompat.notify(1, notification);
             }
         }
+    }
+
+    public void manageWalking(View v){
+        walkingStatus = !walkingStatus;
+
+        activityTransitionList = buildTransition();
+
+        saveInformation();
+        resumeInformation();
+
+        printToScreen("ManageWalking: \n\n" + activityTransitionList.toString());
+    }
+    public void manageRunning(View v){
+        runningStatus = !runningStatus;
+
+        activityTransitionList = buildTransition();
+
+        saveInformation();
+        resumeInformation();
+
+        printToScreen("manageRunning: \n\n" + activityTransitionList.toString());
+    }
+    public void manageCycling(View v){
+        cyclingStatus = !cyclingStatus;
+
+        activityTransitionList = buildTransition();
+
+        saveInformation();
+        resumeInformation();
+
+        printToScreen("manageRunning: \n\n" + activityTransitionList.toString());
+    }
+
+
+    public void status(View v){
+        printToScreen("Status: \n\n" + activityTransitionList.toString() + "\n\n");
     }
 }
