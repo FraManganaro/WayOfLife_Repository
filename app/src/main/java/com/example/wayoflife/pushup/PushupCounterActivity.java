@@ -8,7 +8,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +27,10 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
     private int count = 0;
 
     private TextView tvCounter;
+
+    private Chronometer chronometer;
+    private boolean isRunningChronometer;
+    private long pauseOffset = 0;
 
 //    private boolean justStarted = true;
 //    private Calendar dateStarted;
@@ -43,6 +49,12 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
 
         /** Sensore di tipo PROSSIMITÀ */
         Sensor proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+
+        /** Attivazione del croometro */
+        chronometer = findViewById(R.id.chronometer);
+        chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+        chronometer.start();
+        isRunningChronometer = true;
     }
     @Override
     public void onResume() {
@@ -127,5 +139,23 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("FlessioniFatte", count);
         startActivity(intent);
+    }
+
+    /**
+     * Metodo che permette di avviare e stoppare il chronometro toccando sul cronometro
+     * @param v
+     */
+    public void pauseChronometer(View v){
+        if(isRunningChronometer) {
+            chronometer.stop();
+            pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
+
+            isRunningChronometer = false;
+        } else {
+            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+            chronometer.start();
+
+            isRunningChronometer = true;
+        }
     }
 }

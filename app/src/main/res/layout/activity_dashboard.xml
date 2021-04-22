@@ -22,8 +22,8 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_width="416dp"
-                android:layout_height="39dp"
+                android:layout_width="412dp"
+                android:layout_height="34dp"
                 android:background="#00008577"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
@@ -52,7 +52,7 @@
                 android:layout_width="147dp"
                 android:layout_height="39dp"
                 android:layout_marginStart="20dp"
-                android:text="Premi sull'attività per iniziare l'allenamento"
+                android:text="Premi su un'attività per iniziare l'allenamento"
                 app:fontFamily="@font/candara"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
@@ -69,7 +69,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                app:srcCompat="@drawable/ic_braccioflesso" />
+                app:srcCompat="@drawable/ic_muscle_color" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -109,7 +109,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/ic_walking" />
+                            app:srcCompat="@drawable/ic_walking_color" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -140,7 +140,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/ic_running" />
+                            app:srcCompat="@drawable/ic_running_color" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
@@ -183,7 +183,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/ic_cycling" />
+                            app:srcCompat="@drawable/ic_cycling_color" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -215,7 +215,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/ic_pushup" />
+                            app:srcCompat="@drawable/ic_pushup_color" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
@@ -247,7 +247,7 @@
                             android:layout_below="@id/cycle"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="..."
+                            android:text="@string/freestyle"
                             android:textSize="24sp"
                             app:fontFamily="@font/candara" />
 
@@ -257,7 +257,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/ic_dashboard_black_24dp" />
+                            app:srcCompat="@drawable/ic_workout_color" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -278,7 +278,7 @@
                             android:layout_below="@id/airplane"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="..."
+                            android:text="@string/altro"
                             android:textSize="24sp"
                             app:fontFamily="@font/candara" />
 
@@ -288,7 +288,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/ic_dashboard_black_24dp" />
+                            app:srcCompat="@drawable/ic_altro_color" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>

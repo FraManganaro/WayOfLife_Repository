@@ -12,4 +12,6 @@
     <string name="camminata">Camminata</string>
     <string name="corsa">Corsa</string>
     <string name="pushup">Flessioni</string>
+    <string name="freestyle">Freestyle</string>
+    <string name="altro">Altro</string>
 </resources>

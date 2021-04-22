@@ -482,7 +482,7 @@ public class HomeActivity extends AppCompatActivity {
                 Notification notification = new NotificationCompat.Builder(
                         HomeActivity.this,
                         NOTIFICATION_CHANNEL)
-                        .setSmallIcon(R.drawable.ic_home_black_24dp)
+                        .setSmallIcon(R.drawable.ic_notifications_black_24dp)
                         .setContentTitle("New Notification")
                         .setContentText(enterActivity)
                         .setPriority(NotificationCompat.PRIORITY_HIGH)
