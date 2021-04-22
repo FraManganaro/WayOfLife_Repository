@@ -5,6 +5,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="nome">Nome</string>
     <string name="cognome">Cognome</string>
+    <string name="sesso">Sesso (M/F)</string>
     <string name="activityRecognition">ActivityRecognition</string>
     <string name="conferma">Conferma</string>
     <string name="fineAllenamento">Fine Allenamento</string>
@@ -16,4 +17,8 @@
     <string name="altro">Altro</string>
     <string name="allenamenti">Allenamenti</string>
     <string name="intro_allenamenti">Premi su un`attività per iniziare l`allenamento</string>
+    <string name="peso">Peso (in Kg)</string>
+    <string name="altezza">Altezza (in cm)</string>
+    <string name="aggiornaProfilo">Aggiorna dati del profilo</string>
+    <string name="nickname">Nickname</string>
 </resources>

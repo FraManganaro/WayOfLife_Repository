@@ -2,18 +2,32 @@ package com.example.wayoflife.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.example.wayoflife.Constants;
 import com.example.wayoflife.R;
-import com.example.wayoflife.pushup.PushupCounterActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements ProfileDialog.ExampleDialogListener{
 
     public static final String TAG = "ProfileActivity";
+
+    private FrameLayout frameLayout;
+
+    private String nickname;
+    private String nome;
+    private String cognome;
+    private String peso;
+    private String altezza;
+    private String sesso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,24 +62,79 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * Serve solo per adesso -> numero flessioni appena fatte
-         */
-        Intent i = getIntent();
-        int counter = i.getIntExtra("FlessioniFatte", 0);
-        TextView tv = findViewById(R.id.number_pushup);
-        tv.setText("Numero di flessioni: " + counter);
+        frameLayout = findViewById(R.id.aggiornaDatiProfilo);
+        frameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
 
-        /** ------------------------------------ */
+        updateProfileData();
     }
 
-    /**
-     * Prememndo il bottone vado al contatore di flessioni
-     * @param v
-     */
-    public void goToPushupCounter(View v){
-        Intent intent = new Intent(getApplicationContext(), PushupCounterActivity.class);
-        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+    public void openDialog(){
+        ProfileDialog profileDialog = new ProfileDialog();
+        profileDialog.show(getSupportFragmentManager(), "esempio di dialogo");
+    }
+    @Override
+    public void applyTexts(String nickname, String nome, String cognome,
+                           String peso, String altezza, String sesso) {
+
+        SharedPreferences sharedPref = getSharedPreferences(
+                Constants.PROFILE_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        if(!nickname.isEmpty()) editor.putString(Constants.NICKNAME, nickname);
+        if(!nome.isEmpty()) editor.putString(Constants.NOME, nome);
+        if(!cognome.isEmpty()) editor.putString(Constants.COGNOME, cognome);
+        if(!peso.isEmpty()) editor.putString(Constants.PESO, peso);
+        if(!altezza.isEmpty()) editor.putString(Constants.ALTEZZA, altezza);
+        if(!sesso.isEmpty()) editor.putString(Constants.SESSO, sesso);
+
+        editor.apply();
+
+        updateProfileData();
+    }
+
+
+    public void updateProfileData(){
+        SharedPreferences sharedPref = getSharedPreferences(
+                Constants.PROFILE_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+
+        nickname = sharedPref.getString(
+                Constants.NICKNAME, "Nickname");
+        nome = sharedPref.getString(
+                Constants.NOME, "Nome");
+        cognome = sharedPref.getString(
+                Constants.COGNOME, "Cognome");
+        peso = sharedPref.getString(
+                Constants.PESO, "Peso");
+        altezza = sharedPref.getString(
+                Constants.ALTEZZA, "Altezza");
+        sesso = sharedPref.getString(
+                Constants.SESSO, "Sesso");
+
+        TextView tvNickname = findViewById(R.id.tvNickname);
+        tvNickname.setText(nickname);
+
+        TextView tvNome = findViewById(R.id.tvNome);
+        tvNome.setText(nome);
+
+        TextView tvCognome = findViewById(R.id.tvCognome);
+        tvCognome.setText(cognome);
+
+        TextView tvPeso = findViewById(R.id.tvPeso);
+        tvPeso.setText(peso + " Kg");
+
+        TextView tvAltezza = findViewById(R.id.tvAltezza);
+        tvAltezza.setText(altezza + " cm");
+
+        TextView tvSesso = findViewById(R.id.tvSesso);
+        if(sesso.equalsIgnoreCase("maschio") || sesso.equalsIgnoreCase("m"))
+            tvSesso.setText("Maschio");
+        else tvSesso.setText("Femmina");
     }
 }

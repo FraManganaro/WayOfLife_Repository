@@ -322,13 +322,6 @@ public class HomeActivity extends AppCompatActivity {
          */
         editor.putBoolean(Constants.ACTIVITY_TRACKING_STATUS, activityTrackingEnabled);
 
-//        if(activityTrackingEnabled){
-//            //Salvo che é stato premuto l'oggetto relativo all'italia
-//            editor.putBoolean(Constants.ACTIVITY_TRACKING_STATUS, true);
-//        }else{
-//            editor.putBoolean(Constants.ACTIVITY_TRACKING_STATUS, false);
-//        }
-
         editor.putBoolean(Constants.WALKING_STATUS, walkingStatus);
         editor.putBoolean(Constants.RUNNING_STATUS, runningStatus);
         editor.putBoolean(Constants.CYCLING_STATUS, cyclingStatus);

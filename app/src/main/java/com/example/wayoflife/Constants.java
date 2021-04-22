@@ -11,5 +11,12 @@ public class Constants {
     public static final String RUNNING_STATUS = "RunningStatus";
     public static final String CYCLING_STATUS = "CyclingStatus";
 
+    public static final String NOME = "Nome";
+    public static final String COGNOME = "Cognome";
+    public static final String NICKNAME = "Nickname";
+    public static final String PESO = "Peso";
+    public static final String ALTEZZA = "Peso";
+    public static final String SESSO = "Sesso";
+
 
 }
