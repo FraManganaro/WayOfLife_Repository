@@ -17,7 +17,6 @@
         <activity android:name=".workouts.FreestyleActivity" />
         <activity android:name=".ui.ProfileActivity" />
         <activity android:name=".ui.DashboardActivity" />
-        <activity android:name=".NotificationActivity" />
         <activity android:name=".workouts.PushupCounterActivity" />
         <activity
             android:name=".ui.HomeActivity"

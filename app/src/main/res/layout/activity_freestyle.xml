@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".workouts.FreestyleActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/textView11"
+        android:textSize="25sp"
+        android:gravity="center"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

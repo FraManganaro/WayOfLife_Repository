@@ -28,7 +28,6 @@ import android.widget.Switch;
 
 import com.example.wayoflife.BuildConfig;
 import com.example.wayoflife.Constants;
-import com.example.wayoflife.NotificationActivity;
 import com.example.wayoflife.PermissionRationalActivity;
 import com.example.wayoflife.R;
 import com.example.wayoflife.workouts.RunningActivity;

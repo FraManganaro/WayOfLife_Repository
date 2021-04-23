@@ -38,7 +38,8 @@
                 android:text="@string/nickname"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:id="@+id/tvNickname"/>
+                android:id="@+id/tvNickname"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
 
@@ -71,7 +72,8 @@
                 android:layout_marginLeft="17dp"
                 android:text="@string/aggiornaProfilo"
                 android:textStyle="italic"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:textColor="@color/black"/>
 
         </FrameLayout>
 
@@ -113,7 +115,8 @@
                             android:fontFamily="@font/candara"
                             android:textStyle="bold"
                             android:textSize="17dp"
-                            android:layout_marginTop="5dp"/>
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -130,7 +133,8 @@
                             android:text="@string/cognome"
                             android:fontFamily="@font/candara"
                             android:textStyle="bold"
-                            android:textSize="17dp"/>
+                            android:textSize="17dp"
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -176,7 +180,8 @@
                             android:text="@string/peso"
                             android:fontFamily="@font/candara"
                             android:textStyle="bold"
-                            android:textSize="17dp"/>
+                            android:textSize="17dp"
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -220,7 +225,8 @@
                             android:text="@string/altezza"
                             android:fontFamily="@font/candara"
                             android:textStyle="bold"
-                            android:textSize="17dp"/>
+                            android:textSize="17dp"
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -262,7 +268,8 @@
                             android:text="@string/sesso"
                             android:fontFamily="@font/candara"
                             android:textStyle="bold"
-                            android:textSize="17dp"/>
+                            android:textSize="17dp"
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:layout_width="match_parent"

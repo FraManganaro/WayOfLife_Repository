@@ -7,10 +7,9 @@
     tools:context=".workouts.RunningActivity">
 
     <TextView
-        android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="219dp" />
+        android:id="@+id/textView5"
+        android:textSize="25sp"
+        android:gravity="center"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

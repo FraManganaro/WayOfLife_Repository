@@ -46,7 +46,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/copertina"
@@ -91,8 +92,10 @@
                     app:cardElevation="5dp">
 
                     <RelativeLayout
+                        android:id="@+id/rlCamminata"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:onClick="goToRunningActivity">
 
                         <TextView
                             android:id="@+id/textView3"
@@ -103,7 +106,8 @@
                             android:layout_marginTop="10dp"
                             android:text="@string/camminata"
                             android:textSize="24sp"
-                            app:fontFamily="@font/candara" />
+                            app:fontFamily="@font/candara"
+                            android:textColor="@color/black"/>
 
                         <ImageView
                             android:id="@+id/camminata"
@@ -123,8 +127,10 @@
                     app:cardElevation="5dp">
 
                     <RelativeLayout
+                        android:id="@+id/rlCorsa"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:onClick="goToRunningActivity">
 
                         <TextView
                             android:id="@+id/textView4"
@@ -135,7 +141,8 @@
                             android:layout_marginTop="10dp"
                             android:text="@string/corsa"
                             android:textSize="24sp"
-                            app:fontFamily="@font/candara" />
+                            app:fontFamily="@font/candara"
+                            android:textColor="@color/black"/>
 
                         <ImageView
                             android:id="@+id/corsa"
@@ -167,8 +174,10 @@
                     app:cardElevation="5dp">
 
                     <RelativeLayout
+                        android:id="@+id/rlCiclismo"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:onClick="goToRunningActivity">
 
                         <TextView
                             android:id="@+id/textView6"
@@ -179,7 +188,8 @@
                             android:layout_marginTop="10dp"
                             android:text="@string/ciclismo"
                             android:textSize="24sp"
-                            app:fontFamily="@font/candara" />
+                            app:fontFamily="@font/candara"
+                            android:textColor="@color/black"/>
 
                         <ImageView
                             android:id="@+id/ciclismo"
@@ -199,6 +209,7 @@
                     app:cardElevation="5dp">
 
                     <RelativeLayout
+                        android:id="@+id/rlPushup"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:onClick="goToPushupCounter">
@@ -212,7 +223,8 @@
                             android:layout_marginTop="10dp"
                             android:text="@string/pushup"
                             android:textSize="24sp"
-                            app:fontFamily="@font/candara" />
+                            app:fontFamily="@font/candara"
+                            android:textColor="@color/black"/>
 
                         <ImageView
                             android:id="@+id/flessioni"
@@ -243,8 +255,10 @@
                     app:cardElevation="5dp">
 
                     <RelativeLayout
+                        android:id="@+id/rlFreestyle"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:onClick="goToFreestyleActivity">
 
                         <TextView
                             android:id="@+id/textView8"
@@ -255,7 +269,8 @@
                             android:layout_marginTop="10dp"
                             android:text="@string/freestyle"
                             android:textSize="24sp"
-                            app:fontFamily="@font/candara" />
+                            app:fontFamily="@font/candara"
+                            android:textColor="@color/black"/>
 
                         <ImageView
                             android:id="@+id/freestyle"
@@ -275,6 +290,7 @@
                     app:cardElevation="5dp">
 
                     <RelativeLayout
+                        android:id="@+id/rlExtraWorkout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -287,7 +303,8 @@
                             android:layout_marginTop="10dp"
                             android:text="@string/altro"
                             android:textSize="24sp"
-                            app:fontFamily="@font/candara" />
+                            app:fontFamily="@font/candara"
+                            android:textColor="@color/black"/>
 
                         <ImageView
                             android:id="@+id/altro"
