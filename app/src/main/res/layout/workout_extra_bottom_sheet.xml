@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:text="@string/basket"
             android:textSize="18sp"
             android:fontFamily="@font/candara"/>
@@ -60,7 +60,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:text="@string/calcio"
             android:textSize="18sp"
             android:fontFamily="@font/candara"/>
@@ -83,7 +83,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:text="@string/nuoto"
             android:textSize="18sp"
             android:fontFamily="@font/candara"/>
@@ -106,7 +106,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:text="@string/scalini"
             android:textSize="18sp"
             android:fontFamily="@font/candara"/>
@@ -124,12 +124,13 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_tennis_racket"/>
+            android:src="@drawable/ic_tennis_racket"
+            android:contentDescription="TODO" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:text="@string/tennis"
             android:textSize="18sp"
             android:fontFamily="@font/candara"/>

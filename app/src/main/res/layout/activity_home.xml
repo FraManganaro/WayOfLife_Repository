@@ -1,11 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.HomeActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/navigation"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/background_profile"
+        android:fillViewport="true">
+
+
+        <TextView
+            android:id="@+id/saluto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/candara"
+            android:text="Ciao"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.074" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="211dp"
+            android:layout_height="205dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_muscle_color"
+            app:layout_constraintBottom_toTopOf="@+id/llHome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/saluto"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <LinearLayout
+            android:id="@+id/llHome"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:background="@drawable/background_bottom_sheet"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout_editor_absoluteX="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView3"
+                    android:layout_width="240dp"
+                    android:layout_height="140dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="120dp"
+                    android:layout_height="140dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView4"
+                    android:layout_width="120dp"
+                    android:layout_height="140dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="240dp"
+                    android:layout_height="140dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toTopOf="@+id/button"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <Switch
+                            android:id="@+id/switchAT"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_margin="3dp"
+                            android:fontFamily="@font/candara"
+                            android:onClick="onClickEnableOrDisableActivityRecognition"
+                            android:text="@string/activityRecognition"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0"
+                            tools:ignore="MissingConstraints,UseSwitchCompatOrMaterialXml" />
+
+                        <Switch
+                            android:id="@+id/swCorsa"
+                            android:layout_width="140dp"
+                            android:layout_height="25dp"
+                            android:layout_below="@+id/switchAT"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:fontFamily="@font/candara"
+                            android:onClick="manageRunning"
+                            android:text="@string/corsa"
+                            android:textSize="15sp"
+                            android:textStyle="italic"
+                            app:layout_constraintBottom_toTopOf="@+id/swCamminata"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.06"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/switchAT"
+                            app:layout_constraintVertical_bias="1.0"
+                            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                        <Switch
+                            android:id="@+id/swCamminata"
+                            android:layout_width="140dp"
+                            android:layout_height="26dp"
+                            android:layout_below="@+id/switchAT"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="24dp"
+                            android:fontFamily="@font/candara"
+                            android:onClick="manageWalking"
+                            android:text="@string/camminata"
+                            android:textSize="15sp"
+                            android:textStyle="italic"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.06"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/switchAT"
+                            app:layout_constraintVertical_bias="0.204"
+                            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                        <Switch
+                            android:id="@+id/swCiclismo"
+                            android:layout_width="140dp"
+                            android:layout_height="20dp"
+                            android:layout_below="@+id/switchAT"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:fontFamily="@font/candara"
+                            android:onClick="manageCycling"
+                            android:text="@string/ciclismo"
+                            android:textSize="15sp"
+                            android:textStyle="italic"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.06"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/swCamminata"
+                            app:layout_constraintVertical_bias="0.0"
+                            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipInfo"
+                            android:layout_width="48dp"
+                            android:layout_height="36dp"
+                            android:fontFamily="@font/candara"
+                            android:text="@string/info"
+                            android:textSize="12sp"
+                            android:textStyle="italic"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.813"
+                            app:layout_constraintStart_toEndOf="@+id/swCamminata"
+                            app:layout_constraintTop_toBottomOf="@+id/switchAT"
+                            app:layout_constraintVertical_bias="0.916" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"
@@ -18,139 +226,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_buttom"/>
+        app:menu="@menu/menu_buttom" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClickEnableOrDisableActivityRecognition"
-        android:text="@string/activityRecognition"
-        app:layout_constraintBottom_toTopOf="@+id/navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.759"/>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="257dp"
-        android:layout_height="166dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <Switch
-                android:id="@+id/switchAT"
-                android:layout_width="236dp"
-                android:layout_height="42dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/candara"
-                android:onClick="onClickEnableOrDisableActivityRecognition"
-                android:text="@string/activityRecognition"
-                android:textStyle="bold"
-                android:textSize="22sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.476"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.1"
-                tools:ignore="MissingConstraints,UseSwitchCompatOrMaterialXml" />
-
-            <Switch
-                android:id="@+id/swCorsa"
-                android:layout_width="140dp"
-                android:layout_height="25dp"
-                android:layout_below="@+id/switchAT"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:fontFamily="@font/candara"
-                android:text="@string/corsa"
-                android:textStyle="italic"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toTopOf="@+id/swCamminata"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.085"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/switchAT"
-                app:layout_constraintVertical_bias="1.0"
-                tools:ignore="UseSwitchCompatOrMaterialXml"
-                android:onClick="manageRunning"/>
-
-            <Switch
-                android:id="@+id/swCamminata"
-                android:layout_width="140dp"
-                android:layout_height="26dp"
-                android:layout_below="@+id/switchAT"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/candara"
-                android:textStyle="italic"
-                android:textSize="15sp"
-                android:text="@string/camminata"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.085"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/switchAT"
-                app:layout_constraintVertical_bias="0.263"
-                tools:ignore="UseSwitchCompatOrMaterialXml"
-                android:onClick="manageWalking"/>
-
-            <Switch
-                android:id="@+id/swCiclismo"
-                android:layout_width="140dp"
-                android:layout_height="20dp"
-                android:layout_below="@+id/switchAT"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:fontFamily="@font/candara"
-                android:textStyle="italic"
-                android:textSize="15sp"
-                android:text="@string/ciclismo"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.085"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/swCamminata"
-                app:layout_constraintVertical_bias="0.0"
-                tools:ignore="UseSwitchCompatOrMaterialXml"
-                android:onClick="manageCycling"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipInfo"
-                android:layout_width="48dp"
-                android:layout_height="36dp"
-                android:fontFamily="@font/candara"
-                android:text="@string/info"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.813"
-                app:layout_constraintStart_toEndOf="@+id/swCamminata"
-                app:layout_constraintTop_toBottomOf="@+id/switchAT"
-                app:layout_constraintVertical_bias="0.916" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

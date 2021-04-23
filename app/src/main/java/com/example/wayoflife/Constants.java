@@ -17,6 +17,4 @@ public class Constants {
     public static final String PESO = "Peso";
     public static final String ALTEZZA = "Altezza";
     public static final String SESSO = "Sesso";
-
-
 }
