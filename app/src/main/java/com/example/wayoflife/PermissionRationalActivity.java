@@ -30,7 +30,7 @@ public class PermissionRationalActivity extends AppCompatActivity implements Act
             finish();
         }
 
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_home);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.Q)

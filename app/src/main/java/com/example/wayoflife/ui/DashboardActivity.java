@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.wayoflife.R;
-import com.example.wayoflife.pushup.PushupCounterActivity;
+import com.example.wayoflife.workouts.PushupCounterActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DashboardActivity extends AppCompatActivity {

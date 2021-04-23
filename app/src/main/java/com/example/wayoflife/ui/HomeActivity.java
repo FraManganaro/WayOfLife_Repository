@@ -31,6 +31,7 @@ import com.example.wayoflife.Constants;
 import com.example.wayoflife.NotificationActivity;
 import com.example.wayoflife.PermissionRationalActivity;
 import com.example.wayoflife.R;
+import com.example.wayoflife.workouts.RunningActivity;
 import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.ActivityTransition;
 import com.google.android.gms.location.ActivityTransitionEvent;
@@ -41,8 +42,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -189,8 +192,6 @@ public class HomeActivity extends AppCompatActivity {
                 .setActivityType(DetectedActivity.STILL)
                 .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
                 .build());
-
-        /*
         activityTransitionList.add(new ActivityTransition.Builder()
                 .setActivityType(DetectedActivity.IN_VEHICLE)
                 .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
@@ -199,7 +200,6 @@ public class HomeActivity extends AppCompatActivity {
                 .setActivityType(DetectedActivity.IN_VEHICLE)
                 .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
                 .build());
-         */
 
         return activityTransitionList;
     }
@@ -256,9 +256,11 @@ public class HomeActivity extends AppCompatActivity {
             cyclingStatus = false;
         }
 
+
+        /** Inizializzo il canale per le notifiche */
         createNotificationChannel();
 
-        //Creo un PendingIntent che posso triggerare quando uno ActivityTransition accorre
+        /** Creo un PendingIntent che posso triggerare quando uno ActivityTransition accorre */
         Intent intent = new Intent(TRANSITIONS_RECEIVER_ACTION);
         mActivityTransitionsPendingIntent =
                 PendingIntent.getBroadcast(HomeActivity.this, 0, intent, 0);
@@ -268,6 +270,15 @@ public class HomeActivity extends AppCompatActivity {
 
         /** Recupero le informazioni che sono state memorizzate all'interno del file */
         resumeInformation();
+
+        /** Gestisco il bottone che fornisce le informazioni all'utente */
+        Chip chip = findViewById(R.id.chipInfo);
+        chip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                infoDialog();
+            }
+        });
 
         printToScreen("App initialized.");
     }
@@ -347,6 +358,7 @@ public class HomeActivity extends AppCompatActivity {
 
         if(activityTrackingEnabled) enableActivityTransitions();
     }
+
     /**
      * Gestisco i 3 switch che controllano corsa, camminata e ciclismo
      */
@@ -369,6 +381,48 @@ public class HomeActivity extends AppCompatActivity {
         swCamminata.setChecked(walkingStatus);
         swCorsa.setChecked(runningStatus);
         swCiclismo.setChecked(cyclingStatus);
+    }
+
+    /**
+     * Metodi che gestiscono se considerare o no ogni attività
+     * Comandati dagli switch piccoli
+     * @param v
+     */
+    public void manageWalking(View v){
+        walkingStatus = !walkingStatus;
+
+        activityTransitionList = buildTransition();
+
+        saveInformation();
+        resumeInformation();
+
+        printToScreen("ManageWalking: \n\n" + activityTransitionList.toString() + "\n\n");
+    }
+    public void manageRunning(View v){
+        runningStatus = !runningStatus;
+
+        activityTransitionList = buildTransition();
+
+        saveInformation();
+        resumeInformation();
+
+        printToScreen("ManageRunning: \n\n" + activityTransitionList.toString() + "\n\n");
+    }
+    public void manageCycling(View v){
+        cyclingStatus = !cyclingStatus;
+
+        activityTransitionList = buildTransition();
+
+        saveInformation();
+        resumeInformation();
+
+        printToScreen("ManageRunning: \n\n" + activityTransitionList.toString() + "\n\n");
+    }
+
+    /** Metodo che gestisce il Dialog contenente le informazioni sull'ActivityTransition */
+    public void infoDialog(){
+        HomeInfoDialog homeInfoDialog = new HomeInfoDialog();
+        homeInfoDialog.show(getSupportFragmentManager(), "Dialog informativo");
     }
 
 
@@ -483,7 +537,8 @@ public class HomeActivity extends AppCompatActivity {
 
             String info = "";
             String enterActivity = "";
-            Log.d(TAG, "onReceive(): " + intent);
+
+            printToScreen("onReceive(): " + intent);
 
             if (!TextUtils.equals(TRANSITIONS_RECEIVER_ACTION, intent.getAction())) {
                 printToScreen("Received an unsupported action in TransitionsReceiver: action = " +
@@ -491,12 +546,9 @@ public class HomeActivity extends AppCompatActivity {
                 return;
             }
 
-            // TODO: Extract activity transition information from listener.
-
+            // Extract activity transition information from listener.
             if (ActivityTransitionResult.hasResult(intent)) {
-
                 ActivityTransitionResult result = ActivityTransitionResult.extractResult(intent);
-
                 for (ActivityTransitionEvent event : result.getTransitionEvents()) {
 
                     info = "Transition: " +
@@ -520,13 +572,15 @@ public class HomeActivity extends AppCompatActivity {
                 /**
                  * Creo l'intent che mi permetterà di viaggiare da un'activity all'altra
                  */
-                Intent intentOut = new Intent(HomeActivity.this, NotificationActivity.class); //Da cambiare quando voglio redirectare dalla notifica all'allenamento
+
+                Intent intentOut = new Intent(
+                        HomeActivity.this,
+                        RunningActivity.class);
                 intentOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intentOut.putExtra("message", enterActivity);
+                intentOut.putExtra("attivita riconosciuta", enterActivity);
 
                 PendingIntent pendingIntentOut = PendingIntent.getActivity(HomeActivity.this,
                         0, intentOut, PendingIntent.FLAG_UPDATE_CURRENT);
-
 
                 NotificationManagerCompat notificationManagerCompat =
                         NotificationManagerCompat.from(HomeActivity.this);
@@ -534,55 +588,55 @@ public class HomeActivity extends AppCompatActivity {
                 /**
                  * Creo la notifica e ci assegno il PendingIntent appena creato
                  */
+
+                int icon = 0;
+                String testo = "Vuoi avviare un allenamento specifico di tipo ";
+                String attivitaITA = "";
+
+                switch(enterActivity){
+                    case "WALKING":
+                        icon = R.drawable.ic_walking_color;
+                        testo += "camminata";
+                        attivitaITA = "CAMMINATA";
+                        break;
+                    case "RUNNING":
+                        icon = R.drawable.ic_running_color;
+                        testo += "corsa";
+                        attivitaITA = "CORSA";
+                        break;
+                    case "ON_BICYCLE":
+                        icon = R.drawable.ic_cycling_color;
+                        testo += "ciclismo";
+                        attivitaITA = "CICLISMO";
+                        break;
+                    default:
+                        icon = R.drawable.ic_notifications_black_24dp;
+                        testo = "STILL o IN_VEHICLE";
+                        attivitaITA = "STILL o IN_VEHICLE";
+                        break;
+                }
+
+                testo += "?\nSe SI, allora premi sulla notifica\n\nAltrimenti ignora il messaggio!";
+
                 Notification notification = new NotificationCompat.Builder(
                         HomeActivity.this,
                         NOTIFICATION_CHANNEL)
-                        .setSmallIcon(R.drawable.ic_notifications_black_24dp)
-                        .setContentTitle("New Notification")
-                        .setContentText(enterActivity)
+                        .setSmallIcon(icon)
+                        .setContentTitle("Nuova attivita riconosciuta! - " + attivitaITA)
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText(testo)
+                        )
                         .setPriority(NotificationCompat.PRIORITY_HIGH)
                         .setCategory(NotificationCompat.CATEGORY_EVENT)
                         .setContentIntent(pendingIntentOut)
+                        .addAction(icon,
+                                "Avvia attività (" + attivitaITA + ")",
+                                pendingIntentOut)
+                        .setAutoCancel(true)
                         .build();
 
                 notificationManagerCompat.notify(1, notification);
             }
         }
-    }
-
-    public void manageWalking(View v){
-        walkingStatus = !walkingStatus;
-
-        activityTransitionList = buildTransition();
-
-        saveInformation();
-        resumeInformation();
-
-        printToScreen("ManageWalking: \n\n" + activityTransitionList.toString());
-    }
-    public void manageRunning(View v){
-        runningStatus = !runningStatus;
-
-        activityTransitionList = buildTransition();
-
-        saveInformation();
-        resumeInformation();
-
-        printToScreen("manageRunning: \n\n" + activityTransitionList.toString());
-    }
-    public void manageCycling(View v){
-        cyclingStatus = !cyclingStatus;
-
-        activityTransitionList = buildTransition();
-
-        saveInformation();
-        resumeInformation();
-
-        printToScreen("manageRunning: \n\n" + activityTransitionList.toString());
-    }
-
-
-    public void status(View v){
-        printToScreen("Status: \n\n" + activityTransitionList.toString() + "\n\n");
     }
 }

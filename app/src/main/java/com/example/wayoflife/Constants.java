@@ -15,7 +15,7 @@ public class Constants {
     public static final String COGNOME = "Cognome";
     public static final String NICKNAME = "Nickname";
     public static final String PESO = "Peso";
-    public static final String ALTEZZA = "Peso";
+    public static final String ALTEZZA = "Altezza";
     public static final String SESSO = "Sesso";
 
 

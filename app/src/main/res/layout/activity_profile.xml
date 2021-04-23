@@ -37,7 +37,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/nickname"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:id="@+id/tvNickname"/>
 
         </LinearLayout>
@@ -49,7 +49,7 @@
             android:layout_marginTop="-25dp"
             android:layout_marginEnd="80dp"
             android:background="@drawable/background_button"
-            android:elevation="15dp"
+            android:elevation="20dp"
             android:id="@+id/aggiornaDatiProfilo">
 
             <ImageView
@@ -87,7 +87,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp">
+                android:layout_marginTop="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

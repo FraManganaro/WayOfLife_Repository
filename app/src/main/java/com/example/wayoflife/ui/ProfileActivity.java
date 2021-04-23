@@ -75,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileDialog.
 
     public void openDialog(){
         ProfileDialog profileDialog = new ProfileDialog();
-        profileDialog.show(getSupportFragmentManager(), "esempio di dialogo");
+        profileDialog.show(getSupportFragmentManager(), "Dialog per inserimento dati");
     }
     @Override
     public void applyTexts(String nickname, String nome, String cognome,
@@ -133,8 +133,12 @@ public class ProfileActivity extends AppCompatActivity implements ProfileDialog.
         tvAltezza.setText(altezza + " cm");
 
         TextView tvSesso = findViewById(R.id.tvSesso);
-        if(sesso.equalsIgnoreCase("maschio") || sesso.equalsIgnoreCase("m"))
+        if(sesso.equalsIgnoreCase("maschio") ||
+                sesso.equalsIgnoreCase("m"))
             tvSesso.setText("Maschio");
-        else tvSesso.setText("Femmina");
+        else
+            if (sesso.equalsIgnoreCase("femmina") ||
+                    sesso.equalsIgnoreCase("f"))
+                tvSesso.setText("Femmina");
     }
 }

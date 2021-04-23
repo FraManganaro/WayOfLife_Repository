@@ -1,8 +1,7 @@
-package com.example.wayoflife.pushup;
+package com.example.wayoflife.workouts;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,15 +10,12 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Chronometer;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.wayoflife.Constants;
 import com.example.wayoflife.R;
 import com.example.wayoflife.ui.HomeActivity;
-import com.example.wayoflife.ui.ProfileActivity;
 
 public class PushupCounterActivity extends AppCompatActivity implements SensorEventListener {
 
