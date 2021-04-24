@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.example.wayoflife.BuildConfig;
 import com.example.wayoflife.Constants;
@@ -56,6 +57,8 @@ public class HomeActivity extends AppCompatActivity {
     public static final String TAG = "HomeActivity";
     public static final String NOTIFICATION_CHANNEL = "notification_channel";
 
+    private String nicknameUtente;
+
     /**
      * Oggetti per ActivityRecognition
      */
@@ -63,7 +66,6 @@ public class HomeActivity extends AppCompatActivity {
     private boolean runningQOrLater = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
 
     private boolean activityTrackingEnabled;
-
     private boolean walkingStatus;
     private boolean runningStatus;
     private boolean cyclingStatus;
@@ -339,23 +341,35 @@ public class HomeActivity extends AppCompatActivity {
         editor.apply();
     }
     private void resumeInformation(){
-        SharedPreferences sharedPref = getSharedPreferences(
+        /** Gestisco informazioni della Home */
+        SharedPreferences sharedPrefHome = getSharedPreferences(
                 Constants.HOME_INFO_FILENAME,
                 Context.MODE_PRIVATE);
 
-        activityTrackingEnabled = sharedPref.getBoolean(
+        activityTrackingEnabled = sharedPrefHome.getBoolean(
                 Constants.ACTIVITY_TRACKING_STATUS, false);
 
-        walkingStatus = sharedPref.getBoolean(
+        walkingStatus = sharedPrefHome.getBoolean(
                 Constants.WALKING_STATUS, false);
-        runningStatus = sharedPref.getBoolean(
+        runningStatus = sharedPrefHome.getBoolean(
                 Constants.RUNNING_STATUS, false);
-        cyclingStatus = sharedPref.getBoolean(
+        cyclingStatus = sharedPrefHome.getBoolean(
                 Constants.CYCLING_STATUS, false);
 
         manageSwitch();
 
         if(activityTrackingEnabled) enableActivityTransitions();
+
+        /** Gestisco informazioni del profilo utente */
+        SharedPreferences sharedPrefProfile = getSharedPreferences(
+                Constants.PROFILE_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+
+        nicknameUtente = sharedPrefProfile.getString(
+                Constants.NICKNAME, "Nickname");
+
+        TextView tvNickname = findViewById(R.id.salutoUtente);
+        tvNickname.setText("Ciao " + nicknameUtente + " !");
     }
 
     /**

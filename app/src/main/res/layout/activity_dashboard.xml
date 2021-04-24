@@ -51,7 +51,7 @@
             <TextView
                 android:id="@+id/copertina"
                 android:layout_width="147dp"
-                android:layout_height="39dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:text="@string/intro_allenamenti"
                 app:fontFamily="@font/candara"

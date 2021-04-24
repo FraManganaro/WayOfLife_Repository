@@ -26,10 +26,10 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="40dp"
-                android:src="@drawable/ic_muscle_color" />
+                android:src="@drawable/ic_profile_foto"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,9 +37,10 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/nickname"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:id="@+id/tvNickname"
-                android:textColor="@color/black"/>
+                android:textColor="@color/white"
+                android:fontFamily="@font/candara"/>
 
         </LinearLayout>
 
@@ -49,7 +50,7 @@
             android:layout_marginStart="80dp"
             android:layout_marginTop="-25dp"
             android:layout_marginEnd="80dp"
-            android:background="@drawable/background_button"
+            android:background="@drawable/background_profile_button"
             android:elevation="20dp"
             android:id="@+id/aggiornaDatiProfilo">
 
@@ -59,7 +60,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/background_icon"
+                android:background="@drawable/background_round_icon"
                 android:padding="10dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_profile_settings"/>
@@ -72,8 +73,8 @@
                 android:layout_marginLeft="17dp"
                 android:text="@string/aggiornaProfilo"
                 android:textStyle="italic"
-                android:textSize="15dp"
-                android:textColor="@color/black"/>
+                android:textSize="15sp"
+                android:textColor="@color/white"/>
 
         </FrameLayout>
 

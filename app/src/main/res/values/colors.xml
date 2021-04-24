@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#bf1c00</color>
     <color name="viola">#C35CEF</color>
+    <color name="azzurro">#03A9F4</color>
+    <color name="bluChiaro">#3F51B5</color>
 </resources>

@@ -16,12 +16,12 @@
     <string name="freestyle">Freestyle</string>
     <string name="altro">Altro</string>
     <string name="allenamenti">Allenamenti</string>
-    <string name="intro_allenamenti">Premi su un`attività per iniziare l`allenamento</string>
+    <string name="intro_allenamenti">Premi su una delle attività per iniziare un allenamento</string>
     <string name="peso">Peso (in Kg)</string>
     <string name="altezza">Altezza (in cm)</string>
     <string name="aggiornaProfilo">Aggiorna dati del profilo</string>
     <string name="nickname">Nickname</string>
-    <string name="infoAT">Servizio che permette di rilevare in background l`attività eseguita.\nPer il corretto funzionamento de servizio é necessario tenere aperta l\'applicazione in background e attivare il serivizio utilizzando lo switch dedicato. \n\nSi ha la possibilità di rilevare 3 attività differenti:     \n        Corsa     \n        Camminata     \n        Ciclismo  \n        \nOgni attività può essere rilevata indipendentemente dalle altre. \nUtilizzando quindi gli switch dedicati si ha la possibilità di attivare e disattivare il riconoscimento delle sole attività d\'interesse.  \nNel momento in cui un\'attività viene riconosciuta viene inviata una notifica che indica l\'attività che si sta eseguendo. \nPremendo poi sulla notica si ha la possibilità di attivare direttamente un\'allenamento specifico per l\'attività appena riconosciuta.</string>
+    <string name="infoAT">Servizio che permette di rilevare in background l`attività eseguita.\nPer il corretto funzionamento del servizio é necessario tenere aperta l\'applicazione in background e attivare il servizio utilizzando lo switch dedicato. \n\nSi ha la possibilità di rilevare 3 attività differenti:     \n        Corsa     \n        Camminata     \n        Ciclismo  \n        \nOgni attività può essere rilevata indipendentemente dalle altre. \nUtilizzando quindi gli switch dedicati si ha la possibilità di attivare e disattivare il riconoscimento delle sole attività d\'interesse.\n\nNel momento in cui un\'attività viene riconosciuta viene inviata una notifica che indica l\'attività che si sta eseguendo. \nPremendo poi sulla notifica si ha la possibilità di attivare direttamente un\'allenamento specifico per l\'attività appena riconosciuta.</string>
     <string name="info">Info</string>
     <string name="scegli_allenamento">Scegli allenamento:</string>
     <string name="basket">Basket</string>
@@ -29,4 +29,5 @@
     <string name="nuoto">Nuoto</string>
     <string name="scalini">Scalini</string>
     <string name="tennis">Tennis</string>
+    <string name="reviewAllenamenti">Visualizza i tuoi \nallenamenti</string>
 </resources>
