@@ -112,7 +112,43 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/background_home_button_red"
-                    android:elevation="5dp">
+                    android:elevation="5dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_fire"
+                        android:layout_marginBottom="5dp"/>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tips"
+                            android:fontFamily="@font/candara"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"/>
+
+                        <!--
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/reviewAllenamenti"
+                            android:fontFamily="@font/candara"
+                            android:textStyle="italic"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"/>
+                        -->
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

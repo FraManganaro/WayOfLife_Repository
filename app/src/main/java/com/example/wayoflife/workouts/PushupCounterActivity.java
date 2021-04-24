@@ -6,10 +6,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,16 +23,20 @@ import com.example.wayoflife.ui.HomeActivity;
 public class PushupCounterActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager sensorManager;
-    private int count = 0;
+    private int count = -1;
+
+//    private boolean justStarted = true;
+//    private Calendar dateStarted;
 
     private TextView tvCounter;
+
+    private ImageView playButton;
+    private ImageView endButton;
+    private ImageView minusButton;
 
     private Chronometer chronometer;
     private boolean isRunningChronometer;
     private long pauseOffset = 0;
-
-//    private boolean justStarted = true;
-//    private Calendar dateStarted;
 
     private long timeElapsed = 0;
 
@@ -51,6 +58,13 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
         chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
         chronometer.start();
         isRunningChronometer = true;
+
+
+        playButton = findViewById(R.id.buttonPausePlay);
+        endButton = findViewById(R.id.endButton);
+        minusButton = findViewById(R.id.minusButton);
+
+        endButton.setVisibility(View.INVISIBLE);
     }
     @Override
     public void onResume() {
@@ -60,7 +74,6 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
                 sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY),
                 SensorManager.SENSOR_DELAY_UI);
     }
-
     @Override
     public void onPause() {
         super.onPause();
@@ -77,18 +90,20 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
 //            return;
 //        }
 
-        int val = (int) event.values[0];
+        if(isRunningChronometer) {
+            int val = (int) event.values[0];
 
-        /**
-         * Il sensore di prossimità restituisce i cm di distanza dall'oggetto rilevato
-         * Non ci interessa questo parametro, ci interessa che abbia rilevato qualcosa
-         */
-        if (val > 1)
-            val = 1;
+            /**
+             * Il sensore di prossimità restituisce i cm di distanza dall'oggetto rilevato
+             * Non ci interessa questo parametro, ci interessa che abbia rilevato qualcosa
+             */
+            if (val > 1)
+                val = 1;
 
-        count += val;
+            count += val;
 
-        tvCounter.setText(String.valueOf(count));
+            tvCounter.setText(String.valueOf(count));
+        }
     }
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {}
@@ -99,18 +114,22 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
      * @param v
      */
     public void increaseCounter(View v) {
-        count += 1;
+        if(isRunningChronometer) {
+            count += 1;
 
-        tvCounter.setText(String.valueOf(count));
+            tvCounter.setText(String.valueOf(count));
+        }
     }
     /**
      * Caso opposto, nel caso si volessero rimuovere dal contare delle flessioni non fatte
      * @param v
      */
     public void decreaseCounter(View v) {
-        count -= 1;
+        if(isRunningChronometer) {
+            count -= 1;
 
-        tvCounter.setText(String.valueOf(count));
+            tvCounter.setText(String.valueOf(count));
+        }
     }
 
     /**
@@ -136,7 +155,31 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
         intent.putExtra("FlessioniFatte", count);
         startActivity(intent);
     }
+    public void pauseWorkout(View v) {
+//        if(playButton.getText().toString().equalsIgnoreCase("Pausa")) {
+//            playButton.setText(R.string.play);
+//            endButton.setVisibility(View.VISIBLE);
+//            pauseChronometer(v);
+//        } else {
+//            playButton.setText(R.string.pausa);
+//            endButton.setVisibility(View.INVISIBLE);
+//        }
+        if(isRunningChronometer) {
+            playButton.setImageDrawable(getDrawable(R.drawable.ic_play));
 
+            endButton.setVisibility(View.VISIBLE);
+            minusButton.setVisibility(View.INVISIBLE);
+
+            pauseChronometer(v);
+        } else {
+            playButton.setImageDrawable(getDrawable(R.drawable.ic_pause));
+
+            endButton.setVisibility(View.INVISIBLE);
+            minusButton.setVisibility(View.VISIBLE);
+
+            pauseChronometer(v);
+        }
+    }
     /**
      * Metodo che permette di avviare e stoppare il chronometro toccando sul cronometro
      * @param v

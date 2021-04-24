@@ -1,92 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".workouts.PushupCounterActivity">
+    tools:context=".workouts.PushupCounterActivity"
+    android:onClick="increaseCounter"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/image_background_pushup">
 
-    <TextView
-        android:id="@+id/TVCounter"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:fontFamily="@font/candara"
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="240dp"
+        android:layout_height="150dp"
+        android:background="@drawable/background_home_button_blue"
+        android:elevation="15dp"
         android:gravity="center"
-        android:onClick="increaseCounter"
-        android:text="0"
-        android:textAlignment="center"
-        android:textSize="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="260dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="60dp"
-        android:onClick="stopWorkout"
-        android:text="@string/fineAllenamento"
-        android:textAlignment="center"
-        android:backgroundTint="@color/red"
-        android:fontFamily="@font/candara"
-        android:background="@drawable/background_profile_button"
-        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="74dp"
-        android:layout_height="69dp"
-        android:background="@drawable/background_profile_button"
-        android:gravity="center"
-        android:onClick="decreaseCounter"
-        android:text="-"
-        android:textSize="25dp"
-        android:fontFamily="@font/candara"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.933" />
+        app:layout_constraintVertical_bias="0.08">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="140dp"
-        android:layout_height="101dp"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.343">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
             <Chronometer
                 android:id="@+id/chronometer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="180dp"
+                android:layout_height="100dp"
                 android:fontFamily="@font/candara"
-                android:onClick="pauseChronometer"
-                android:textSize="35dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.495" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="50sp" />
+
+        </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_white_corners"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+        app:layout_constraintVertical_bias="0.163"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/candara"
+            android:text="Numero di flessioni"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/TVCounter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/TVCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/candara"
+            android:gravity="center"
+            android:text="@string/zero"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+            app:layout_constraintVertical_bias="0.14" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+        app:layout_constraintVertical_bias="0.959">
+
+
+        <!--
+            <Button
+                android:id="@+id/endButton"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/background_round_icon"
+                android:fontFamily="@font/candara"
+                android:text="@string/fine"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:onClick="stopWorkout"/>
+            -->
+
+
+        <!--
+        <Button
+            android:id="@+id/buttonPausePlay"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/background_round_icon"
+            android:fontFamily="@font/candara"
+            android:onClick="pauseWorkout"
+            android:text="@string/pausa"
+            android:textSize="12sp"
+            android:textStyle="italic"/>
+        -->
+
+        <ImageView
+            android:id="@+id/endButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:elevation="15dp"
+            android:onClick="stopWorkout"
+            android:src="@drawable/ic_stop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.048"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/buttonPausePlay"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
+            android:elevation="15dp"
+            android:onClick="pauseWorkout"
+            android:src="@drawable/ic_pause"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.293"
+            app:layout_constraintStart_toEndOf="@+id/endButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/minusButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:elevation="15dp"
+            android:onClick="decreaseCounter"
+            android:src="@drawable/ic_minus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.634"
+            app:layout_constraintStart_toEndOf="@+id/buttonPausePlay"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

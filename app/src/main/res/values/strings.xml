@@ -30,4 +30,8 @@
     <string name="scalini">Scalini</string>
     <string name="tennis">Tennis</string>
     <string name="reviewAllenamenti">Visualizza i tuoi \nallenamenti</string>
+    <string name="play">Play</string>
+    <string name="pausa">Pausa</string>
+    <string name="fine">Fine</string>
+    <string name="zero">0</string>
 </resources>

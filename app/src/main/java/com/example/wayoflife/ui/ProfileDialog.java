@@ -12,14 +12,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.wayoflife.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class ProfileDialog extends AppCompatDialogFragment {
-    private EditText nicknameET;
-    private EditText nomeET;
-    private EditText cognomeET;
-    private EditText pesoET;
-    private EditText altezzaET;
-    private EditText sessoET;
+    private TextInputEditText nicknameET;
+    private TextInputEditText nomeET;
+    private TextInputEditText cognomeET;
+    private TextInputEditText pesoET;
+    private TextInputEditText altezzaET;
+    private TextInputEditText sessoET;
 
     private String nickname;
     private String nome;
