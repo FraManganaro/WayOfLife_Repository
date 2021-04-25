@@ -1,6 +1,7 @@
 package com.example.wayoflife.workouts;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,8 +16,13 @@ import com.example.wayoflife.ui.HomeActivity;
 
 public class FreestyleActivity extends AppCompatActivity {
 
+    private ConstraintLayout constraintLayout;
+
     private ImageView playButton;
     private ImageView endButton;
+    private ImageView pushupButton;
+
+    private TextView textView;
 
     private Chronometer chronometer;
     private boolean isRunningChronometer;
@@ -29,7 +35,7 @@ public class FreestyleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freestyle);
 
-        String message = getIntent().getStringExtra("attivita riconosciuta");
+        String arrivo = getIntent().getStringExtra("attivita riconosciuta");
 
         /** Attivazione del croometro */
         chronometer = findViewById(R.id.chronometer);
@@ -37,9 +43,19 @@ public class FreestyleActivity extends AppCompatActivity {
         chronometer.start();
         isRunningChronometer = true;
 
+        constraintLayout = findViewById(R.id.clPrincipale);
 
         playButton = findViewById(R.id.buttonPausePlay);
         endButton = findViewById(R.id.endButton);
+
+        pushupButton = findViewById(R.id.pushupButton);
+        textView = findViewById(R.id.tvPushup);
+
+        if(!arrivo.equalsIgnoreCase("freestyle")){
+            pushupButton.setVisibility(View.INVISIBLE);
+            textView.setVisibility(View.INVISIBLE);
+            constraintLayout.setBackground(getDrawable(R.drawable.background_white_corners));
+        }
 
         endButton.setVisibility(View.INVISIBLE);
     }
@@ -80,11 +96,15 @@ public class FreestyleActivity extends AppCompatActivity {
 
             endButton.setVisibility(View.VISIBLE);
 
+            pushupButton.setClickable(false);
+
             pauseChronometer(v);
         } else {
             playButton.setImageDrawable(getDrawable(R.drawable.ic_pause));
 
             endButton.setVisibility(View.INVISIBLE);
+
+            pushupButton.setClickable(true);
 
             pauseChronometer(v);
         }
@@ -105,5 +125,22 @@ public class FreestyleActivity extends AppCompatActivity {
 
             isRunningChronometer = true;
         }
+    }
+
+    /**
+     * Controllo dell'icona per passare al contatore delle flessioni
+     * @param v
+     */
+    public void goToPushupCounter(View v){
+        Intent intent = new Intent(getApplicationContext(), PushupCounterActivity.class);
+        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        intent.putExtra("arrivo", "freestyleActivity");
+
+        /** devo mettere come extra anche il tempo passato, le kcal */
+
+        pauseWorkout(v);
+
+        startActivity(intent);
     }
 }

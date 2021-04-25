@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,11 +13,11 @@ import android.widget.RelativeLayout;
 
 import com.example.wayoflife.R;
 import com.example.wayoflife.workouts.FreestyleActivity;
-import com.example.wayoflife.workouts.GenericWorkoutActivity;
 import com.example.wayoflife.workouts.PushupCounterActivity;
 import com.example.wayoflife.workouts.RunningActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.chip.Chip;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -59,7 +58,7 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
         RelativeLayout rlEW = findViewById(R.id.rlExtraWorkout);
-        Intent intent = new Intent(getApplicationContext(), GenericWorkoutActivity.class);
+        Intent intent = new Intent(getApplicationContext(), FreestyleActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         rlEW.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +132,12 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        /** Gestisco il bottone che fornisce le informazioni all'utente */
+        Chip chip = findViewById(R.id.chipInfo);
+        chip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { infoDialog(); }
+        });
     }
 
     /**
@@ -170,5 +175,12 @@ public class DashboardActivity extends AppCompatActivity {
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("attivita riconosciuta", "Freestyle");
         startActivity(intent);
+    }
+
+    /** Metodo che gestisce il Dialog contenente le informazioni sull'ActivityTransition */
+    public void infoDialog(){
+        InfoDialog infoDialog = new InfoDialog();
+        infoDialog.setType("dashboard");
+        infoDialog.show(getSupportFragmentManager(), "Dialog informativo");
     }
 }

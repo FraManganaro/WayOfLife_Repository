@@ -213,6 +213,18 @@
                         android:layout_height="match_parent"
                         android:onClick="goToPushupCounter">
 
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipInfo"
+                            android:layout_width="50dp"
+                            android:layout_height="35dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginTop="0dp"
+                            android:fontFamily="@font/candara"
+                            android:text="@string/info"
+                            android:textSize="12sp"
+                            android:textStyle="italic"/>
+
                         <TextView
                             android:id="@+id/textView7"
                             android:layout_width="wrap_content"

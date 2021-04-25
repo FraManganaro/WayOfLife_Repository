@@ -45,7 +45,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -434,8 +433,9 @@ public class HomeActivity extends AppCompatActivity {
 
     /** Metodo che gestisce il Dialog contenente le informazioni sull'ActivityTransition */
     public void infoDialog(){
-        HomeInfoDialog homeInfoDialog = new HomeInfoDialog();
-        homeInfoDialog.show(getSupportFragmentManager(), "Dialog informativo");
+        InfoDialog infoDialog = new InfoDialog();
+        infoDialog.setType("home");
+        infoDialog.show(getSupportFragmentManager(), "Dialog informativo");
     }
 
 

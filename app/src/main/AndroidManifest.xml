@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WayOfLife">
         <activity android:name=".workouts.RunningActivity"></activity>
-        <activity android:name=".workouts.GenericWorkoutActivity" />
+        <activity android:name=".workouts.EndWorkoutActivity" />
         <activity android:name=".workouts.FreestyleActivity" />
         <activity android:name=".ui.ProfileActivity" />
         <activity android:name=".ui.DashboardActivity" />

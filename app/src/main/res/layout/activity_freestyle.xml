@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/clPrincipale"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".workouts.FreestyleActivity"
-    android:background="@drawable/gym_inscription_text_200404_1440x2560">
+    android:background="@drawable/image_background_freestyle">
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
@@ -78,6 +79,37 @@
             app:layout_constraintHorizontal_bias="0.293"
             app:layout_constraintStart_toEndOf="@+id/endButton"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/pushupButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:elevation="15dp"
+            android:src="@drawable/ic_pushup_color"
+            android:onClick="goToPushupCounter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.679"
+            app:layout_constraintStart_toEndOf="@+id/buttonPausePlay"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.275" />
+
+        <TextView
+            android:id="@+id/tvPushup"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:fontFamily="@font/candara"
+            android:gravity="center"
+            android:text="@string/pushup"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.679"
+            app:layout_constraintStart_toEndOf="@+id/buttonPausePlay"
+            app:layout_constraintTop_toBottomOf="@+id/pushupButton"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

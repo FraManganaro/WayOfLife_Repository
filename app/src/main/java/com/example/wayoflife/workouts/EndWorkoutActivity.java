@@ -7,12 +7,12 @@ import android.widget.TextView;
 
 import com.example.wayoflife.R;
 
-public class GenericWorkoutActivity extends AppCompatActivity {
+public class EndWorkoutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_generic_workout);
+        setContentView(R.layout.activity_end_workout);
 
         TextView textView = findViewById(R.id.textView12);
 

@@ -13,16 +13,23 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.wayoflife.R;
 
-public class HomeInfoDialog extends AppCompatDialogFragment {
+public class InfoDialog extends AppCompatDialogFragment {
 
     private final String TAG = "HomeInfoDialog";
+    private String classeDerivazione = "";
 
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.home_info_dialog, null);
+
+        View view;
+
+        if(classeDerivazione.equalsIgnoreCase("home")) {
+            view = inflater.inflate(R.layout.home_info_dialog, null);
+        } else
+            view = inflater.inflate(R.layout.dashboard_info_dialog, null);
 
         builder.setView(view)
                 .setTitle("Informazioni:")
@@ -33,5 +40,9 @@ public class HomeInfoDialog extends AppCompatDialogFragment {
                 });
 
         return builder.create();
+    }
+
+    public void setType(String tipo){
+        classeDerivazione = tipo;
     }
 }

@@ -126,7 +126,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
      */
     public void decreaseCounter(View v) {
         if(isRunningChronometer) {
-            count -= 1;
+            if(count > 0) count -= 1;
 
             tvCounter.setText(String.valueOf(count));
         }
