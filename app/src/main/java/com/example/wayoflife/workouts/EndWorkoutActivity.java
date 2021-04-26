@@ -27,7 +27,9 @@ public class EndWorkoutActivity extends AppCompatActivity {
         textView.setText(""+tempoPassato);
     }
 
-    public void returnHome(View v){
+    public void saveWorkout(View v){
+        //devo salvare l'allenamento
+
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
