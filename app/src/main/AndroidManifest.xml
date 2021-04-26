@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wayoflife">
     <!-- Required for 28 and below. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" /> <!-- Required for 29+. -->
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
 
@@ -12,7 +16,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WayOfLife">
-        <activity android:name=".workouts.RunningActivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBz_06Gwas-PQZOEEFsCr7ifjwlCXwk22k"/> <!-- API di GoogleMaps -->
+
+        <activity android:name=".workouts.RunningActivity"/>
         <activity android:name=".workouts.EndWorkoutActivity" />
         <activity android:name=".workouts.FreestyleActivity" />
         <activity android:name=".ui.ProfileActivity" />

@@ -7,8 +7,7 @@
     tools:context=".ui.DashboardActivity"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -39,7 +38,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/allenamenti"
-                android:textSize="30sp"
+                android:textSize="35sp"
                 app:fontFamily="@font/candara"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
@@ -60,7 +59,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:textStyle="bold"/>
 
             <ImageView
                 android:id="@+id/imageView"
@@ -342,7 +342,7 @@
             android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:itemBackground="@color/purple_500"
+            app:itemBackground="@color/purple_700"
             app:itemIconTint="@drawable/navigation_selector"
             app:itemTextColor="@drawable/navigation_selector"
             app:layout_constraintBottom_toBottomOf="parent"

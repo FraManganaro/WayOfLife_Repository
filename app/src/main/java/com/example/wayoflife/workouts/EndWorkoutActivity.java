@@ -20,8 +20,6 @@ public class EndWorkoutActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textView12);
 
-        TextView tv = findViewById(R.id.textView11);
-
         String message = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
         long tempoPassato = getIntent().getLongExtra(Constants.TEMPO_PASSATO, 0);
 

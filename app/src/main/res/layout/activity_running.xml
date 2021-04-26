@@ -1,26 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".workouts.RunningActivity"
-    android:id="@+id/clPrincipaleRunning">
+    android:orientation="vertical">
 
+    <fragment
+        android:id="@+id/googleMaps"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="350dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/clPrincipaleRunning"
+        android:background="@drawable/background_running_activity">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="240dp"
+            android:layout_height="100dp"
+            android:background="@drawable/background_home_button_blue"
+            android:elevation="15dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.096">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <Chronometer
+                    android:id="@+id/chronometer"
+                    android:layout_width="180dp"
+                    android:layout_height="100dp"
+                    android:fontFamily="@font/candara"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="50sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.943">
+
+            <ImageView
+                android:id="@+id/endButton"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:elevation="15dp"
+                android:onClick="stopWorkout"
+                android:src="@drawable/ic_stop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.048"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/buttonPausePlay"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentEnd="true"
+                android:elevation="15dp"
+                android:onClick="pauseWorkout"
+                android:src="@drawable/ic_pause"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.293"
+                app:layout_constraintStart_toEndOf="@+id/endButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="240dp"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:background="@drawable/background_home_button_blue"
         android:elevation="15dp"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.056">
+        app:layout_constraintTop_toBottomOf="@+id/googleMaps"
+        app:layout_constraintVertical_bias="0.069">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -79,7 +167,7 @@
             app:layout_constraintStart_toEndOf="@+id/endButton"
             app:layout_constraintTop_toTopOf="parent" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+    -->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
