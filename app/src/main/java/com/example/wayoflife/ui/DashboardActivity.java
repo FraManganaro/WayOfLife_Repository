@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.example.wayoflife.Constants;
 import com.example.wayoflife.R;
 import com.example.wayoflife.workouts.FreestyleActivity;
 import com.example.wayoflife.workouts.PushupCounterActivity;
@@ -76,7 +77,7 @@ public class DashboardActivity extends AppCompatActivity {
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                intent.putExtra("attivita riconosciuta", "Basket");
+                                intent.putExtra(Constants.ATTIVITA_RILEVATA, "Basket");
                                 startActivity(intent);
 
                                 bottomSheetDialog.dismiss();
@@ -87,7 +88,7 @@ public class DashboardActivity extends AppCompatActivity {
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                intent.putExtra("attivita riconosciuta", "Calcio");
+                                intent.putExtra(Constants.ATTIVITA_RILEVATA, "Calcio");
                                 startActivity(intent);
 
                                 bottomSheetDialog.dismiss();
@@ -98,7 +99,7 @@ public class DashboardActivity extends AppCompatActivity {
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                intent.putExtra("attivita riconosciuta", "Nuoto");
+                                intent.putExtra(Constants.ATTIVITA_RILEVATA, "Nuoto");
                                 startActivity(intent);
 
                                 bottomSheetDialog.dismiss();
@@ -109,7 +110,7 @@ public class DashboardActivity extends AppCompatActivity {
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                intent.putExtra("attivita riconosciuta", "Scalini");
+                                intent.putExtra(Constants.ATTIVITA_RILEVATA, "Scalini");
                                 startActivity(intent);
 
                                 bottomSheetDialog.dismiss();
@@ -120,7 +121,7 @@ public class DashboardActivity extends AppCompatActivity {
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                intent.putExtra("attivita riconosciuta", "Tennis");
+                                intent.putExtra(Constants.ATTIVITA_RILEVATA, "Tennis");
                                 startActivity(intent);
 
                                 bottomSheetDialog.dismiss();
@@ -147,7 +148,7 @@ public class DashboardActivity extends AppCompatActivity {
     public void goToPushupCounter(View v){
         Intent intent = new Intent(getApplicationContext(), PushupCounterActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("attivita riconosciuta", "Pushup");
+        intent.putExtra(Constants.ATTIVITA_RILEVATA, "Pushup");
         startActivity(intent);
     }
     /**
@@ -163,7 +164,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), RunningActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("attivita riconosciuta", activity);
+        intent.putExtra(Constants.ATTIVITA_RILEVATA, activity);
         startActivity(intent);
     }
     /**
@@ -173,7 +174,7 @@ public class DashboardActivity extends AppCompatActivity {
     public void goToFreestyleActivity(View v){
         Intent intent = new Intent(getApplicationContext(), FreestyleActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("attivita riconosciuta", "Freestyle");
+        intent.putExtra(Constants.ATTIVITA_RILEVATA, "Freestyle");
         startActivity(intent);
     }
 

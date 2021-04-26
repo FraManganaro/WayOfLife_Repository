@@ -590,7 +590,21 @@ public class HomeActivity extends AppCompatActivity {
                         HomeActivity.this,
                         RunningActivity.class);
                 intentOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intentOut.putExtra("attivita riconosciuta", enterActivity);
+
+                switch(enterActivity){
+                    case "RUNNING":
+                        intentOut.putExtra(Constants.ATTIVITA_RILEVATA, "Corsa");
+                        break;
+                    case "WALKING":
+                        intentOut.putExtra(Constants.ATTIVITA_RILEVATA, "Camminata");
+                        break;
+                    case "ON_BICYCLE":
+                        intentOut.putExtra(Constants.ATTIVITA_RILEVATA, "Ciclismo");
+                        break;
+                    default:
+                        intentOut.putExtra(Constants.ATTIVITA_RILEVATA, enterActivity);
+                        break;
+                }
 
                 PendingIntent pendingIntentOut = PendingIntent.getActivity(HomeActivity.this,
                         0, intentOut, PendingIntent.FLAG_UPDATE_CURRENT);

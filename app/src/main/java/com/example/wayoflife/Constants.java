@@ -11,6 +11,9 @@ public class Constants {
     public static final String RUNNING_STATUS = "RunningStatus";
     public static final String CYCLING_STATUS = "CyclingStatus";
 
+    public static final String ATTIVITA_RILEVATA = "Attività Rilevata";
+    public static final String TEMPO_PASSATO = "TempoPassato";
+
     public static final String NOME = "Nome";
     public static final String COGNOME = "Cognome";
     public static final String NICKNAME = "Nickname";

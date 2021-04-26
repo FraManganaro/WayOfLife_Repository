@@ -17,22 +17,26 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wayoflife.Constants;
 import com.example.wayoflife.R;
 import com.example.wayoflife.ui.HomeActivity;
+
+import org.w3c.dom.Text;
 
 public class PushupCounterActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager sensorManager;
     private int count = -1;
 
-//    private boolean justStarted = true;
-//    private Calendar dateStarted;
+    private String attivitaDiProvenienza;
 
     private TextView tvCounter;
+    private TextView tvFreestyle;
 
     private ImageView playButton;
     private ImageView endButton;
     private ImageView minusButton;
+    private ImageView freestyleButton;
 
     private Chronometer chronometer;
     private boolean isRunningChronometer;
@@ -45,26 +49,35 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pushup_counter);
 
-        tvCounter = findViewById(R.id.TVCounter);
+        attivitaDiProvenienza = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
 
         /** Sistema per interagire con i sensori */
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
-        /** Sensore di tipo PROSSIMITÀ */
-        Sensor proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-
-        /** Attivazione del croometro */
+        /** Attivazione del cronometro */
         chronometer = findViewById(R.id.chronometer);
-        chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+
+        if(attivitaDiProvenienza.equalsIgnoreCase("Freestyle")){
+            chronometer.setBase(getIntent().getLongExtra(Constants.TEMPO_PASSATO, 0));
+        } else
+            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+
         chronometer.start();
         isRunningChronometer = true;
 
+        tvCounter = findViewById(R.id.TVCounter);
+
+        tvFreestyle = findViewById(R.id.tvFreestyle);
 
         playButton = findViewById(R.id.buttonPausePlay);
         endButton = findViewById(R.id.endButton);
         minusButton = findViewById(R.id.minusButton);
 
+        freestyleButton = findViewById(R.id.freestyleButton);
+
         endButton.setVisibility(View.INVISIBLE);
+        tvFreestyle.setVisibility(View.INVISIBLE);
+        freestyleButton.setVisibility(View.INVISIBLE);
     }
     @Override
     public void onResume() {
@@ -84,12 +97,6 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-//        if (justStarted) {
-//            justStarted = false;
-//            dateStarted = Calendar.getInstance();
-//            return;
-//        }
-
         if(isRunningChronometer) {
             int val = (int) event.values[0];
 
@@ -107,6 +114,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
     }
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+
 
     /**
      * Se l'utente vuole aggiungere delle felssioni manualmente ha la possibilità di farlo
@@ -132,56 +140,63 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
         }
     }
 
+
     /**
-     * Allenamento finito, devo salvare le flessioni che sono state fatte e portare l'utente nella
-     * pagina di overview.
+     * Allenamento finito, devo salvare le flessioni che sono state fatte
+     * In base a dove é stato richiamata l'attività devo passare cose diverse
      * @param v
      */
     public void stopWorkout(View v) {
-//        PushUpData data = new PushUpData(getApplicationContext());
-//        Calendar currentDate = Calendar.getInstance();
-//
-//        timeElapsed = currentDate.getTimeInMillis() -
-//                dateStarted.getTimeInMillis();
+        Intent intent;
 
-//        try {
-//            data.writeData(count, timeElapsed);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        if(attivitaDiProvenienza.equalsIgnoreCase("Freestyle")) {
+            intent = new Intent(getApplicationContext(), FreestyleActivity.class);
+        } else {
+            intent = new Intent(getApplicationContext(), EndWorkoutActivity.class);
+        }
 
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("FlessioniFatte", count);
+
+        intent.putExtra("flessioni", count);
+        intent.putExtra(Constants.ATTIVITA_RILEVATA, "Pushup");
+        intent.putExtra(Constants.TEMPO_PASSATO, chronometer.getBase());
+
         startActivity(intent);
     }
+
+    /**
+     * Metto in pausa allenamento e cambio le icone che vengono visualizzate
+     * @param v
+     */
     public void pauseWorkout(View v) {
-//        if(playButton.getText().toString().equalsIgnoreCase("Pausa")) {
-//            playButton.setText(R.string.play);
-//            endButton.setVisibility(View.VISIBLE);
-//            pauseChronometer(v);
-//        } else {
-//            playButton.setText(R.string.pausa);
-//            endButton.setVisibility(View.INVISIBLE);
-//        }
         if(isRunningChronometer) {
             playButton.setImageDrawable(getDrawable(R.drawable.ic_play));
 
-            endButton.setVisibility(View.VISIBLE);
+            if(attivitaDiProvenienza.equalsIgnoreCase("Freestyle")){
+                tvFreestyle.setVisibility(View.VISIBLE);
+                freestyleButton.setVisibility(View.VISIBLE);
+            } else
+                endButton.setVisibility(View.VISIBLE);
+
             minusButton.setVisibility(View.INVISIBLE);
 
             pauseChronometer(v);
         } else {
             playButton.setImageDrawable(getDrawable(R.drawable.ic_pause));
 
-            endButton.setVisibility(View.INVISIBLE);
+            if(attivitaDiProvenienza.equalsIgnoreCase("Freestyle")){
+                tvFreestyle.setVisibility(View.INVISIBLE);
+                freestyleButton.setVisibility(View.INVISIBLE);
+            } else
+                endButton.setVisibility(View.INVISIBLE);
+
             minusButton.setVisibility(View.VISIBLE);
 
             pauseChronometer(v);
         }
     }
     /**
-     * Metodo che permette di avviare e stoppare il chronometro toccando sul cronometro
+     * Metodo che permette di avviare e stoppare il cronometro
      * @param v
      */
     public void pauseChronometer(View v){

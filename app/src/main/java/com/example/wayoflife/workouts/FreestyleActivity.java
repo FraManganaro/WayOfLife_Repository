@@ -11,12 +11,16 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.wayoflife.Constants;
 import com.example.wayoflife.R;
-import com.example.wayoflife.ui.HomeActivity;
 
 public class FreestyleActivity extends AppCompatActivity {
 
+    private final String TAG = "FreestyleActivity";
+
     private ConstraintLayout constraintLayout;
+
+    private String attivitaDiProvenienza;
 
     private ImageView playButton;
     private ImageView endButton;
@@ -35,15 +39,20 @@ public class FreestyleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freestyle);
 
-        String arrivo = getIntent().getStringExtra("attivita riconosciuta");
+        attivitaDiProvenienza = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
 
-        /** Attivazione del croometro */
+        /** Attivazione del cronometro */
         chronometer = findViewById(R.id.chronometer);
-        chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+
+        if(attivitaDiProvenienza.equalsIgnoreCase("Pushup")) {
+            chronometer.setBase(getIntent().getLongExtra(Constants.TEMPO_PASSATO, 0));
+        } else
+            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+
         chronometer.start();
         isRunningChronometer = true;
 
-        constraintLayout = findViewById(R.id.clPrincipale);
+        constraintLayout = findViewById(R.id.clPrincipaleFreestyle);
 
         playButton = findViewById(R.id.buttonPausePlay);
         endButton = findViewById(R.id.endButton);
@@ -51,52 +60,53 @@ public class FreestyleActivity extends AppCompatActivity {
         pushupButton = findViewById(R.id.pushupButton);
         textView = findViewById(R.id.tvPushup);
 
-        if(!arrivo.equalsIgnoreCase("freestyle")){
+        if(!attivitaDiProvenienza.equalsIgnoreCase("freestyle") &&
+                !attivitaDiProvenienza.equalsIgnoreCase("pushup")){
             pushupButton.setVisibility(View.INVISIBLE);
             textView.setVisibility(View.INVISIBLE);
-            constraintLayout.setBackground(getDrawable(R.drawable.background_white_corners));
+            constraintLayout.setBackground(getDrawable(R.drawable.background_white_corners)); //DA CAMBIARE
         }
 
         endButton.setVisibility(View.INVISIBLE);
     }
 
     /**
-     * Allenamento finito, devo salvare le flessioni che sono state fatte e portare l'utente nella
-     * pagina di overview.
+     * Allenamento finito, devo passare alla classe di review le informazioni da salvare
      * @param v
      */
     public void stopWorkout(View v) {
-//        PushUpData data = new PushUpData(getApplicationContext());
-//        Calendar currentDate = Calendar.getInstance();
-//
-//        timeElapsed = currentDate.getTimeInMillis() -
-//                dateStarted.getTimeInMillis();
-
-//        try {
-//            data.writeData(count, timeElapsed);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        Intent intent = new Intent(getApplicationContext(), EndWorkoutActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        if(attivitaDiProvenienza.equalsIgnoreCase("Freestyle") ||
+                attivitaDiProvenienza.equalsIgnoreCase("Pushup")){
+
+            intent.putExtra(Constants.ATTIVITA_RILEVATA,  "Freestyle");
+        } else {
+            intent.putExtra(Constants.ATTIVITA_RILEVATA, attivitaDiProvenienza);
+        }
+
+        intent.putExtra(Constants.TEMPO_PASSATO, chronometer.getBase());
+
+        //devo aggiungere altri parametri da passare
+
         startActivity(intent);
     }
+    /**
+     * Metto in pausa il cronometro e cambio le icone per finire l'allenamento
+     * @param v
+     */
     public void pauseWorkout(View v) {
-//        if(playButton.getText().toString().equalsIgnoreCase("Pausa")) {
-//            playButton.setText(R.string.play);
-//            endButton.setVisibility(View.VISIBLE);
-//            pauseChronometer(v);
-//        } else {
-//            playButton.setText(R.string.pausa);
-//            endButton.setVisibility(View.INVISIBLE);
-//        }
         if(isRunningChronometer) {
             playButton.setImageDrawable(getDrawable(R.drawable.ic_play));
 
             endButton.setVisibility(View.VISIBLE);
 
-            pushupButton.setClickable(false);
+            if(attivitaDiProvenienza.equalsIgnoreCase("freestyle") ||
+                    attivitaDiProvenienza.equalsIgnoreCase("pushup")) {
+                pushupButton.setVisibility(View.INVISIBLE);
+                textView.setVisibility(View.INVISIBLE);
+            }
 
             pauseChronometer(v);
         } else {
@@ -104,13 +114,17 @@ public class FreestyleActivity extends AppCompatActivity {
 
             endButton.setVisibility(View.INVISIBLE);
 
-            pushupButton.setClickable(true);
+            if(attivitaDiProvenienza.equalsIgnoreCase("freestyle") ||
+                    attivitaDiProvenienza.equalsIgnoreCase("pushup")) {
+                pushupButton.setVisibility(View.VISIBLE);
+                textView.setVisibility(View.VISIBLE);
+            }
 
             pauseChronometer(v);
         }
     }
     /**
-     * Metodo che permette di avviare e stoppare il chronometro toccando sul cronometro
+     * Metodo che permette di avviare e stoppare il cronometro
      * @param v
      */
     public void pauseChronometer(View v){
@@ -135,7 +149,8 @@ public class FreestyleActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), PushupCounterActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        intent.putExtra("arrivo", "freestyleActivity");
+        intent.putExtra(Constants.ATTIVITA_RILEVATA, "Freestyle");
+        intent.putExtra(Constants.TEMPO_PASSATO, chronometer.getBase());
 
         /** devo mettere come extra anche il tempo passato, le kcal */
 
