@@ -35,4 +35,6 @@
     <string name="fine">Fine</string>
     <string name="zero">0</string>
     <string name="infoPushup">Informazioni sui pushup</string>
+    <string name="history">Cronologia Workout</string>
+    <string name="cercaData">Seleziona data</string>
 </resources>
