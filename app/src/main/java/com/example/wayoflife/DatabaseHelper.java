@@ -113,7 +113,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<CustomerModel> getWorkoutForDate(String data){    //da controllare query
         //Variabili
         List<CustomerModel> returnList = new ArrayList<>();
-        String query = "SELECT * FROM " + TABLE_NAME + ", WHERE data = " + data;
+        String query = "SELECT * FROM " + TABLE_NAME + ", WHERE " + DATA_COLUMN + " = " + data;
 
         //Get Readable Database
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
