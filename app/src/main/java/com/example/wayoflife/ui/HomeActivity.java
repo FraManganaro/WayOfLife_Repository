@@ -61,7 +61,6 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Oggetti per ActivityRecognition
      */
-    // Review check for devices with Android 10 (29+).
     private boolean runningQOrLater = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
 
     private boolean activityTrackingEnabled;
@@ -78,6 +77,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private PendingIntent mActivityTransitionsPendingIntent;
     private HomeActivity.TransitionsReceiver mTransitionsReceiver;
+
+
+
 
     /**
      * Creo un canale per le notifiche
@@ -204,16 +206,33 @@ public class HomeActivity extends AppCompatActivity {
         return activityTransitionList;
     }
 
+    /**
+     * Controllo se é il primo accesso all'applicazione
+     * Se non fosse lancio l'activity che permette di impostare i dati del proprio profilo
+     */
+    private void firstAccess(){
+        SharedPreferences sharedPrefHome = getSharedPreferences(
+                Constants.PROFILE_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+
+        if(sharedPrefHome.getString(Constants.NOME, "").isEmpty()){
+            Intent intent = new Intent(getApplicationContext(), FirstAccessActivity.class);
+            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+    }
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /** Controllo se é il primo accesso -> a memoria vuota */
+        firstAccess();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        /**
-         * Controllore della navigation bar
-         */
+        /** Controllore della navigation bar */
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
 
@@ -239,7 +258,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
         /** Se ho qualcosa da ripristinare lo rispristino da qui */
         if(savedInstanceState != null) {
             activityTrackingEnabled = savedInstanceState.getBoolean(Constants.ACTIVITY_TRACKING_STATUS);
@@ -256,7 +274,6 @@ public class HomeActivity extends AppCompatActivity {
             cyclingStatus = false;
         }
 
-
         /** Inizializzo il canale per le notifiche */
         createNotificationChannel();
 
@@ -265,7 +282,7 @@ public class HomeActivity extends AppCompatActivity {
         mActivityTransitionsPendingIntent =
                 PendingIntent.getBroadcast(HomeActivity.this, 0, intent, 0);
 
-        //Inizializzo un BroadcastReceiver per ascoltare le transazioni dell'utente
+        /** Inizializzo un BroadcastReceiver per ascoltare le transazioni dell'utente */
         mTransitionsReceiver = new HomeActivity.TransitionsReceiver();
 
         /** Recupero le informazioni che sono state memorizzate all'interno del file */
@@ -284,6 +301,8 @@ public class HomeActivity extends AppCompatActivity {
     }
     @Override
     protected void onStart() {
+        firstAccess();
+
         super.onStart();
 
         // Registro il BroadcastReceiver per ascoltare le attività
@@ -318,8 +337,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     * Salvo le informazioni dei bottoni che sono stati premuto oppure no
-     * In questo modo anche se l'applicazione dovesse essere killara avrei lo stesso i progressi
+     * Salvo le informazioni degli switch (che sono stati premuto oppure no)
+     * In questo modo ad ogni avvio dell'applicazione avrei i dati salvati
      */
     private void saveInformation(){
         SharedPreferences sharedPref = getSharedPreferences(
@@ -328,9 +347,7 @@ public class HomeActivity extends AppCompatActivity {
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        /**
-         * Salvo se é stato attivato oppure no l'ActivityRecognitionClient
-         */
+        /** Salvo se é stato attivato oppure no l'ActivityRecognitionClient */
         editor.putBoolean(Constants.ACTIVITY_TRACKING_STATUS, activityTrackingEnabled);
 
         editor.putBoolean(Constants.WALKING_STATUS, walkingStatus);
@@ -439,6 +456,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         // Start activity recognition if the permission was approved.
@@ -448,7 +466,6 @@ public class HomeActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
-
     /**
      * Registers callbacks for {@link ActivityTransition} events via a custom
      * {@link BroadcastReceiver}
@@ -517,7 +534,11 @@ public class HomeActivity extends AppCompatActivity {
                 });
     }
 
-
+    /**
+     * Ogni volta che viene attivato/disattivato lo switch dell'activityRecognition
+     * viene invocato questo metodo
+     * @param view
+     */
     public void onClickEnableOrDisableActivityRecognition(View view) {
 
         // Enable/Disable activity tracking and ask for permissions if needed.
@@ -559,7 +580,6 @@ public class HomeActivity extends AppCompatActivity {
                 return;
             }
 
-            // Extract activity transition information from listener.
             if (ActivityTransitionResult.hasResult(intent)) {
                 ActivityTransitionResult result = ActivityTransitionResult.extractResult(intent);
                 for (ActivityTransitionEvent event : result.getTransitionEvents()) {
@@ -570,11 +590,12 @@ public class HomeActivity extends AppCompatActivity {
                             new SimpleDateFormat("HH:mm:ss", Locale.ITALIAN).format(new Date());
 
 
-                    //Stampo nella console transizione di ingresso e di uscite
+                    /** Stampo nella console transizione di ingresso e di uscite */
                     printToScreen(info);
 
-                    //Salvo solo la transazione di INGRESSO
-                    if(toTransitionType(event.getTransitionType()).equalsIgnoreCase("ENTER")){
+                    /** Salvo solo la transazione di INGRESSO */
+                    if(toTransitionType(event.getTransitionType())
+                            .equalsIgnoreCase("ENTER")){
                         enterActivity = toActivityString(event.getActivityType());
                     }
 
@@ -582,9 +603,7 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             if(enterActivity!=null) {
-                /**
-                 * Creo l'intent che mi permetterà di viaggiare da un'activity all'altra
-                 */
+                /** Creo l'intent che mi permetterà di viaggiare da un'activity all'altra */
 
                 Intent intentOut = new Intent(
                         HomeActivity.this,
@@ -612,9 +631,7 @@ public class HomeActivity extends AppCompatActivity {
                 NotificationManagerCompat notificationManagerCompat =
                         NotificationManagerCompat.from(HomeActivity.this);
 
-                /**
-                 * Creo la notifica e ci assegno il PendingIntent appena creato
-                 */
+                /** Creo la notifica e gli assegno il PendingIntent appena creato */
 
                 int icon = 0;
                 String testo = "Vuoi avviare un allenamento specifico di tipo ";

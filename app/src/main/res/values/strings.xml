@@ -34,7 +34,9 @@
     <string name="pausa">Pausa</string>
     <string name="fine">Fine</string>
     <string name="zero">0</string>
-    <string name="infoPushup">Informazioni sui pushup</string>
+    <string name="infoPushup">Servizio che permette di rilevare in modo automatico quante flessioni vengono fatte utilizzando il sensore di prossimità del telefono (posto in prossimità della fotocamera posteriore del telefono).\n\nPer il corretto funzionamento: \n    Porre il telefono per terra, con lo schermo direzionato verso l\'alto, mettendolo all\'altezza del petto.\n    Iniziare l\'esercizio portando il petto verso il dispositivo posizionato a terra\n    Sollevarsi completando il movimento e allontanandosi dal pavimento.\n\nIn questo modo le flessioni verranno contate in modo automatico.\n\nIn alternativa, si ha anche la possibilità di aggiungere manualmente le flessioni fatte, premendo in qualsiasi punto dello schermo.\nIn caso di errore, si ha la possibilità di decrementare il contatore totale utilizzando il bottone destinato (posto in basso a destra).</string>
     <string name="history">Cronologia Workout</string>
     <string name="cercaData">Seleziona data</string>
+    <string name="benvenuti_su">Benvenuti su</string>
+    <string name="prossimo">Prossimo</string>
 </resources>
