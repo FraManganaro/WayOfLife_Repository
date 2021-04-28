@@ -7,7 +7,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".ui.FirstAccessActivity">
+    tools:context=".ui.FirstAccessActivity"
+    android:background="@drawable/prova">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,10 +24,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="170dp"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:background="@drawable/background_firt_access">
+                android:background="@drawable/background_top_first_access">
 
                 <TextView
                     android:id="@+id/textView10"
@@ -45,31 +46,41 @@
                     android:text="@string/app_name"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:layout_marginStart="10dp"/>
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/ic_fire"/>
 
             </LinearLayout>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Inserisci i dati per completare il profilo!"
+                android:text="@string/datiProfilo"
                 android:gravity="center"
                 android:fontFamily="@font/candara"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/white"
+                android:textStyle="italic"
+                android:textSize="15sp"
+                android:layout_marginTop="-16dp"
+                android:padding="7dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:background="@drawable/background_home_button_red"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:background="@drawable/background_card_first_access_d1">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -97,8 +108,12 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/background_card_first_access_d2">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -150,7 +165,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:background="@drawable/background_card_first_access_d1">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -179,8 +198,10 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:background="@color/white">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -209,8 +230,11 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/background_card_first_access_d2">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -237,7 +261,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="80dp"
+                android:layout_gravity="bottom">
 
                 <Button
                     android:id="@+id/button2"
@@ -249,7 +274,9 @@
                     android:onClick="saveData"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_margin="30dp"/>
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/background_home_button_red"/>
 
             </RelativeLayout>
 

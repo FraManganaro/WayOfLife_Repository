@@ -8,7 +8,7 @@
         android:endColor="@color/viola"/>
 
     <corners
-        android:bottomLeftRadius="60dp"
-        android:bottomRightRadius="60dp"/>>
+        android:bottomLeftRadius="40dp"
+        android:bottomRightRadius="40dp"/>>
 
 </shape>
