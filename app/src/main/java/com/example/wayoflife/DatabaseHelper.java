@@ -6,11 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -68,8 +64,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //Dati da verificare se sono presenti negli allenamenti
         //Se == -1, vuol dire che non sono stati inseriti nella fine dell'allenamento
-        if(customerModel.getChilometrri() != -1)
-            cv.put(CHILOMETRI_COLUMN, customerModel.getChilometrri());
+        if(customerModel.getChilometri() != -1)
+            cv.put(CHILOMETRI_COLUMN, customerModel.getChilometri());
 
         if(customerModel.getN_flessioni() != -1)
             cv.put(NUM_FLESSIONI_COLUMN, customerModel.getN_flessioni());

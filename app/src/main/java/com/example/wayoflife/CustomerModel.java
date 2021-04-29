@@ -2,30 +2,31 @@ package com.example.wayoflife;
 
 public class CustomerModel {
 
-    //Costanti
+    //Variabili
     private int id;
     private String nome;
     private String data;
     private String durata;
     private String tipologia;
     private int calorie;
-    private float chilometrri;
+    private float chilometri;
     private int n_flessioni;
     private int state;
 
-    //Costruttore
-    public CustomerModel(String nome, String data, String durata, String tipologia, int calorie, float chilometrri, int n_flessioni, int state) {
+    /** Costruttore completo */
+    public CustomerModel(String nome, String data, String durata, String tipologia, int calorie, float chilometri, int n_flessioni, int state) {
         this.id = -1;
         this.nome = nome;
         this.data = data;
         this.durata = durata;
         this.tipologia = tipologia;
         this.calorie = calorie;
-        this.chilometrri = chilometrri;
+        this.chilometri = chilometri;
         this.n_flessioni = n_flessioni;
         this.state = state;
     }
 
+    /** Costruttore per attività extra */
     public CustomerModel(String nome, String data, String durata, String tipologia, int calorie, int state) {
         this.id = -1;
         this.nome = nome;
@@ -33,11 +34,12 @@ public class CustomerModel {
         this.durata = durata;
         this.tipologia = tipologia;
         this.calorie = calorie;
-        this.chilometrri = -1;
+        this.chilometri = -1;
         this.n_flessioni = -1;
         this.state = state;
     }
 
+    /** Costruttore per Freestyle o Pushup */
     public CustomerModel(String nome, String data, String durata, String tipologia, int calorie, int n_flessioni, int state) {
         this.id = -1;
         this.nome = nome;
@@ -45,19 +47,20 @@ public class CustomerModel {
         this.durata = durata;
         this.tipologia = tipologia;
         this.calorie = calorie;
-        this.chilometrri = -1;
+        this.chilometri = -1;
         this.n_flessioni = n_flessioni;
         this.state = state;
     }
 
-    public CustomerModel(String nome, String data, String durata, String tipologia, int calorie, float chilometrri, int state) {
+    /** Costruttore per Corsa, Ciclismo, Camminata */
+    public CustomerModel(String nome, String data, String durata, String tipologia, int calorie, float chilometri, int state) {
         this.id = -1;
         this.nome = nome;
         this.data = data;
         this.durata = durata;
         this.tipologia = tipologia;
         this.calorie = calorie;
-        this.chilometrri = chilometrri;
+        this.chilometri = chilometri;
         this.n_flessioni = -1;
         this.state = state;
     }
@@ -66,8 +69,6 @@ public class CustomerModel {
     }
 
     // ToString
-
-
     @Override
     public String toString() {
         return "CustomerModel{" +
@@ -77,7 +78,7 @@ public class CustomerModel {
                 ", durata='" + durata + '\'' +
                 ", tipologia='" + tipologia + '\'' +
                 ", calorie=" + calorie +
-                ", chilometrri=" + chilometrri +
+                ", chilometrri=" + chilometri +
                 ", n_flessioni=" + n_flessioni +
                 ", state=" + state +
                 '}';
@@ -132,12 +133,12 @@ public class CustomerModel {
         this.calorie = calorie;
     }
 
-    public float getChilometrri() {
-        return chilometrri;
+    public float getChilometri() {
+        return chilometri;
     }
 
-    public void setChilometrri(float chilometrri) {
-        this.chilometrri = chilometrri;
+    public void setChilometri(float chilometri) {
+        this.chilometri = chilometri;
     }
 
     public int getN_flessioni() {
