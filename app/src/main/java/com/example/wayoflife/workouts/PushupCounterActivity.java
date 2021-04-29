@@ -2,52 +2,66 @@ package com.example.wayoflife.workouts;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wayoflife.Calories;
 import com.example.wayoflife.Constants;
 import com.example.wayoflife.R;
-import com.example.wayoflife.ui.HomeActivity;
-
-import org.w3c.dom.Text;
 
 public class PushupCounterActivity extends AppCompatActivity implements SensorEventListener {
 
+    private static final String TAG = "PushupCounterActivity";
+
     private SensorManager sensorManager;
-    private int count = -1;
+    private int pushupCounter = -1;
 
     private String attivitaDiProvenienza;
 
     private TextView tvCounter;
     private TextView tvFreestyle;
-
+    private TextView caloriesTV;
     private ImageView playButton;
     private ImageView endButton;
     private ImageView minusButton;
     private ImageView freestyleButton;
 
+    /** Gestione del cronometro */
     private Chronometer chronometer;
     private boolean isRunningChronometer;
     private long pauseOffset = 0;
 
-    private long timeElapsed = 0;
+    /** Per gestione delle calorie */
+    private Thread t;
+    private boolean cycle;
+    private boolean updateCalories;
+    private int secondCounter;
+    private int calorie;
+    private int calorieRicevute;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pushup_counter);
+        updateCalories = true;
+        cycle = true;
+        secondCounter = 0;
+        calorie = 0;
+        calorieRicevute = 0;
 
         attivitaDiProvenienza = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
 
@@ -56,17 +70,47 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
 
         /** Attivazione del cronometro */
         chronometer = findViewById(R.id.chronometer);
-
-        if(attivitaDiProvenienza.equalsIgnoreCase("Freestyle")){
-            chronometer.setBase(getIntent().getLongExtra(Constants.TEMPO_PASSATO, 0));
-        } else
-            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
-
         chronometer.start();
         isRunningChronometer = true;
 
-        tvCounter = findViewById(R.id.TVCounter);
 
+        if(attivitaDiProvenienza.equalsIgnoreCase("Freestyle")){
+            /** nel caso in cui provenga dall'allenamento Freestyle devo ripristinare calorie e tempo */
+            chronometer.setBase(getIntent().getLongExtra(Constants.TEMPO_PASSATO, 0));
+            calorieRicevute = getIntent().getIntExtra(Constants.CALORIE, 0);
+        } else
+            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+
+
+        caloriesTV = findViewById(R.id.caloriesTV);
+
+        /** thread che ogni secondo aggiorna le calorie bruciate durante ogni attività */
+        t = new Thread(() -> {
+            while(cycle) {
+                while(updateCalories) {
+                    try {
+                        Thread.sleep(1000); //ogni secondo
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.d(TAG, "Secondi = " + secondCounter);
+
+                                secondCounter++;
+                                updateCalories();
+
+                                caloriesTV.setText(calorie + calorieRicevute + " kcal");
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        t.start();
+
+        tvCounter = findViewById(R.id.TVCounter);
         tvFreestyle = findViewById(R.id.tvFreestyle);
 
         playButton = findViewById(R.id.buttonPausePlay);
@@ -93,8 +137,6 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
 
         sensorManager.unregisterListener(this);
     }
-
-
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(isRunningChronometer) {
@@ -107,13 +149,26 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
             if (val > 1)
                 val = 1;
 
-            count += val;
+            pushupCounter += val;
 
-            tvCounter.setText(String.valueOf(count));
+            tvCounter.setText(String.valueOf(pushupCounter));
         }
     }
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {/** non implementato */}
+
+
+    /** Calorie consumate da questa attività */
+    private void updateCalories(){
+        SharedPreferences sharedPref = getSharedPreferences(
+                Constants.PROFILE_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+
+        int peso = Integer.parseInt(sharedPref.getString(
+                Constants.PESO, "0"));
+
+        calorie = (int) (Calories.FLESSIONI * peso * secondCounter)/3600;
+    }
 
 
     /**
@@ -123,9 +178,9 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
      */
     public void increaseCounter(View v) {
         if(isRunningChronometer) {
-            count += 1;
+            pushupCounter += 1;
 
-            tvCounter.setText(String.valueOf(count));
+            tvCounter.setText(String.valueOf(pushupCounter));
         }
     }
     /**
@@ -134,9 +189,9 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
      */
     public void decreaseCounter(View v) {
         if(isRunningChronometer) {
-            if(count > 0) count -= 1;
+            if(pushupCounter > 0) pushupCounter -= 1;
 
-            tvCounter.setText(String.valueOf(count));
+            tvCounter.setText(String.valueOf(pushupCounter));
         }
     }
 
@@ -157,9 +212,10 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
 
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        intent.putExtra("flessioni", count);
+        intent.putExtra("flessioni", pushupCounter);
         intent.putExtra(Constants.ATTIVITA_RILEVATA, "Pushup");
         intent.putExtra(Constants.TEMPO_PASSATO, chronometer.getBase());
+        intent.putExtra(Constants.CALORIE, calorie + calorieRicevute);
 
         startActivity(intent);
     }
@@ -181,6 +237,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
             minusButton.setVisibility(View.INVISIBLE);
 
             pauseChronometer(v);
+
         } else {
             playButton.setImageDrawable(getDrawable(R.drawable.ic_pause));
 

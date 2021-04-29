@@ -4,16 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.LocaleList;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
@@ -30,34 +27,45 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 public class RunningActivity extends AppCompatActivity {
 
     private final String TAG = "RunningActivity";
 
     private ConstraintLayout constraintLayout;
-
-    private String attivitaDiProvenienza;
-
     private ImageView playButton;
     private ImageView endButton;
+
+    private String attivitaDiProvenienza;
+    private int calorie;
 
     private Chronometer chronometer;
     private boolean isRunningChronometer;
     private long pauseOffset = 0;
-
     private long timeElapsed = 0;
 
     /** Variabili per la mappa */
     private SupportMapFragment supportMapFragment;
     private FusedLocationProviderClient client;
 
+    private Thread t;
+    private boolean continueFindLocation;
+    private boolean cycle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_running);
+
+        cycle = true;
+        continueFindLocation = true;
 
         attivitaDiProvenienza = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
 
@@ -74,6 +82,7 @@ public class RunningActivity extends AppCompatActivity {
 
         client = LocationServices.getFusedLocationProviderClient(this);
 
+
         if (ActivityCompat.checkSelfPermission(RunningActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             getCurrentLocation(); //da chiamare quando ho il permesso del GPS
@@ -83,11 +92,33 @@ public class RunningActivity extends AppCompatActivity {
         }
 
 
+        t = new Thread(() -> {
+            while(cycle) {
+                while (continueFindLocation) {
+                    try {
+                        Thread.sleep(2000);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.d(TAG, "run");
+
+                                getCurrentLocation();
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        t.start();
+
         constraintLayout = findViewById(R.id.clPrincipaleRunning);
 
         playButton = findViewById(R.id.buttonPausePlay);
         endButton = findViewById(R.id.endButton);
-
 
         /**
          * Probabilmente da rimuovere
@@ -108,7 +139,6 @@ public class RunningActivity extends AppCompatActivity {
 //        }
 
         endButton.setVisibility(View.INVISIBLE);
-
     }
 
     /**
@@ -116,6 +146,9 @@ public class RunningActivity extends AppCompatActivity {
      * @param v
      */
     public void stopWorkout(View v) {
+        cycle = false;
+        continueFindLocation = false;
+
         Intent intent = new Intent(getApplicationContext(), EndWorkoutActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -137,12 +170,14 @@ public class RunningActivity extends AppCompatActivity {
 
             endButton.setVisibility(View.VISIBLE);
 
+            continueFindLocation = false;
             pauseChronometer(v);
         } else {
             playButton.setImageDrawable(getDrawable(R.drawable.ic_pause));
 
             endButton.setVisibility(View.INVISIBLE);
 
+            continueFindLocation = true;
             pauseChronometer(v);
         }
     }
@@ -165,6 +200,14 @@ public class RunningActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == 44){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                getCurrentLocation();
+            }
+        }
+    }
     private void getCurrentLocation() {
         @SuppressLint("MissingPermission") Task<Location> task = client.getLastLocation();
 
@@ -187,19 +230,10 @@ public class RunningActivity extends AppCompatActivity {
 
                         //Aggiungo il marker alla mappa
                         googleMap.addMarker(markerOptions);
-
                     }
                 });
             }
         });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == 44){
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                getCurrentLocation();
-            }
-        }
-    }
 }
