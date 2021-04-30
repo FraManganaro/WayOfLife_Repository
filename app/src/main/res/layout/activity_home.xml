@@ -68,7 +68,8 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/background_home_button_blue"
                     android:elevation="5dp"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:onClick="goToHistoryActivity">
 
                     <ImageView
                         android:layout_width="60dp"

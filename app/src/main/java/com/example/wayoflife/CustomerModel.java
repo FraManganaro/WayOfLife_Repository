@@ -3,7 +3,6 @@ package com.example.wayoflife;
 public class CustomerModel {
 
     //Variabili
-    private int id;
     private String nome;
     private String data;
     private String durata;
@@ -14,21 +13,19 @@ public class CustomerModel {
     private int state;
 
     /** Costruttore completo */
-    public CustomerModel(String nome, String data, String durata, String tipologia, int calorie, float chilometri, int n_flessioni, int state) {
-        this.id = -1;
+    public CustomerModel(String nome, String data, String durata, float chilometri, String tipologia, int calorie, int n_flessioni, int state) {
         this.nome = nome;
         this.data = data;
         this.durata = durata;
+        this.chilometri = chilometri;
         this.tipologia = tipologia;
         this.calorie = calorie;
-        this.chilometri = chilometri;
         this.n_flessioni = n_flessioni;
         this.state = state;
     }
 
     /** Costruttore per attività extra */
     public CustomerModel(String nome, String data, String durata, String tipologia, int calorie, int state) {
-        this.id = -1;
         this.nome = nome;
         this.data = data;
         this.durata = durata;
@@ -41,7 +38,6 @@ public class CustomerModel {
 
     /** Costruttore per Freestyle o Pushup */
     public CustomerModel(String nome, String data, String durata, String tipologia, int calorie, int n_flessioni, int state) {
-        this.id = -1;
         this.nome = nome;
         this.data = data;
         this.durata = durata;
@@ -53,14 +49,13 @@ public class CustomerModel {
     }
 
     /** Costruttore per Corsa, Ciclismo, Camminata */
-    public CustomerModel(String nome, String data, String durata, String tipologia, int calorie, float chilometri, int state) {
-        this.id = -1;
+    public CustomerModel(String nome, String data, String durata, float chilometri, String tipologia, int calorie, int state) {
         this.nome = nome;
         this.data = data;
         this.durata = durata;
+        this.chilometri = chilometri;
         this.tipologia = tipologia;
         this.calorie = calorie;
-        this.chilometri = chilometri;
         this.n_flessioni = -1;
         this.state = state;
     }
@@ -72,7 +67,6 @@ public class CustomerModel {
     @Override
     public String toString() {
         return "CustomerModel{" +
-                "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", data='" + data + '\'' +
                 ", durata='" + durata + '\'' +
@@ -85,14 +79,6 @@ public class CustomerModel {
     }
 
     // Get e Set
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
     }

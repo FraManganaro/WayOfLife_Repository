@@ -95,16 +95,16 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         try {
             if(tipologiaAllenamento.equals("Corsa")  || tipologiaAllenamento.equals("Camminata") || tipologiaAllenamento.equals("Ciclismo")){
                 //uso il costruttore con chilometri, senza flessioni
-                customerModel = new CustomerModel();
+                customerModel = new CustomerModel(nome, data, durata, chilometri, tipologiaAllenamento, calorie, state);
             }
             else{
                 if (tipologiaAllenamento.equals("Pushup") || tipologiaAllenamento.equals("Freestyle")){
                     //uso il costruttore senza chilometri, con flessioni
-                    customerModel = new CustomerModel();
+                    customerModel = new CustomerModel(nome, data, durata, tipologiaAllenamento, calorie, n_flessioni, state);
                 }
                 else{
                     //uso il costruttore senza chilometri e flessioni
-                    customerModel = new CustomerModel();
+                    customerModel = new CustomerModel(nome, data, durata, tipologiaAllenamento, calorie, state);
                 }
             }
         }catch (Exception e){

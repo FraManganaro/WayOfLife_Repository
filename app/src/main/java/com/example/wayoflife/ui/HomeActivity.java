@@ -31,7 +31,9 @@ import com.example.wayoflife.BuildConfig;
 import com.example.wayoflife.Constants;
 import com.example.wayoflife.PermissionRationalActivity;
 import com.example.wayoflife.R;
+import com.example.wayoflife.workouts.FreestyleActivity;
 import com.example.wayoflife.workouts.RunningActivity;
+import com.example.wayoflife.workouts.WorkoutHistoryActivity;
 import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.ActivityTransition;
 import com.google.android.gms.location.ActivityTransitionEvent;
@@ -682,5 +684,11 @@ public class HomeActivity extends AppCompatActivity {
                 notificationManagerCompat.notify(1, notification);
             }
         }
+    }
+
+    public void goToHistoryActivity(View v){
+        Intent intent = new Intent(getApplicationContext(), WorkoutHistoryActivity.class);
+        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
