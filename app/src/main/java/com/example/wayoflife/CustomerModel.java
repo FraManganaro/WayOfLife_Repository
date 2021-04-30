@@ -66,16 +66,11 @@ public class CustomerModel {
     // ToString
     @Override
     public String toString() {
-        return "CustomerModel{" +
-                ", nome='" + nome + '\'' +
-                ", data='" + data + '\'' +
-                ", durata='" + durata + '\'' +
-                ", tipologia='" + tipologia + '\'' +
-                ", calorie=" + calorie +
-                ", chilometrri=" + chilometri +
-                ", n_flessioni=" + n_flessioni +
-                ", state=" + state +
-                '}';
+        return "Nome: " + nome + '\n' +
+                "Data: " + data + '\n' +
+                "Tipologia: " + tipologia + '\n' +
+                "Durata: " + durata + '\n' +
+                "kcal: " + calorie;
     }
 
     // Get e Set
