@@ -25,6 +25,7 @@ public class FreestyleActivity extends AppCompatActivity {
     private final String TAG = "FreestyleActivity";
 
     private String attivitaDiProvenienza;
+    private int flessioni;
 
     private ConstraintLayout constraintLayout;
     private TextView tvPushup;
@@ -43,6 +44,7 @@ public class FreestyleActivity extends AppCompatActivity {
     private boolean cycle;
     private boolean updateCalories;
     private int secondCounter;
+    private int secondiRicevuti;
     private int calorie;
     private int calorieRicevute;
 
@@ -55,10 +57,12 @@ public class FreestyleActivity extends AppCompatActivity {
         cycle = true;
         updateCalories = true;
         secondCounter = 0;
+        secondiRicevuti = 0;
         calorie = 0;
         calorieRicevute = 0;
 
         attivitaDiProvenienza = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
+        secondiRicevuti = getIntent().getIntExtra(Constants.TEMPO_IN_SECONDI, 0);
 
         /** Attivazione del cronometro */
         chronometer = findViewById(R.id.chronometer);
@@ -70,6 +74,7 @@ public class FreestyleActivity extends AppCompatActivity {
             /** nel caso in cui provenga dall'allenamento Pushup devo ripristinare calorie e tempo */
             chronometer.setBase(getIntent().getLongExtra(Constants.TEMPO_PASSATO, 0));
             calorieRicevute = getIntent().getIntExtra(Constants.CALORIE, 0);
+            flessioni = getIntent().getIntExtra(Constants.FLESSIONI, 0);
         } else {
             chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
         }
@@ -106,6 +111,7 @@ public class FreestyleActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Log.d(TAG, "Secondi = " + secondCounter);
+                                Log.d(TAG, "Calorie = " + calorie + calorieRicevute);
 
                                 secondCounter++;
                                 updateCalories();
@@ -179,7 +185,9 @@ public class FreestyleActivity extends AppCompatActivity {
         } else intent.putExtra(Constants.ATTIVITA_RILEVATA, attivitaDiProvenienza);
 
         intent.putExtra(Constants.TEMPO_PASSATO, chronometer.getBase());
+        intent.putExtra(Constants.TEMPO_IN_SECONDI, secondCounter + secondiRicevuti);
         intent.putExtra(Constants.CALORIE, calorie + calorieRicevute);
+        intent.putExtra(Constants.FLESSIONI, flessioni);
 
         startActivity(intent);
     }
@@ -246,7 +254,9 @@ public class FreestyleActivity extends AppCompatActivity {
 
         intent.putExtra(Constants.ATTIVITA_RILEVATA, "Freestyle");
         intent.putExtra(Constants.TEMPO_PASSATO, chronometer.getBase());
-        intent.putExtra(Constants.CALORIE, calorie);
+        intent.putExtra(Constants.TEMPO_IN_SECONDI, secondCounter + secondiRicevuti);
+        intent.putExtra(Constants.CALORIE, calorie + calorieRicevute);
+        intent.putExtra(Constants.FLESSIONI, flessioni);
 
         pauseWorkout(v);
 

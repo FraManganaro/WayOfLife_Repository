@@ -7,7 +7,9 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -16,7 +18,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.wayoflife.Calories;
 import com.example.wayoflife.Constants;
 import com.example.wayoflife.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -32,6 +36,8 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import org.w3c.dom.Text;
+
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
@@ -42,10 +48,11 @@ public class RunningActivity extends AppCompatActivity {
     private ConstraintLayout constraintLayout;
     private ImageView playButton;
     private ImageView endButton;
+    private TextView caloriesTV;
 
     private String attivitaDiProvenienza;
-    private int calorie;
 
+    /** Variabili per gestione cronometro */
     private Chronometer chronometer;
     private boolean isRunningChronometer;
     private long pauseOffset = 0;
@@ -55,9 +62,12 @@ public class RunningActivity extends AppCompatActivity {
     private SupportMapFragment supportMapFragment;
     private FusedLocationProviderClient client;
 
+    /** Variabili per aggiornamento posizione e calorie */
     private Thread t;
     private boolean continueFindLocation;
     private boolean cycle;
+    private int secondCounter;
+    private int calorie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,23 +76,23 @@ public class RunningActivity extends AppCompatActivity {
 
         cycle = true;
         continueFindLocation = true;
+        secondCounter = 0;
+        calorie = 0;
 
         attivitaDiProvenienza = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
 
         /** Attivazione del cronometro */
         chronometer = findViewById(R.id.chronometer);
         chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
-
         chronometer.start();
         isRunningChronometer = true;
 
         /** Assegnazione della mappa */
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.googleMaps);
-
         client = LocationServices.getFusedLocationProviderClient(this);
 
-
+        /** Controllo i permessi per la posizione */
         if (ActivityCompat.checkSelfPermission(RunningActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             getCurrentLocation(); //da chiamare quando ho il permesso del GPS
@@ -91,17 +101,33 @@ public class RunningActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
 
+        constraintLayout = findViewById(R.id.clPrincipaleRunning);
 
+        playButton = findViewById(R.id.buttonPausePlay);
+        endButton = findViewById(R.id.endButton);
+
+        caloriesTV = findViewById(R.id.caloriesTV);
+
+        endButton.setVisibility(View.INVISIBLE);
+
+
+        /** Aggiorno la posizione ogni 3 secondi (con anche aggiornamento delle calorie) */
         t = new Thread(() -> {
             while(cycle) {
                 while (continueFindLocation) {
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(3000);
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Log.d(TAG, "run");
+                                Log.d(TAG, "Secondi = " + secondCounter);
+                                Log.d(TAG, "Calorie = " + calorie);
+
+                                secondCounter += 3;
+                                updateCalories();
+
+                                caloriesTV.setText(calorie + " kcal");
 
                                 getCurrentLocation();
                             }
@@ -112,13 +138,7 @@ public class RunningActivity extends AppCompatActivity {
                 }
             }
         });
-
         t.start();
-
-        constraintLayout = findViewById(R.id.clPrincipaleRunning);
-
-        playButton = findViewById(R.id.buttonPausePlay);
-        endButton = findViewById(R.id.endButton);
 
         /**
          * Probabilmente da rimuovere
@@ -137,8 +157,33 @@ public class RunningActivity extends AppCompatActivity {
 //                constraintLayout.setBackground(getDrawable(R.drawable.background_white_corners));
 //                break;
 //        }
+    }
 
-        endButton.setVisibility(View.INVISIBLE);
+    /**
+     * Per ogni attività calcolo quante calorie vengono consumate
+     */
+    private void updateCalories(){
+        SharedPreferences sharedPref = getSharedPreferences(
+                Constants.PROFILE_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+
+        int peso = Integer.parseInt(sharedPref.getString(
+                Constants.PESO, "0"));
+
+        switch(attivitaDiProvenienza){
+            case "Ciclismo":
+                calorie = (int) (Calories.CICLISMO * peso * secondCounter)/3600;
+                break;
+            case "Camminata":
+                calorie = (int) (Calories.CAMMINATA * peso * secondCounter)/3600;
+                break;
+            case "Corsa":
+                calorie = (int) (Calories.CORSA * peso * secondCounter)/3600;
+                break;
+            default:
+                Log.d(TAG, "Errore in updateCalories");
+                break;
+        }
     }
 
     /**
@@ -154,8 +199,8 @@ public class RunningActivity extends AppCompatActivity {
 
         intent.putExtra(Constants.ATTIVITA_RILEVATA, attivitaDiProvenienza);
         intent.putExtra(Constants.TEMPO_PASSATO, chronometer.getBase());
-
-        //devo aggiungere altri parametri da passare
+        intent.putExtra(Constants.TEMPO_IN_SECONDI, secondCounter);
+        intent.putExtra(Constants.CALORIE, calorie);
 
         startActivity(intent);
     }
@@ -199,6 +244,7 @@ public class RunningActivity extends AppCompatActivity {
             isRunningChronometer = true;
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

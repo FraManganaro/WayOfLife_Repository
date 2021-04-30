@@ -29,6 +29,9 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
     private String nome;
     private String data;
     private String durata; //Da mettere nella classe come String
+    private double durataInSecondi;
+    private double durataInMinuti;
+    private double durataInOre;
 
     private String tipologiaAllenamento;
 
@@ -37,38 +40,50 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
     private int n_flessioni;
     private int state;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_workout);
-        TextView textView = findViewById(R.id.textView12);
 
-        //nome -> da recuperare da un label sul layout
+        TextView tv1 = findViewById(R.id.textView12);
+        TextView tv2 = findViewById(R.id.textView13);
+        TextView tv3 = findViewById(R.id.textView14);
+        TextView tv4 = findViewById(R.id.textView15);
+        TextView tv5 = findViewById(R.id.textView16);
+
+        //nome -> da recuperare da un label sul layout (chiedere all'utente)
 
         /** Recupero data odierna */
         Date date = new Date();
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy"); // getting date in this format
-        String formattedDate = df.format(date.getDate());
-        data = formattedDate;
+        data = df.format(date.getDate());
 
         tipologiaAllenamento = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
+        tv1.setText(tipologiaAllenamento);
 
-        long tempoPassato = getIntent().getLongExtra(Constants.TEMPO_PASSATO, 0);
+        durataInSecondi = 1.0 *
+                getIntent().getIntExtra(Constants.TEMPO_IN_SECONDI, 0);
+        durataInMinuti = durataInSecondi/60;
+        durataInOre = durataInMinuti/60;
 
-        //calorie = getIntent().getFloatExtra(Constants.CALORIE, 0);
-        //chilometri = getIntent().getIntExtra(Constants.CHILOMETRI, 0);
-
-        /** In base alla tipologia di allenamento vedo se recuperare flessioni o no */
-        if(tipologiaAllenamento.equalsIgnoreCase("Freestyle") ||
-                tipologiaAllenamento.equalsIgnoreCase("Pushup")) {
-            n_flessioni = getIntent().getIntExtra(Constants.FLESSIONI, 0);
+        if(durataInOre > 1.0) { durata = durataInOre + " Ore"; }
+        else {
+            if (durataInMinuti < 1.0) { durata = durataInSecondi + " Secondi"; }
+            else { durata = durataInMinuti + " Minuti"; }
         }
 
-        //state (?)
+        tv2.setText(durata);
 
-        // textView.setText(tipologiaAllenamento);
-        textView.setText(""+tempoPassato);
+        calorie = getIntent().getIntExtra(Constants.CALORIE, 0);
+        tv3.setText(calorie + " kcal");
+
+        chilometri = getIntent().getIntExtra(Constants.CHILOMETRI, 0);
+        tv4.setText(chilometri + " km");
+
+        n_flessioni = getIntent().getIntExtra(Constants.FLESSIONI, 0);
+        tv5.setText(n_flessioni + " Flessioni");
+
+        //state (?)
     }
 
     public void saveWorkout(View v){

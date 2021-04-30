@@ -27,7 +27,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
     private static final String TAG = "PushupCounterActivity";
 
     private SensorManager sensorManager;
-    private int pushupCounter = -1;
+    private int pushupCounter;
 
     private String attivitaDiProvenienza;
 
@@ -49,6 +49,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
     private boolean cycle;
     private boolean updateCalories;
     private int secondCounter;
+    private int secondiRicevuti;
     private int calorie;
     private int calorieRicevute;
 
@@ -57,6 +58,9 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pushup_counter);
+
+        pushupCounter = -1;
+
         updateCalories = true;
         cycle = true;
         secondCounter = 0;
@@ -64,6 +68,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
         calorieRicevute = 0;
 
         attivitaDiProvenienza = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
+        secondiRicevuti = getIntent().getIntExtra(Constants.TEMPO_IN_SECONDI, 0);
 
         /** Sistema per interagire con i sensori */
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -78,6 +83,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
             /** nel caso in cui provenga dall'allenamento Freestyle devo ripristinare calorie e tempo */
             chronometer.setBase(getIntent().getLongExtra(Constants.TEMPO_PASSATO, 0));
             calorieRicevute = getIntent().getIntExtra(Constants.CALORIE, 0);
+            pushupCounter = getIntent().getIntExtra(Constants.FLESSIONI, 0) - 1;
         } else
             chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
 
@@ -95,6 +101,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
                             @Override
                             public void run() {
                                 Log.d(TAG, "Secondi = " + secondCounter);
+                                Log.d(TAG, "Calorie = " + calorie + calorieRicevute);
 
                                 secondCounter++;
                                 updateCalories();
@@ -202,6 +209,9 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
      * @param v
      */
     public void stopWorkout(View v) {
+        cycle = false;
+        updateCalories = false;
+
         Intent intent;
 
         if(attivitaDiProvenienza.equalsIgnoreCase("Freestyle")) {
@@ -212,9 +222,10 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
 
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        intent.putExtra("flessioni", pushupCounter);
+        intent.putExtra(Constants.FLESSIONI, pushupCounter);
         intent.putExtra(Constants.ATTIVITA_RILEVATA, "Pushup");
         intent.putExtra(Constants.TEMPO_PASSATO, chronometer.getBase());
+        intent.putExtra(Constants.TEMPO_IN_SECONDI, secondCounter + secondiRicevuti);
         intent.putExtra(Constants.CALORIE, calorie + calorieRicevute);
 
         startActivity(intent);
@@ -236,6 +247,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
 
             minusButton.setVisibility(View.INVISIBLE);
 
+            updateCalories = false;
             pauseChronometer(v);
 
         } else {
@@ -249,6 +261,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
 
             minusButton.setVisibility(View.VISIBLE);
 
+            updateCalories = true;
             pauseChronometer(v);
         }
     }

@@ -12,7 +12,8 @@ public class Constants {
     public static final String CYCLING_STATUS = "CyclingStatus";
 
     public static final String ATTIVITA_RILEVATA = "Attività Rilevata";
-    public static final String TEMPO_PASSATO = "TempoPassato";
+    public static final String TEMPO_PASSATO = "Tempo Passato";
+    public static final String TEMPO_IN_SECONDI = "Tempo in Secondi";
     public static final String FLESSIONI = "Flessioni";
     public static final String CALORIE = "Calorie";
     public static final String CHILOMETRI = "Chilometri";
