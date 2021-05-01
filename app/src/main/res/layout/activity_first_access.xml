@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     tools:context=".ui.FirstAccessActivity"
-    android:background="@drawable/prova">
+    android:background="@drawable/image_background_intro">
 
     <ScrollView
         android:layout_width="match_parent"

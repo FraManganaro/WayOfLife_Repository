@@ -3,6 +3,7 @@ package com.example.wayoflife.workouts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,18 +12,24 @@ import android.widget.ListView;
 import com.example.wayoflife.CustomerModel;
 import com.example.wayoflife.DatabaseHelper;
 import com.example.wayoflife.R;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutHistoryActivity extends AppCompatActivity {
-    //Inizializzazioni variabili
-    Button btDate;
-    ListView listView;
 
-    DatabaseHelper databaseHelper;
-    List<CustomerModel> models;
-    ArrayAdapter arrayAdapter;
+    private final String TAG = "WorkoutHistoryActivity";
+    private String data;
+
+    //Inizializzazioni variabili
+    private Button btDate;
+    private ListView listView;
+
+    private DatabaseHelper databaseHelper;
+    private List<CustomerModel> models;
+    private ArrayAdapter arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +39,38 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
         btDate = findViewById(R.id.bt_calendar);
         listView = findViewById(R.id.list_view);
 
-        prova();
+//        prova();
 
         databaseHelper = new DatabaseHelper(WorkoutHistoryActivity.this);
         models = databaseHelper.getAllWorkout();
 
-        arrayAdapter = new ArrayAdapter<CustomerModel>(WorkoutHistoryActivity.this, android.R.layout.simple_list_item_1, models);
+        arrayAdapter = new ArrayAdapter<CustomerModel>(WorkoutHistoryActivity.this,
+                android.R.layout.simple_list_item_1, models);
         listView.setAdapter(arrayAdapter);
 
-        // Bottone per uscita del calendario
+
+        /** Gestione del calendario */
+        MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText("Seleziona una data");
+        MaterialDatePicker materialDatePicker = builder.build();
+
         btDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                materialDatePicker.show(getSupportFragmentManager(), "DATA_PICKER");
             }
         });
+        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(Object selection) {
+                data = materialDatePicker.getHeaderText();
+                Log.d(TAG, "onPositiveButtonClick: " + data);
+                modifyData();
+                Log.d(TAG, "onPositiveButtonClick: " + data);
+            }
+        });
+
+
     }
 
     public void prova(){
@@ -57,5 +81,54 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
         db.addWorkout(customerModel1);
         db.addWorkout(customerModel2);
         db.addWorkout(customerModel3);
+    }
+
+    private void modifyData(){
+        String[] t = data.split(" ");
+        Log.d(TAG, "modifyData: " + t[0]);
+        Log.d(TAG, "modifyData: " + t[1]);
+        Log.d(TAG, "modifyData: " + t[2]);
+
+        if(Integer.parseInt(t[0]) < 10)
+            t[0] = "0" + t[0];
+
+        switch(t[1]){
+            case "gen":
+                data = t[0] + "/" + "01" + "/" + t[2];
+                break;
+            case "feb":
+                data = t[0] + "/" + "02" + "/" + t[2];
+                break;
+            case "mar":
+                data = t[0] + "/" + "03" + "/" + t[2];
+                break;
+            case "apr":
+                data = t[0] + "/" + "04" + "/" + t[2];
+                break;
+            case "mag":
+                data = t[0] + "/" + "05" + "/" + t[2];
+                break;
+            case "giu":
+                data = t[0] + "/" + "06" + "/" + t[2];
+                break;
+            case "lug":
+                data = t[0] + "/" + "07" + "/" + t[2];
+                break;
+            case "ago":
+                data = t[0] + "/" + "08" + "/" + t[2];
+                break;
+            case "set":
+                data = t[0] + "/" + "09" + "/" + t[2];
+                break;
+            case "ott":
+                data = t[0] + "/" + "10" + "/" + t[2];
+                break;
+            case "nov":
+                data = t[0] + "/" + "11" + "/" + t[2];
+                break;
+            case "dic":
+                data = t[0] + "/" + "12" + "/" + t[2];
+                break;
+        }
     }
 }

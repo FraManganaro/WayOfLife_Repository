@@ -24,11 +24,9 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
 
     private final String TAG = "EndWorkoutActivity";
 
-    private int id;
-
     private String nome;
     private String data;
-    private String durata; //Da mettere nella classe come String
+    private String durata;
     private double durataInSecondi;
     private double durataInMinuti;
     private double durataInOre;
@@ -55,11 +53,11 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
 
         /** Recupero data odierna */
         Date date = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy"); // getting date in this format
-        data = df.format(date.getDate());
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy"); // getting date in this format
+        data = df.format(date.getTime());
 
         tipologiaAllenamento = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
-        tv1.setText(tipologiaAllenamento);
+        tv1.setText(data);
 
         durataInSecondi = 1.0 *
                 getIntent().getIntExtra(Constants.TEMPO_IN_SECONDI, 0);

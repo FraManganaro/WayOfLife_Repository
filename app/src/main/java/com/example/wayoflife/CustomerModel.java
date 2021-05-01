@@ -70,7 +70,7 @@ public class CustomerModel {
                 "Data: " + data + '\n' +
                 "Tipologia: " + tipologia + '\n' +
                 "Durata: " + durata + '\n' +
-                "kcal: " + calorie;
+                "Calorie: " + calorie + " kcal";
     }
 
     // Get e Set

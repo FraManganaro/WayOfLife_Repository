@@ -40,4 +40,5 @@
     <string name="benvenuti_su">Benvenuti su</string>
     <string name="prossimo">Prossimo</string>
     <string name="datiProfilo">Inserisci i dati per completare il profilo!</string>
+    <string name="salva">Salva</string>
 </resources>
