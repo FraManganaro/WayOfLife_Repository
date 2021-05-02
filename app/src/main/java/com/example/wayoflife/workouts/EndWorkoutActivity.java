@@ -16,6 +16,7 @@ import com.example.wayoflife.CustomerModel;
 import com.example.wayoflife.DatabaseHelper;
 import com.example.wayoflife.R;
 import com.example.wayoflife.ui.HomeActivity;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,7 +33,6 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
     private double durataInOre;
 
     private String tipologiaAllenamento;
-
     private int calorie;
     private float chilometri;
     private int n_flessioni;
@@ -43,51 +43,45 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_workout);
 
-        TextView tv1 = findViewById(R.id.textView12);
-        TextView tv2 = findViewById(R.id.textView13);
-        TextView tv3 = findViewById(R.id.textView14);
-        TextView tv4 = findViewById(R.id.textView15);
-        TextView tv5 = findViewById(R.id.textView16);
+        TextView tvData = findViewById(R.id.textView12);
+        TextView tvDurata = findViewById(R.id.textView13);
+        TextView tvCalorie = findViewById(R.id.textView14);
+        TextView tvChilometri = findViewById(R.id.textView15);
+        TextView tvFlessioni = findViewById(R.id.textView16);
 
-        //nome -> da recuperare da un label sul layout (chiedere all'utente)
 
         /** Recupero data odierna */
         Date date = new Date();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy"); // getting date in this format
         data = df.format(date.getTime());
+        tvData.setText(data);
 
         tipologiaAllenamento = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
-        tv1.setText(data);
 
         durataInSecondi = 1.0 *
                 getIntent().getIntExtra(Constants.TEMPO_IN_SECONDI, 0);
-        durataInMinuti = durataInSecondi/60;
-        durataInOre = durataInMinuti/60;
-
-        if(durataInOre > 1.0) { durata = durataInOre + " Ore"; }
-        else {
-            if (durataInMinuti < 1.0) { durata = durataInSecondi + " Secondi"; }
-            else { durata = durataInMinuti + " Minuti"; }
-        }
-
-        tv2.setText(durata);
+//        durataInSecondi = 2432; -> prova
+        manageTime();
+        tvDurata.setText(durata);
 
         calorie = getIntent().getIntExtra(Constants.CALORIE, 0);
-        tv3.setText(calorie + " kcal");
+        tvCalorie.setText(calorie + " kcal");
 
         chilometri = getIntent().getIntExtra(Constants.CHILOMETRI, 0);
-        tv4.setText(chilometri + " km");
+        tvChilometri.setText(chilometri + " km");
 
         n_flessioni = getIntent().getIntExtra(Constants.FLESSIONI, 0);
-        tv5.setText(n_flessioni + " Flessioni");
+        tvFlessioni.setText(n_flessioni + " Flessioni");
 
         //state (?)
     }
 
     public void saveWorkout(View v){
-        //Passaggi per il salvataggio nel database
-        //da fare in un pop up che chiede se salvare o no i dati
-        //oppure due bottoni con scritto: "Salva dati", "Torna alla home senza salvare"
+        TextInputEditText nomeET = findViewById(R.id.etNome);
+        nome = nomeET.getText().toString();
+        if(nome.equalsIgnoreCase(""))
+            nome = "Allenamento " + tipologiaAllenamento;
+
         CustomerModel customerModel = null;
 
         try {
@@ -121,6 +115,76 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+    public void returnHome(View v){
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    /**
+     * Metodo che converte il tempo in secondi nel formato:
+     *     00:00:00
+     * ore:minuti:secondi
+     */
+    private void manageTime(){
+        int tempO, tempM, tempS;
+
+        durataInMinuti = durataInSecondi/60;
+        durataInOre = durataInMinuti/60;
+
+        if(durataInOre > 1.0) {
+            tempO = (int) durataInOre;
+            if(tempO < 10)
+                durata = "0" + tempO + ":";
+            else
+                durata = tempO + ":";
+//            durata = tempO + ":";
+
+            tempO *= 60;
+            tempM = (int) durataInMinuti;
+            tempM -= tempO;
+            if(tempM < 10)
+                durata += "0" + tempM + ":";
+            else
+                durata += tempM + ":";
+//            durata += tempM + ":";
+
+            tempM *= 60;
+            tempS = (int) durataInSecondi;
+            tempS -= tempM + 3600;
+            if(tempS < 10)
+                durata += "0" + tempS + " ore";
+            else
+                durata += tempS + " ore";
+//            durata += tempS;
+
+        }else {
+            if (durataInMinuti < 1.0) {
+                tempS = (int) durataInSecondi;
+                if(tempS < 10)
+                    durata = "0" + tempS + " secondi";
+                else
+                    durata = tempS + " secondi";
+
+//                durata = tempS + " secondi";
+            }else {
+                tempM = (int) durataInMinuti;
+                if(tempM < 10)
+                    durata = "0" + tempM + ":";
+                else
+                    durata = tempM + ":";
+
+                tempM *= 60;
+                tempS = (int) durataInSecondi;
+                tempS -= tempM;
+                if(tempS < 10)
+                    durata += "0" + tempS + " minuti";
+                else
+                    durata += tempS + " minuti";
+//                durata += tempS;
+            }
+        }
     }
 
 }
