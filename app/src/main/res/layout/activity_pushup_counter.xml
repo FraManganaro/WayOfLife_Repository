@@ -186,7 +186,7 @@
         android:layout_height="100dp"
         android:fontFamily="@font/candara"
         android:gravity="center"
-        android:text="0"
+        android:text="@string/intro_kcal"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="italic"

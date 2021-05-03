@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
@@ -15,12 +17,15 @@ import com.example.wayoflife.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class ProfileDialog extends AppCompatDialogFragment {
+
     private TextInputEditText nicknameET;
     private TextInputEditText nomeET;
     private TextInputEditText cognomeET;
     private TextInputEditText pesoET;
     private TextInputEditText altezzaET;
     private TextInputEditText sessoET;
+
+    private LinearLayout llNome;
 
     private String nickname;
     private String nome;

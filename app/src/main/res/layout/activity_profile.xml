@@ -50,12 +50,12 @@
             android:layout_marginTop="-25dp"
             android:layout_marginEnd="80dp"
             android:background="@drawable/background_profile_button"
-            android:elevation="20dp"
+            android:elevation="10dp"
             android:id="@+id/aggiornaDatiProfilo">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
                 android:layout_marginRight="10dp"
@@ -69,10 +69,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginLeft="17dp"
-                android:text="@string/aggiornaProfilo"
+                android:layout_marginLeft="10dp"
+                android:text="Profilo Utente"
                 android:textStyle="italic"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:textColor="@color/white"/>
 
         </FrameLayout>
@@ -302,6 +302,17 @@
         </ScrollView>
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/floatingButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="70dp"
+        android:layout_marginEnd="30dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_pen"/>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"

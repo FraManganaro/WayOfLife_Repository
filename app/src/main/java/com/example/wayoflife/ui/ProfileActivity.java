@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.wayoflife.Constants;
 import com.example.wayoflife.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ProfileActivity extends AppCompatActivity implements ProfileDialog.ExampleDialogListener{
 
@@ -62,8 +63,16 @@ public class ProfileActivity extends AppCompatActivity implements ProfileDialog.
             }
         });
 
-        frameLayout = findViewById(R.id.aggiornaDatiProfilo);
-        frameLayout.setOnClickListener(new View.OnClickListener() {
+//        frameLayout = findViewById(R.id.aggiornaDatiProfilo);
+//        frameLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openDialog();
+//            }
+//        });
+
+        FloatingActionButton fb = findViewById(R.id.floatingButton);
+        fb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openDialog();
