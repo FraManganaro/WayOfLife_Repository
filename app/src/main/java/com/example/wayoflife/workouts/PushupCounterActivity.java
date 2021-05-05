@@ -9,7 +9,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
@@ -144,6 +143,14 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
 
         sensorManager.unregisterListener(this);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cycle = false;
+        updateCalories = false;
+    }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(isRunningChronometer) {
@@ -215,7 +222,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
         Intent intent;
 
         if(attivitaDiProvenienza.equalsIgnoreCase("Freestyle")) {
-            intent = new Intent(getApplicationContext(), FreestyleActivity.class);
+            intent = new Intent(getApplicationContext(), TrainingActivity.class);
         } else {
             intent = new Intent(getApplicationContext(), EndWorkoutActivity.class);
         }
@@ -229,6 +236,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
         intent.putExtra(Constants.CALORIE, calorie + calorieRicevute);
 
         startActivity(intent);
+        finish();
     }
 
     /**

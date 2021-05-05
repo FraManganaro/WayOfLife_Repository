@@ -26,7 +26,7 @@
             android:name=".workouts.EndWorkoutActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".workouts.FreestyleActivity"
+            android:name=".workouts.TrainingActivity"
             android:screenOrientation="portrait" />
         <activity
         android:name=".workouts.PushupCounterActivity"

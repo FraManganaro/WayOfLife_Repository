@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.example.wayoflife.Constants;
 import com.example.wayoflife.R;
-import com.example.wayoflife.workouts.FreestyleActivity;
+import com.example.wayoflife.workouts.TrainingActivity;
 import com.example.wayoflife.workouts.PushupCounterActivity;
 import com.example.wayoflife.workouts.RunningActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -59,7 +59,7 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
         RelativeLayout rlEW = findViewById(R.id.rlExtraWorkout);
-        Intent intent = new Intent(getApplicationContext(), FreestyleActivity.class);
+        Intent intent = new Intent(getApplicationContext(), TrainingActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         rlEW.setOnClickListener(new View.OnClickListener() {
@@ -172,7 +172,7 @@ public class DashboardActivity extends AppCompatActivity {
      * @param v
      */
     public void goToFreestyleActivity(View v){
-        Intent intent = new Intent(getApplicationContext(), FreestyleActivity.class);
+        Intent intent = new Intent(getApplicationContext(), TrainingActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(Constants.ATTIVITA_RILEVATA, "Freestyle");
         startActivity(intent);

@@ -31,7 +31,6 @@ import com.example.wayoflife.BuildConfig;
 import com.example.wayoflife.Constants;
 import com.example.wayoflife.PermissionRationalActivity;
 import com.example.wayoflife.R;
-import com.example.wayoflife.workouts.FreestyleActivity;
 import com.example.wayoflife.workouts.RunningActivity;
 import com.example.wayoflife.workouts.WorkoutHistoryActivity;
 import com.google.android.gms.location.ActivityRecognition;

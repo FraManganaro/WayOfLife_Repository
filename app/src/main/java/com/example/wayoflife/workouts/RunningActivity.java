@@ -158,6 +158,12 @@ public class RunningActivity extends AppCompatActivity {
 //                break;
 //        }
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cycle = false;
+        continueFindLocation = false;
+    }
 
     /**
      * Per ogni attività calcolo quante calorie vengono consumate
@@ -203,6 +209,7 @@ public class RunningActivity extends AppCompatActivity {
         intent.putExtra(Constants.CALORIE, calorie);
 
         startActivity(intent);
+        finish();
     }
 
     /**

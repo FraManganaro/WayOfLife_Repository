@@ -20,7 +20,7 @@ import com.example.wayoflife.R;
 
 import java.util.concurrent.BlockingDeque;
 
-public class FreestyleActivity extends AppCompatActivity {
+public class TrainingActivity extends AppCompatActivity {
 
     private final String TAG = "FreestyleActivity";
 
@@ -127,6 +127,12 @@ public class FreestyleActivity extends AppCompatActivity {
         });
         t.start();
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cycle = false;
+        updateCalories = false;
+    }
 
     /**
      * Per ogni attività calcolo quante calorie vengono consumate
@@ -190,6 +196,7 @@ public class FreestyleActivity extends AppCompatActivity {
         intent.putExtra(Constants.FLESSIONI, flessioni);
 
         startActivity(intent);
+        finish();
     }
     /**
      * Metto in pausa il cronometro e cambio le icone per finire l'allenamento

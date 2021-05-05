@@ -73,7 +73,7 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         n_flessioni = getIntent().getIntExtra(Constants.FLESSIONI, 0);
         tvFlessioni.setText(n_flessioni + " Flessioni");
 
-        //state (?)
+        //state - da implementare
     }
 
     public void saveWorkout(View v){
@@ -115,11 +115,13 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
     }
     public void returnHome(View v){
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
     }
 
     /**
@@ -139,7 +141,6 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
                 durata = "0" + tempO + ":";
             else
                 durata = tempO + ":";
-//            durata = tempO + ":";
 
             tempO *= 60;
             tempM = (int) durataInMinuti;
@@ -148,7 +149,6 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
                 durata += "0" + tempM + ":";
             else
                 durata += tempM + ":";
-//            durata += tempM + ":";
 
             tempM *= 60;
             tempS = (int) durataInSecondi;
@@ -157,7 +157,6 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
                 durata += "0" + tempS + " ore";
             else
                 durata += tempS + " ore";
-//            durata += tempS;
 
         }else {
             if (durataInMinuti < 1.0) {
@@ -167,7 +166,6 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
                 else
                     durata = tempS + " secondi";
 
-//                durata = tempS + " secondi";
             }else {
                 tempM = (int) durataInMinuti;
                 if(tempM < 10)
@@ -182,7 +180,6 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
                     durata += "0" + tempS + " minuti";
                 else
                     durata += tempS + " minuti";
-//                durata += tempS;
             }
         }
     }
