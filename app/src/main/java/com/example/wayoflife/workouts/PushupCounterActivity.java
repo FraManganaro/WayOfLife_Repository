@@ -178,7 +178,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
                 Constants.PROFILE_INFO_FILENAME,
                 Context.MODE_PRIVATE);
 
-        int peso = Integer.parseInt(sharedPref.getString(
+        double peso = Double.parseDouble(sharedPref.getString(
                 Constants.PESO, "0"));
 
         calorie = (int) (Calories.FLESSIONI * peso * secondCounter)/3600;

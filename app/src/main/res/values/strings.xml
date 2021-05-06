@@ -42,4 +42,7 @@
     <string name="datiProfilo">Inserisci i dati per completare il profilo!</string>
     <string name="salva">Salva</string>
     <string name="intro_kcal">0 kcal</string>
+    <string name="data">Data:</string>
+    <string name="durata">Durata:</string>
+    <string name="resoconto_allenamento">Resoconto Allenamento!</string>
 </resources>

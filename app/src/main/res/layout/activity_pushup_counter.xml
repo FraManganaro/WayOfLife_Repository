@@ -59,7 +59,7 @@
         app:layout_constraintVertical_bias="0.163">
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/tvTempo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/candara"

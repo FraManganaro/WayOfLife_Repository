@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.example.wayoflife.Constants;
 import com.example.wayoflife.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -24,6 +26,8 @@ public class ProfileDialog extends AppCompatDialogFragment {
     private TextInputEditText pesoET;
     private TextInputEditText altezzaET;
     private TextInputEditText sessoET;
+
+
 
     private LinearLayout llNome;
 
@@ -66,14 +70,43 @@ public class ProfileDialog extends AppCompatDialogFragment {
                     }
                 });
 
+        restoreInformation();
+
+        /** metto come valore di default i valori attuali */
         nicknameET = view.findViewById(R.id.etNickname);
+        nicknameET.setText(nickname);
         nomeET = view.findViewById(R.id.etNome);
+        nomeET.setText(nome);
         cognomeET = view.findViewById(R.id.etCognome);
+        cognomeET.setText(cognome);
         pesoET = view.findViewById(R.id.etPeso);
+        pesoET.setText(peso);
         altezzaET = view.findViewById(R.id.etAltezza);
+        altezzaET.setText(altezza);
         sessoET = view.findViewById(R.id.etSesso);
+        sessoET.setText(sesso);
 
         return builder.create();
+    }
+
+    /** Recupero le infortmazioni del profilo per mostrarle nel form */
+    public void restoreInformation(){
+        SharedPreferences sharedPref = getContext().getSharedPreferences(
+                Constants.PROFILE_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+
+        nickname = sharedPref.getString(
+                Constants.NICKNAME, "Nickname");
+        nome = sharedPref.getString(
+                Constants.NOME, "Nome");
+        cognome = sharedPref.getString(
+                Constants.COGNOME, "Cognome");
+        peso = sharedPref.getString(
+                Constants.PESO, "Peso");
+        altezza = sharedPref.getString(
+                Constants.ALTEZZA, "Altezza");
+        sesso = sharedPref.getString(
+                Constants.SESSO, "Sesso");
     }
 
     @Override

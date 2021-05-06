@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,9 +14,9 @@ import com.example.wayoflife.DatabaseHelper;
 
 import com.example.wayoflife.Constants;
 import com.example.wayoflife.CustomerModel;
-import com.example.wayoflife.DatabaseHelper;
 import com.example.wayoflife.R;
 import com.example.wayoflife.ui.HomeActivity;
+import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
@@ -43,12 +44,14 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_workout);
 
-        TextView tvData = findViewById(R.id.textView12);
-        TextView tvDurata = findViewById(R.id.textView13);
-        TextView tvCalorie = findViewById(R.id.textView14);
-        TextView tvChilometri = findViewById(R.id.textView15);
-        TextView tvFlessioni = findViewById(R.id.textView16);
+        TextView tvData = findViewById(R.id.tvData);
+        TextView tvDurata = findViewById(R.id.tvTempo);
+        TextView tvCalorie = findViewById(R.id.tvCalorie);
+        TextView tvExtra = findViewById(R.id.tvExtra);
+        TextView tipoAllenamento = findViewById(R.id.tipoAllenamento);
 
+        LinearLayout llExtra = findViewById(R.id.llExtra);
+        TextView tvExtraText = findViewById(R.id.tvExtraText);
 
         /** Recupero data odierna */
         Date date = new Date();
@@ -57,10 +60,11 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         tvData.setText(data);
 
         tipologiaAllenamento = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
+        tipoAllenamento.setText("Tipologia allenamento: "+ tipologiaAllenamento);
 
         durataInSecondi = 1.0 *
                 getIntent().getIntExtra(Constants.TEMPO_IN_SECONDI, 0);
-//        durataInSecondi = 2432; -> prova
+//        durataInSecondi = 2432; -> per test
         manageTime();
         tvDurata.setText(durata);
 
@@ -68,19 +72,32 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         tvCalorie.setText(calorie + " kcal");
 
         chilometri = getIntent().getIntExtra(Constants.CHILOMETRI, 0);
-        tvChilometri.setText(chilometri + " km");
-
         n_flessioni = getIntent().getIntExtra(Constants.FLESSIONI, 0);
-        tvFlessioni.setText(n_flessioni + " Flessioni");
 
-        //state - da implementare
+        if(chilometri != 0) {
+            tvExtraText.setText("Chilometri fatti: ");
+            tvExtra.setText(chilometri + " km");
+        } else if(n_flessioni != 0) {
+            tvExtraText.setText("Flessioni fatte: ");
+            tvExtra.setText(""+ n_flessioni);
+        } else {
+            tvExtra.setVisibility(View.INVISIBLE);
+            llExtra.setVisibility(View.INVISIBLE);
+            tvExtraText.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void saveWorkout(View v){
         TextInputEditText nomeET = findViewById(R.id.etNome);
+        Slider slider = findViewById(R.id.slider);
+
+
         nome = nomeET.getText().toString();
         if(nome.equalsIgnoreCase(""))
             nome = "Allenamento " + tipologiaAllenamento;
+
+        state = (int) slider.getValue();
+
 
         CustomerModel customerModel = null;
 

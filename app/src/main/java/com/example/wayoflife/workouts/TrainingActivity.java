@@ -142,7 +142,7 @@ public class TrainingActivity extends AppCompatActivity {
                 Constants.PROFILE_INFO_FILENAME,
                 Context.MODE_PRIVATE);
 
-        int peso = Integer.parseInt(sharedPref.getString(
+        double peso = Double.parseDouble(sharedPref.getString(
                 Constants.PESO, "0"));
 
         switch(attivitaDiProvenienza){
