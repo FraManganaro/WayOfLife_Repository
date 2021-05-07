@@ -45,4 +45,5 @@
     <string name="data">Data:</string>
     <string name="durata">Durata:</string>
     <string name="resoconto_allenamento">Resoconto Allenamento!</string>
+    <string name="intro_km">0 km</string>
 </resources>

@@ -71,10 +71,16 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         calorie = getIntent().getIntExtra(Constants.CALORIE, 0);
         tvCalorie.setText(calorie + " kcal");
 
-        chilometri = getIntent().getIntExtra(Constants.CHILOMETRI, 0);
+        String tr = getIntent().getStringExtra(Constants.CHILOMETRI);
+        if (tr == null) {
+            chilometri = 0;
+        } else {
+            chilometri = Float.parseFloat(tr);
+        }
+
         n_flessioni = getIntent().getIntExtra(Constants.FLESSIONI, 0);
 
-        if(chilometri != 0) {
+        if(chilometri != 0.0f) {
             tvExtraText.setText("Chilometri fatti: ");
             tvExtra.setText(chilometri + " km");
         } else if(n_flessioni != 0) {
@@ -118,14 +124,14 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
             }
         }catch (Exception e){
             Toast.makeText(EndWorkoutActivity.this,
-                    "Errore nell'inserimento dati", Toast.LENGTH_SHORT).show();
+                    "Errore nel salvataggio", Toast.LENGTH_SHORT).show();
         }
 
         DatabaseHelper db = new DatabaseHelper(EndWorkoutActivity.this);
         boolean success = db.addWorkout(customerModel);
         if (success){
             Toast.makeText(EndWorkoutActivity.this,
-                    "Inserimento effettuato con successo", Toast.LENGTH_SHORT).show();
+                    "Allenamento salvato!", Toast.LENGTH_SHORT).show();
         }
 
         //Una volta salvato l'allenamento posso tornare alla Home

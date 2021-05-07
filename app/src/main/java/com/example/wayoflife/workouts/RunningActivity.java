@@ -38,6 +38,7 @@ import com.google.android.gms.tasks.Task;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
@@ -49,6 +50,7 @@ public class RunningActivity extends AppCompatActivity {
     private ImageView playButton;
     private ImageView endButton;
     private TextView caloriesTV;
+    private TextView chilometriTV;
 
     private String attivitaDiProvenienza;
 
@@ -61,6 +63,16 @@ public class RunningActivity extends AppCompatActivity {
     /** Variabili per la mappa */
     private SupportMapFragment supportMapFragment;
     private FusedLocationProviderClient client;
+
+    /** Variabili per calcolo distanza */
+    private LatLng l1;
+    private LatLng l2;
+    private boolean stopped;
+    private float distance;
+
+    /** Disegnare linee sulla mappa */
+    private PolylineOptions polylineOptions;
+    private Polyline polyline;
 
     /** Variabili per aggiornamento posizione e calorie */
     private Thread t;
@@ -79,6 +91,11 @@ public class RunningActivity extends AppCompatActivity {
         secondCounter = 0;
         calorie = 0;
 
+        distance = 0;
+        stopped = false;
+
+        polylineOptions = new PolylineOptions();
+
         attivitaDiProvenienza = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
 
         /** Attivazione del cronometro */
@@ -95,7 +112,7 @@ public class RunningActivity extends AppCompatActivity {
         /** Controllo i permessi per la posizione */
         if (ActivityCompat.checkSelfPermission(RunningActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            getCurrentLocation(); //da chiamare quando ho il permesso del GPS
+            getFirstCurrentLocation(); //da chiamare quando ho il permesso del GPS
         } else {
             ActivityCompat.requestPermissions(RunningActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
@@ -107,6 +124,7 @@ public class RunningActivity extends AppCompatActivity {
         endButton = findViewById(R.id.endButton);
 
         caloriesTV = findViewById(R.id.caloriesTV);
+        chilometriTV = findViewById(R.id.chilometriTV);
 
         endButton.setVisibility(View.INVISIBLE);
 
@@ -208,6 +226,9 @@ public class RunningActivity extends AppCompatActivity {
         intent.putExtra(Constants.TEMPO_IN_SECONDI, secondCounter);
         intent.putExtra(Constants.CALORIE, calorie);
 
+        DecimalFormat numberFormat = new DecimalFormat("0.00");
+        intent.putExtra(Constants.CHILOMETRI, "" + numberFormat.format(distance));
+
         startActivity(intent);
         finish();
     }
@@ -230,6 +251,7 @@ public class RunningActivity extends AppCompatActivity {
             endButton.setVisibility(View.INVISIBLE);
 
             continueFindLocation = true;
+            stopped = true;
             pauseChronometer(v);
         }
     }
@@ -257,9 +279,40 @@ public class RunningActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode == 44){
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                getCurrentLocation();
+                getFirstCurrentLocation();
             }
         }
+    }
+    private void getFirstCurrentLocation() {
+        @SuppressLint("MissingPermission") Task<Location> task = client.getLastLocation();
+
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+                    @Override
+                    public void onMapReady(GoogleMap googleMap) {
+                        //Trovo latitudine e longitudine
+                        l1 = new LatLng(location.getLatitude(),
+                                location.getLongitude());
+
+                        //Creo un marker da mettere sulla mappa
+                        MarkerOptions markerOptions = new MarkerOptions()
+                                .position(l1)
+                                .title("Partenza");
+
+                        //Creo animazione per zoommare sul punto prestabilito
+//                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(l1, 12.0f));
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(l1, 18.5f));
+
+                        //Aggiungo il marker alla mappa
+                        googleMap.addMarker(markerOptions);
+
+                        polylineOptions.add(l1);
+                    }
+                });
+            }
+        });
     }
     private void getCurrentLocation() {
         @SuppressLint("MissingPermission") Task<Location> task = client.getLastLocation();
@@ -270,19 +323,34 @@ public class RunningActivity extends AppCompatActivity {
                 supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                     @Override
                     public void onMapReady(GoogleMap googleMap) {
-                        //Trovo latitudine e longitudine
-                        LatLng latLng = new LatLng(location.getLatitude(),
+                        l2 = new LatLng(location.getLatitude(),
                                 location.getLongitude());
 
-                        //Creo un marker da mettere sulla mappa
-                        MarkerOptions markerOptions = new MarkerOptions().position(latLng)
-                                .title("Io sono qui");
+                        MarkerOptions markerOptions = new MarkerOptions()
+                                .position(l2)
+                                .title("");
 
-                        //Creo animazione per zoommare sul punto prestabilito
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                        if(stopped) {
+                            l1 = l2;
+                            stopped = false;
+                        }
 
-                        //Aggiungo il marker alla mappa
-                        googleMap.addMarker(markerOptions);
+                        if(!(l1.equals(l2))) {
+                            float[] results = new float[1];
+                            Location.distanceBetween(l1.latitude, l1.longitude, l2.latitude, l2.longitude, results);
+                            distance += results[0] / 1000; /** viene restituito il valore in metri */
+
+                            polylineOptions.add(l2).color(R.color.red);
+                            polyline = googleMap.addPolyline(polylineOptions);
+
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLng(l2));
+
+                            Log.d(TAG, "distance (float) = " + distance);
+                            DecimalFormat numberFormat = new DecimalFormat("0.00");
+                            chilometriTV.setText(numberFormat.format(distance) + " km");
+
+                            l1 = l2;
+                        }
                     }
                 });
             }
