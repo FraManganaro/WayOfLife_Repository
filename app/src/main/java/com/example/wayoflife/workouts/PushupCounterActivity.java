@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.wayoflife.Calories;
 import com.example.wayoflife.Constants;
 import com.example.wayoflife.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class PushupCounterActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -33,9 +34,9 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
     private TextView tvCounter;
     private TextView tvFreestyle;
     private TextView caloriesTV;
-    private ImageView playButton;
-    private ImageView endButton;
-    private ImageView minusButton;
+    private FloatingActionButton playButton;
+    private FloatingActionButton endButton;
+    private FloatingActionButton minusButton;
     private ImageView freestyleButton;
 
     /** Gestione del cronometro */

@@ -35,20 +35,17 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-
-import org.w3c.dom.Text;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.DecimalFormat;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 public class RunningActivity extends AppCompatActivity {
 
     private final String TAG = "RunningActivity";
 
     private ConstraintLayout constraintLayout;
-    private ImageView playButton;
-    private ImageView endButton;
+    private FloatingActionButton playButton;
+    private FloatingActionButton endButton;
     private TextView caloriesTV;
     private TextView chilometriTV;
 
@@ -157,24 +154,6 @@ public class RunningActivity extends AppCompatActivity {
             }
         });
         t.start();
-
-        /**
-         * Probabilmente da rimuovere
-         */
-//        switch (attivitaDiProvenienza) {
-//            case "Corsa":
-//                constraintLayout.setBackground(getDrawable(R.drawable.image_background_running));
-//                break;
-//            case "Camminata":
-//                constraintLayout.setBackground(getDrawable(R.drawable.image_background_walking));
-//                break;
-//            case "Ciclismo":
-//                constraintLayout.setBackground(getDrawable(R.drawable.image_background_cycling));
-//                break;
-//            default:
-//                constraintLayout.setBackground(getDrawable(R.drawable.background_white_corners));
-//                break;
-//        }
     }
     @Override
     protected void onDestroy() {

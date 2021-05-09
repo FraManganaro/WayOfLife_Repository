@@ -17,8 +17,7 @@ import android.widget.TextView;
 import com.example.wayoflife.Calories;
 import com.example.wayoflife.Constants;
 import com.example.wayoflife.R;
-
-import java.util.concurrent.BlockingDeque;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class TrainingActivity extends AppCompatActivity {
 
@@ -30,8 +29,8 @@ public class TrainingActivity extends AppCompatActivity {
     private ConstraintLayout constraintLayout;
     private TextView tvPushup;
     private TextView caloriesTV;
-    private ImageView playButton;
-    private ImageView endButton;
+    private FloatingActionButton playButton;
+    private FloatingActionButton endButton;
     private ImageView pushupButton;
 
     /** Per gestione del cronometro */
