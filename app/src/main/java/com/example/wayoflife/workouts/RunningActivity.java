@@ -12,17 +12,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wayoflife.Calories;
 import com.example.wayoflife.Constants;
 import com.example.wayoflife.R;
+import com.example.wayoflife.ui.InfoDialog;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -71,6 +72,11 @@ public class RunningActivity extends AppCompatActivity {
     private PolylineOptions polylineOptions;
     private Polyline polyline;
 
+    /** Gestione dei permessi per il GPS */
+    private LocationManager locationManager;
+    private boolean gpsStatus;
+    private Context context;
+
     /** Variabili per aggiornamento posizione e calorie */
     private Thread t;
     private boolean continueFindLocation;
@@ -95,21 +101,26 @@ public class RunningActivity extends AppCompatActivity {
 
         attivitaDiProvenienza = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
 
-        /** Attivazione del cronometro */
-        chronometer = findViewById(R.id.chronometer);
-        chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
-        chronometer.start();
-        isRunningChronometer = true;
-
         /** Assegnazione della mappa */
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.googleMaps);
         client = LocationServices.getFusedLocationProviderClient(this);
 
+        context = getApplicationContext();
+        checkGpsStatus();
+
+        /** Attivazione del cronometro */
+        chronometer = findViewById(R.id.chronometer);
+        if(gpsStatus) {
+            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+            chronometer.start();
+            isRunningChronometer = true;
+        } else { infoDialog(); }
+
         /** Controllo i permessi per la posizione */
         if (ActivityCompat.checkSelfPermission(RunningActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            getFirstCurrentLocation(); //da chiamare quando ho il permesso del GPS
+            if(gpsStatus) getFirstCurrentLocation(); //da chiamare quando ho il permesso del GPS
         } else {
             ActivityCompat.requestPermissions(RunningActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
@@ -125,10 +136,41 @@ public class RunningActivity extends AppCompatActivity {
 
         endButton.setVisibility(View.INVISIBLE);
 
+        if(gpsStatus) startTraining();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cycle = false;
+        continueFindLocation = false;
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
 
+        checkGpsStatus();
+
+        if(gpsStatus) {
+            supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.googleMaps);
+            client = LocationServices.getFusedLocationProviderClient(this);
+            getFirstCurrentLocation();
+        }
+
+        Log.d(TAG, "onRestart:");
+
+        if(cycle && continueFindLocation) {
+            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+            chronometer.start();
+            isRunningChronometer = true;
+            startTraining();
+        }
+    }
+
+    private void startTraining(){
         /** Aggiorno la posizione ogni 3 secondi (con anche aggiornamento delle calorie) */
         t = new Thread(() -> {
-            while(cycle) {
+            while (cycle) {
                 while (continueFindLocation) {
                     try {
                         Thread.sleep(3000);
@@ -155,11 +197,12 @@ public class RunningActivity extends AppCompatActivity {
         });
         t.start();
     }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        cycle = false;
-        continueFindLocation = false;
+
+    /** Metodo che gestisce il Dialog contenente le informazioni sull'ActivityTransition */
+    public void infoDialog(){
+        InfoDialog infoDialog = new InfoDialog();
+        infoDialog.setType("running");
+        infoDialog.show(getSupportFragmentManager(), "Dialog informativo");
     }
 
     /**
@@ -211,7 +254,6 @@ public class RunningActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
     /**
      * Metto in pausa il cronometro e cambio le icone per finire l'allenamento
      * @param v
@@ -234,7 +276,6 @@ public class RunningActivity extends AppCompatActivity {
             pauseChronometer(v);
         }
     }
-
     /**
      * Metodo che permette di avviare e stoppare il cronometro
      * @param v
@@ -334,6 +375,12 @@ public class RunningActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    public void checkGpsStatus() {
+        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        assert locationManager != null;
+        gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
 }

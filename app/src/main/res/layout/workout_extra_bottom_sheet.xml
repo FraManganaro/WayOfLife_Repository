@@ -27,7 +27,10 @@
         android:orientation="horizontal"
         android:padding="8dp"
         android:id="@+id/basket"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground">
 
         <ImageView
             android:layout_width="40dp"
@@ -50,7 +53,10 @@
         android:orientation="horizontal"
         android:padding="8dp"
         android:id="@+id/calcio"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground">
 
         <ImageView
             android:layout_width="40dp"
@@ -73,7 +79,10 @@
         android:orientation="horizontal"
         android:padding="8dp"
         android:id="@+id/nuoto"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground">
 
         <ImageView
             android:layout_width="40dp"
@@ -96,7 +105,10 @@
         android:orientation="horizontal"
         android:padding="8dp"
         android:id="@+id/scalini"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground">
 
         <ImageView
             android:layout_width="40dp"
@@ -119,7 +131,10 @@
         android:orientation="horizontal"
         android:padding="8dp"
         android:id="@+id/tennis"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground">
 
         <ImageView
             android:layout_width="40dp"
