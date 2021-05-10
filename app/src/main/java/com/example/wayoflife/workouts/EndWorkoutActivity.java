@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,8 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.example.wayoflife.R.drawable.ic_walking_color;
 
 public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
 
@@ -61,6 +64,7 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
 
         tipologiaAllenamento = getIntent().getStringExtra(Constants.ATTIVITA_RILEVATA);
         tipoAllenamento.setText("Tipologia allenamento: "+ tipologiaAllenamento);
+        updateIcon();
 
         durataInSecondi = 1.0 *
                 getIntent().getIntExtra(Constants.TEMPO_IN_SECONDI, 0);
@@ -204,6 +208,43 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
                 else
                     durata += tempS + " minuti";
             }
+        }
+    }
+
+    private void updateIcon(){
+        ImageView iv = findViewById(R.id.iconaAllenamento);
+
+        switch(tipologiaAllenamento){
+            case "Camminata":
+                iv.setImageDrawable(getDrawable(R.drawable.ic_walking_color));
+                break;
+            case "Corsa":
+                iv.setImageDrawable(getDrawable(R.drawable.ic_running_color));
+                break;
+            case "Ciclismo":
+                iv.setImageDrawable(getDrawable(R.drawable.ic_cycling_color));
+                break;
+            case "Freestyle":
+                iv.setImageDrawable(getDrawable(R.drawable.ic_workout_color));
+                break;
+            case "Pushup":
+                iv.setImageDrawable(getDrawable(R.drawable.ic_pushup_color));
+                break;
+            case "Calcio":
+                iv.setImageDrawable(getDrawable(R.drawable.ic_football));
+                break;
+            case "Basket":
+                iv.setImageDrawable(getDrawable(R.drawable.ic_basketball));
+                break;
+            case "Scalini":
+                iv.setImageDrawable(getDrawable(R.drawable.ic_stairs));
+                break;
+            case "Nuoto":
+                iv.setImageDrawable(getDrawable(R.drawable.ic_swimmer));
+                break;
+            case "Tennis":
+                iv.setImageDrawable(getDrawable(R.drawable.ic_tennis_racket));
+                break;
         }
     }
 
