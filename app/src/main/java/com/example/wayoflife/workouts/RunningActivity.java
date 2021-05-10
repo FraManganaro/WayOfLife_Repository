@@ -237,7 +237,6 @@ public class RunningActivity extends AppCompatActivity {
                 break;
         }
     }
-
     /**
      * Allenamento finito, devo passare alla classe di review le informazioni da salvare
      * @param v
