@@ -11,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.example.wayoflife.Constants;
+import com.example.wayoflife.dialog.InfoDialog;
+import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.R;
-import com.example.wayoflife.workouts.TrainingActivity;
-import com.example.wayoflife.workouts.PushupCounterActivity;
-import com.example.wayoflife.workouts.RunningActivity;
+import com.example.wayoflife.workouts.trainings.PushupCounterActivity;
+import com.example.wayoflife.workouts.trainings.SquatActivity;
+import com.example.wayoflife.workouts.trainings.TrainingActivity;
+import com.example.wayoflife.workouts.trainings.RunningActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.chip.Chip;
@@ -71,6 +73,20 @@ public class DashboardActivity extends AppCompatActivity {
                 View sheetView = LayoutInflater.from(
                         getApplicationContext()).inflate(R.layout.workout_extra_bottom_sheet,
                         (ViewGroup) findViewById(R.id.workoutBottomSheet));
+
+                /** Gestione dell'allenamento camminata */
+                sheetView.findViewById(R.id.rlCamminata).setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent i = new Intent(getApplicationContext(), RunningActivity.class);
+                                i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                i.putExtra(Constants.ATTIVITA_RILEVATA, "Camminata");
+                                startActivity(i);
+
+                                bottomSheetDialog.dismiss();
+                            }
+                        });
 
                 /** Gestione dell'allenamento basket */
                 sheetView.findViewById(R.id.basket).setOnClickListener(
@@ -133,12 +149,17 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        /** Gestisco il bottone che fornisce le informazioni all'utente */
-        Chip chip = findViewById(R.id.chipInfo);
-        chip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { infoDialog(); }
-        });
+//        /** Gestisco il bottone che fornisce le informazioni all'utente */
+//        Chip chipP = findViewById(R.id.chipInfoPushup);
+//        chipP.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) { infoDialog(); }
+//        });
+//        Chip chipS = findViewById(R.id.chipInfoSquat);
+//        chipS.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) { infoDialog(); }
+//        });
     }
 
     /**
@@ -152,15 +173,25 @@ public class DashboardActivity extends AppCompatActivity {
         startActivity(intent);
     }
     /**
+     * Premendo il RelativeLayout vado al contatore di squat
+     * @param v
+     */
+    public void goToSquatActivity(View v){
+        Intent intent = new Intent(getApplicationContext(), SquatActivity.class);
+        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(Constants.ATTIVITA_RILEVATA, "Squat");
+        startActivity(intent);
+    }
+    /**
      * Premenedo il RelativeLayout vado all'attività per traccare corsa, camminata e ciclismo
      * @param v
      */
     public void goToRunningActivity(View v){
         String activity = "";
 
-        if(v.getId() == R.id.rlCamminata) activity = "Camminata";
         if(v.getId() == R.id.rlCorsa) activity = "Corsa";
         if(v.getId() == R.id.rlCiclismo) activity = "Ciclismo";
+        if(v.getId() == R.id.rlSquat) activity = "Camminata";
 
         Intent intent = new Intent(getApplicationContext(), RunningActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -178,10 +209,16 @@ public class DashboardActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /** Metodo che gestisce il Dialog contenente le informazioni sull'ActivityTransition */
-    public void infoDialog(){
+    /** Metodo che gestisce il Dialog contenente le informazioni sui Pushup */
+    public void infoDialogPushup(View v){
         InfoDialog infoDialog = new InfoDialog();
-        infoDialog.setType("dashboard");
+        infoDialog.setType("pushup");
+        infoDialog.show(getSupportFragmentManager(), "Dialog informativo");
+    }
+    /** Metodo che gestisce il Dialog contenente le informazioni ssugli Squat */
+    public void infoDialogSquat(View v){
+        InfoDialog infoDialog = new InfoDialog();
+        infoDialog.setType("squat");
         infoDialog.show(getSupportFragmentManager(), "Dialog informativo");
     }
 }

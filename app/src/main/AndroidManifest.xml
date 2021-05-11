@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" /> <!-- Required for 29+. -->
-    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" /> <!-- Required for 28 and below. -->
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
 
     <application
         android:allowBackup="true"
@@ -15,22 +15,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WayOfLife">
+        <activity android:name=".workouts.trainings.SquatActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBz_06Gwas-PQZOEEFsCr7ifjwlCXwk22k" /> <!-- API di GoogleMaps -->
         <activity
-            android:name=".workouts.RunningActivity"
+            android:name=".workouts.trainings.RunningActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".workouts.EndWorkoutActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".workouts.TrainingActivity"
+            android:name=".workouts.trainings.TrainingActivity"
             android:screenOrientation="portrait" />
         <activity
-        android:name=".workouts.PushupCounterActivity"
-        android:screenOrientation="portrait" />
+            android:name=".workouts.trainings.PushupCounterActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".workouts.WorkoutHistoryActivity"
             android:screenOrientation="portrait" />
@@ -40,9 +41,9 @@
         <activity
             android:name=".ui.DashboardActivity"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".ui.FirstAccessActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.FirstAccessActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.HomeActivity"
             android:label="@string/app_name"

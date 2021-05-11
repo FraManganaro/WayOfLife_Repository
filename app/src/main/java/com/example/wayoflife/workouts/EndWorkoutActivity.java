@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.example.wayoflife.DatabaseHelper;
 
-import com.example.wayoflife.Constants;
-import com.example.wayoflife.CustomerModel;
+import com.example.wayoflife.util.Constants;
+import com.example.wayoflife.util.CustomerModel;
 import com.example.wayoflife.R;
 import com.example.wayoflife.ui.HomeActivity;
 import com.google.android.material.slider.Slider;
@@ -22,8 +22,6 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static com.example.wayoflife.R.drawable.ic_walking_color;
 
 public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
 
@@ -40,6 +38,7 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
     private int calorie;
     private float chilometri;
     private int n_flessioni;
+    private int n_squat;
     private int state;
 
     @Override
@@ -83,6 +82,8 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         }
 
         n_flessioni = getIntent().getIntExtra(Constants.FLESSIONI, 0);
+        n_squat = getIntent().getIntExtra(Constants.SQUAT, 0);
+        Log.d(TAG, "onCreate: " + n_squat);
 
         if(chilometri != 0.0f) {
             tvExtraText.setText("Chilometri fatti: ");
@@ -229,6 +230,9 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
                 break;
             case "Pushup":
                 iv.setImageDrawable(getDrawable(R.drawable.ic_pushup_color));
+                break;
+            case "Squat":
+                iv.setImageDrawable(getDrawable(R.drawable.ic_squats));
                 break;
             case "Calcio":
                 iv.setImageDrawable(getDrawable(R.drawable.ic_football));

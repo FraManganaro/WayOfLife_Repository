@@ -1,4 +1,4 @@
-package com.example.wayoflife;
+package com.example.wayoflife.util;
 
 public class CustomerModel {
 

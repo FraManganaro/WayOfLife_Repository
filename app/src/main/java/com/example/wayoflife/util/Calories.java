@@ -1,4 +1,4 @@
-package com.example.wayoflife;
+package com.example.wayoflife.util;
 
 public class Calories {
     /**
@@ -14,6 +14,7 @@ public class Calories {
     public static final double CICLISMO = 7.0;
     public static final double FLESSIONI = 4.5;
     public static final double FREESTYLE = 3.0;
+    public static final double SQUAT = 8.0;
 
     public static final double BASKET = 7.0;
     public static final double CALCIO = 8.5;

@@ -12,7 +12,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.example.wayoflife.Constants;
+import com.example.wayoflife.dialog.ProfileDialog;
+import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

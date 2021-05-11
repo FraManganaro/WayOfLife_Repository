@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".workouts.TrainingActivity"
+    tools:context=".workouts.trainings.TrainingActivity"
     android:background="@drawable/image_background_freestyle">
 
     <RelativeLayout
@@ -41,6 +41,38 @@
 
     </RelativeLayout>
 
+
+    <ImageView
+        android:id="@+id/squatButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:elevation="15dp"
+        android:onClick="goToSquatActivity"
+        android:src="@drawable/ic_squat"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/caloriesTV"
+        app:layout_constraintVertical_bias="0.607" />
+
+    <TextView
+        android:id="@+id/tvSquat"
+        android:layout_width="60dp"
+        android:layout_height="20dp"
+        android:fontFamily="@font/candara"
+        android:gravity="center"
+        android:text="@string/squat"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/squatButton"
+        app:layout_constraintVertical_bias="1.0" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
@@ -53,34 +85,6 @@
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
         app:layout_constraintVertical_bias="0.959">
 
-        <!--
-        <ImageView
-            android:id="@+id/endButton"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:elevation="15dp"
-            android:onClick="stopWorkout"
-            android:src="@drawable/ic_stop_v"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.048"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/buttonPausePlay"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_alignParentEnd="true"
-            android:elevation="15dp"
-            android:onClick="pauseWorkout"
-            android:src="@drawable/ic_pause_v"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.293"
-            app:layout_constraintStart_toEndOf="@+id/endButton"
-            app:layout_constraintTop_toTopOf="parent" />
-            -->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/endButton"

@@ -1,4 +1,4 @@
-package com.example.wayoflife.ui;
+package com.example.wayoflife.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -8,13 +8,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import com.example.wayoflife.Constants;
+import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.R;
 import com.google.android.material.textfield.TextInputEditText;
 

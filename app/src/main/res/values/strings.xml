@@ -46,4 +46,6 @@
     <string name="durata">Durata:</string>
     <string name="resoconto_allenamento">Resoconto Allenamento!</string>
     <string name="intro_km">0 km</string>
+    <string name="numero_di_squat">Numero di squat</string>
+    <string name="squat">Squat</string>
 </resources>

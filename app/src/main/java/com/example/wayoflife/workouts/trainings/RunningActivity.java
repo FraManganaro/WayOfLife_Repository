@@ -1,4 +1,4 @@
-package com.example.wayoflife.workouts;
+package com.example.wayoflife.workouts.trainings;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +20,11 @@ import android.view.View;
 import android.widget.Chronometer;
 import android.widget.TextView;
 
-import com.example.wayoflife.Calories;
-import com.example.wayoflife.Constants;
+import com.example.wayoflife.util.Calories;
+import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.R;
-import com.example.wayoflife.ui.InfoDialog;
+import com.example.wayoflife.dialog.InfoDialog;
+import com.example.wayoflife.workouts.EndWorkoutActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;

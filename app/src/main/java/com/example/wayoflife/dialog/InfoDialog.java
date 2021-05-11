@@ -1,8 +1,7 @@
-package com.example.wayoflife.ui;
+package com.example.wayoflife.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.wayoflife.R;
-import com.example.wayoflife.workouts.EndWorkoutActivity;
+import com.example.wayoflife.ui.HomeActivity;
 
 public class InfoDialog extends AppCompatDialogFragment {
 
@@ -31,10 +30,15 @@ public class InfoDialog extends AppCompatDialogFragment {
 
         if(classeDerivazione.equalsIgnoreCase("home")) {
             view = inflater.inflate(R.layout.home_info_dialog, null);
-        } else if(classeDerivazione.equalsIgnoreCase("dashboard")) {
-            view = inflater.inflate(R.layout.dashboard_info_dialog, null);
-        } else {
-            view = inflater.inflate(R.layout.dashboard_info_dialog, null);
+
+        } else if(classeDerivazione.equalsIgnoreCase("pushup")) {
+            view = inflater.inflate(R.layout.pushup_info_dialog, null);
+
+        } else if(classeDerivazione.equalsIgnoreCase("squat")) {
+            view = inflater.inflate(R.layout.squat_info_dialog, null);
+
+        }else {
+            view = inflater.inflate(R.layout.gps_info_dialog, null);
 
             builder.setView(view)
                     .setTitle("Attiva il GPS:")

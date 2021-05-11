@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".workouts.RunningActivity"
+    tools:context=".workouts.trainings.RunningActivity"
     android:orientation="vertical"
     android:background="@drawable/image_background_running">
 

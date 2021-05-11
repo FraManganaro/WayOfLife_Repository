@@ -1,4 +1,4 @@
-package com.example.wayoflife;
+package com.example.wayoflife.util;
 
 public class Constants {
     public static final String PROFILE_INFO_FILENAME = "Elementi salvati del profilo";
@@ -15,6 +15,7 @@ public class Constants {
     public static final String TEMPO_PASSATO = "Tempo Passato";
     public static final String TEMPO_IN_SECONDI = "Tempo in Secondi";
     public static final String FLESSIONI = "Flessioni";
+    public static final String SQUAT = "Squat";
     public static final String CALORIE = "Calorie";
     public static final String CHILOMETRI = "Chilometri";
 

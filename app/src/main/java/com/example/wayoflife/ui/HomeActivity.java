@@ -28,10 +28,11 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.wayoflife.BuildConfig;
-import com.example.wayoflife.Constants;
+import com.example.wayoflife.dialog.InfoDialog;
+import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.PermissionRationalActivity;
 import com.example.wayoflife.R;
-import com.example.wayoflife.workouts.RunningActivity;
+import com.example.wayoflife.workouts.trainings.RunningActivity;
 import com.example.wayoflife.workouts.WorkoutHistoryActivity;
 import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.ActivityTransition;

@@ -1,4 +1,4 @@
-package com.example.wayoflife.workouts;
+package com.example.wayoflife.workouts.trainings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -14,9 +14,10 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.wayoflife.Calories;
-import com.example.wayoflife.Constants;
+import com.example.wayoflife.util.Calories;
+import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.R;
+import com.example.wayoflife.workouts.EndWorkoutActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class TrainingActivity extends AppCompatActivity {
@@ -25,13 +26,16 @@ public class TrainingActivity extends AppCompatActivity {
 
     private String attivitaDiProvenienza;
     private int flessioni;
+    private int squat;
 
     private ConstraintLayout constraintLayout;
     private TextView tvPushup;
+    private TextView tvSquat;
     private TextView caloriesTV;
     private FloatingActionButton playButton;
     private FloatingActionButton endButton;
     private ImageView pushupButton;
+    private ImageView squatButton;
 
     /** Per gestione del cronometro */
     private Chronometer chronometer;
@@ -50,7 +54,7 @@ public class TrainingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_freestyle);
+        setContentView(R.layout.activity_training);
 
         /** Inizializzo variabili per le calorie */
         cycle = true;
@@ -68,12 +72,13 @@ public class TrainingActivity extends AppCompatActivity {
         chronometer.start();
         isRunningChronometer = true;
 
-
-        if(attivitaDiProvenienza.equalsIgnoreCase("Pushup")){
-            /** nel caso in cui provenga dall'allenamento Pushup devo ripristinare calorie e tempo */
+        /** nel caso in cui provenga dall'allenamento Pushup o Squat devo ripristinare calorie e tempo */
+        if(attivitaDiProvenienza.equalsIgnoreCase("Pushup") ||
+                attivitaDiProvenienza.equalsIgnoreCase("Squat")){
             chronometer.setBase(getIntent().getLongExtra(Constants.TEMPO_PASSATO, 0));
             calorieRicevute = getIntent().getIntExtra(Constants.CALORIE, 0);
             flessioni = getIntent().getIntExtra(Constants.FLESSIONI, 0);
+            squat = getIntent().getIntExtra(Constants.SQUAT, 0);
         } else {
             chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
         }
@@ -84,17 +89,22 @@ public class TrainingActivity extends AppCompatActivity {
         playButton = findViewById(R.id.buttonPausePlay);
         endButton = findViewById(R.id.endButton);
         pushupButton = findViewById(R.id.pushupButton);
+        squatButton = findViewById(R.id.squatButton);
 
         tvPushup = findViewById(R.id.tvPushup);
+        tvSquat = findViewById(R.id.tvSquat);
         caloriesTV = findViewById(R.id.caloriesTV);
 
         endButton.setVisibility(View.INVISIBLE);
 
         /** Nel caso in cui si avvii un workout generico */
         if(!attivitaDiProvenienza.equalsIgnoreCase("Freestyle") &&
-                !attivitaDiProvenienza.equalsIgnoreCase("Pushup")){
+                !attivitaDiProvenienza.equalsIgnoreCase("Pushup") &&
+                !attivitaDiProvenienza.equalsIgnoreCase("Squat")){
             pushupButton.setVisibility(View.INVISIBLE);
+            squatButton.setVisibility(View.INVISIBLE);
             tvPushup.setVisibility(View.INVISIBLE);
+            tvSquat.setVisibility(View.INVISIBLE);
             constraintLayout.setBackground(getDrawable(R.drawable.prova3)); //DA CAMBIARE
         }
 
@@ -183,7 +193,8 @@ public class TrainingActivity extends AppCompatActivity {
 
         /** scelgo quale attività passare come parametro extra */
         if(attivitaDiProvenienza.equalsIgnoreCase("Freestyle") ||
-                attivitaDiProvenienza.equalsIgnoreCase("Pushup")){
+                attivitaDiProvenienza.equalsIgnoreCase("Pushup") ||
+                attivitaDiProvenienza.equalsIgnoreCase("Squat")){
 
             intent.putExtra(Constants.ATTIVITA_RILEVATA,  "Freestyle");
 
@@ -193,6 +204,7 @@ public class TrainingActivity extends AppCompatActivity {
         intent.putExtra(Constants.TEMPO_IN_SECONDI, secondCounter + secondiRicevuti);
         intent.putExtra(Constants.CALORIE, calorie + calorieRicevute);
         intent.putExtra(Constants.FLESSIONI, flessioni);
+        intent.putExtra(Constants.SQUAT, squat);
 
         startActivity(intent);
         finish();
@@ -208,9 +220,12 @@ public class TrainingActivity extends AppCompatActivity {
             endButton.setVisibility(View.VISIBLE);
 
             if(attivitaDiProvenienza.equalsIgnoreCase("freestyle") ||
-                    attivitaDiProvenienza.equalsIgnoreCase("pushup")) {
+                    attivitaDiProvenienza.equalsIgnoreCase("pushup") ||
+                    attivitaDiProvenienza.equalsIgnoreCase("squat")) {
                 pushupButton.setVisibility(View.INVISIBLE);
                 tvPushup.setVisibility(View.INVISIBLE);
+                squatButton.setVisibility(View.INVISIBLE);
+                tvSquat.setVisibility(View.INVISIBLE);
             }
 
             updateCalories = false;
@@ -225,6 +240,8 @@ public class TrainingActivity extends AppCompatActivity {
                     attivitaDiProvenienza.equalsIgnoreCase("pushup")) {
                 pushupButton.setVisibility(View.VISIBLE);
                 tvPushup.setVisibility(View.VISIBLE);
+                squatButton.setVisibility(View.VISIBLE);
+                tvSquat.setVisibility(View.VISIBLE);
             }
 
             updateCalories = true;
@@ -262,6 +279,27 @@ public class TrainingActivity extends AppCompatActivity {
         intent.putExtra(Constants.TEMPO_PASSATO, chronometer.getBase());
         intent.putExtra(Constants.TEMPO_IN_SECONDI, secondCounter + secondiRicevuti);
         intent.putExtra(Constants.CALORIE, calorie + calorieRicevute);
+        intent.putExtra(Constants.FLESSIONI, flessioni);
+        intent.putExtra(Constants.SQUAT, squat);
+
+        pauseWorkout(v);
+
+        startActivity(intent);
+    }
+    /**
+     * Controllo dell'icona per passare al contatore delle flessioni
+     * Devo passare il tempo passato, le kcal bruciate e l'attività di arrivo
+     * @param v
+     */
+    public void goToSquatActivity(View v){
+        Intent intent = new Intent(getApplicationContext(), SquatActivity.class);
+        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        intent.putExtra(Constants.ATTIVITA_RILEVATA, "Freestyle");
+        intent.putExtra(Constants.TEMPO_PASSATO, chronometer.getBase());
+        intent.putExtra(Constants.TEMPO_IN_SECONDI, secondCounter + secondiRicevuti);
+        intent.putExtra(Constants.CALORIE, calorie + calorieRicevute);
+        intent.putExtra(Constants.SQUAT, squat);
         intent.putExtra(Constants.FLESSIONI, flessioni);
 
         pauseWorkout(v);

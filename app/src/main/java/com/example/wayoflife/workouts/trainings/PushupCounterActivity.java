@@ -1,4 +1,4 @@
-package com.example.wayoflife.workouts;
+package com.example.wayoflife.workouts.trainings;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,9 +17,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.wayoflife.Calories;
-import com.example.wayoflife.Constants;
+import com.example.wayoflife.util.Calories;
+import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.R;
+import com.example.wayoflife.workouts.EndWorkoutActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class PushupCounterActivity extends AppCompatActivity implements SensorEventListener {
@@ -28,6 +29,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
 
     private SensorManager sensorManager;
     private int pushupCounter;
+    private int squat;
 
     private String attivitaDiProvenienza;
 
@@ -84,6 +86,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
             chronometer.setBase(getIntent().getLongExtra(Constants.TEMPO_PASSATO, 0));
             calorieRicevute = getIntent().getIntExtra(Constants.CALORIE, 0);
             pushupCounter = getIntent().getIntExtra(Constants.FLESSIONI, 0) - 1;
+            squat = getIntent().getIntExtra(Constants.SQUAT, 0);
         } else
             chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
 
@@ -235,6 +238,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
         intent.putExtra(Constants.TEMPO_PASSATO, chronometer.getBase());
         intent.putExtra(Constants.TEMPO_IN_SECONDI, secondCounter + secondiRicevuti);
         intent.putExtra(Constants.CALORIE, calorie + calorieRicevute);
+        intent.putExtra(Constants.SQUAT, squat);
 
         startActivity(intent);
         finish();

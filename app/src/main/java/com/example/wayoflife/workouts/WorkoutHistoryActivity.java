@@ -9,13 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.wayoflife.CustomerModel;
+import com.example.wayoflife.util.CustomerModel;
 import com.example.wayoflife.DatabaseHelper;
 import com.example.wayoflife.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutHistoryActivity extends AppCompatActivity {

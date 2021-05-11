@@ -6,12 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import com.example.wayoflife.Constants;
+import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.R;
-import com.example.wayoflife.workouts.EndWorkoutActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
