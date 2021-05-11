@@ -63,7 +63,7 @@
         android:layout_height="20dp"
         android:fontFamily="@font/candara"
         android:gravity="center"
-        android:text="@string/squat"
+        android:text="@string/info_squat"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"

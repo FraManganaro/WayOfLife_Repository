@@ -49,11 +49,13 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         TextView tvData = findViewById(R.id.tvData);
         TextView tvDurata = findViewById(R.id.tvTempo);
         TextView tvCalorie = findViewById(R.id.tvCalorie);
-        TextView tvExtra = findViewById(R.id.tvExtra);
         TextView tipoAllenamento = findViewById(R.id.tipoAllenamento);
 
         LinearLayout llExtra = findViewById(R.id.llExtra);
+        TextView tvExtra = findViewById(R.id.tvExtra);
+        TextView tvExtraSquat = findViewById(R.id.tvExtraSquat);
         TextView tvExtraText = findViewById(R.id.tvExtraText);
+        TextView tvExtraTextSquat = findViewById(R.id.tvExtraTextSquat);
 
         /** Recupero data odierna */
         Date date = new Date();
@@ -83,18 +85,40 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
 
         n_flessioni = getIntent().getIntExtra(Constants.FLESSIONI, 0);
         n_squat = getIntent().getIntExtra(Constants.SQUAT, 0);
-        Log.d(TAG, "onCreate: " + n_squat);
 
         if(chilometri != 0.0f) {
             tvExtraText.setText("Chilometri fatti: ");
             tvExtra.setText(chilometri + " km");
-        } else if(n_flessioni != 0) {
+
+            tvExtraSquat.setVisibility(View.INVISIBLE);
+            tvExtraTextSquat.setVisibility(View.INVISIBLE);
+
+        } else if (n_squat != 0 && n_flessioni != 0) {
             tvExtraText.setText("Flessioni fatte: ");
-            tvExtra.setText(""+ n_flessioni);
+            tvExtra.setText("" + n_flessioni);
+            tvExtraTextSquat.setText("Squat fatti: ");
+            tvExtraSquat.setText("" + n_squat);
+
+        } else if (n_flessioni != 0 && n_squat == 0) {
+            tvExtraText.setText("Flessioni fatte: ");
+            tvExtra.setText("" + n_flessioni);
+
+            tvExtraSquat.setVisibility(View.INVISIBLE);
+            tvExtraTextSquat.setVisibility(View.INVISIBLE);
+
+        } else if (n_squat != 0 && n_flessioni == 0) {
+            tvExtraText.setText("Squat fatti: ");
+            tvExtra.setText("" + n_squat);
+
+            tvExtraSquat.setVisibility(View.INVISIBLE);
+            tvExtraTextSquat.setVisibility(View.INVISIBLE);
+
         } else {
             tvExtra.setVisibility(View.INVISIBLE);
             llExtra.setVisibility(View.INVISIBLE);
             tvExtraText.setVisibility(View.INVISIBLE);
+            tvExtraSquat.setVisibility(View.INVISIBLE);
+            tvExtraTextSquat.setVisibility(View.INVISIBLE);
         }
     }
 

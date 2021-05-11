@@ -8,7 +8,8 @@
     android:gravity="center_horizontal"
     android:onClick="increaseCounter"
     android:orientation="vertical"
-    tools:context=".workouts.trainings.SquatActivity">
+    tools:context=".workouts.trainings.SquatActivity"
+    android:background="@drawable/image_background_squat">
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"

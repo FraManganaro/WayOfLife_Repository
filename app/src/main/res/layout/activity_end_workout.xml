@@ -91,13 +91,13 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
+            android:padding="5dp"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.148"
+            app:layout_constraintHorizontal_bias="0.146"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.344"
-            android:padding="5dp">
+            app:layout_constraintVertical_bias="0.313">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -123,13 +123,13 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
+            android:padding="5dp"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.837"
+            app:layout_constraintHorizontal_bias="0.838"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.344"
-            android:padding="5dp">
+            app:layout_constraintVertical_bias="0.313">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -151,18 +151,19 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
+            android:padding="5dp"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.589"
-            android:padding="5dp">
+            app:layout_constraintVertical_bias="0.543">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -184,20 +185,19 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-
         <LinearLayout
             android:id="@+id/llExtra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
+            android:padding="5dp"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.833"
+            app:layout_constraintHorizontal_bias="0.834"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.589"
-            android:padding="5dp">
+            app:layout_constraintVertical_bias="0.63">
 
             <TextView
                 android:id="@+id/tvExtraText"
@@ -218,20 +218,39 @@
                 android:text="0"
                 android:textSize="25sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvExtraTextSquat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/candara"
+                android:paddingEnd="10dp"
+                android:text="@string/squat"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tvExtraSquat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/candara"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="25sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/candara"
             android:text="Inserisci una valutazione all'allenamento:"
+            android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@+id/slider"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-            app:layout_constraintVertical_bias="0.996"
-            android:textStyle="italic"
-            android:fontFamily="@font/candara"/>
+            app:layout_constraintVertical_bias="1.0" />
 
         <com.google.android.material.slider.Slider
             android:id="@+id/slider"
@@ -245,10 +264,10 @@
             app:labelBehavior="gone"
             app:layout_constraintBottom_toTopOf="@+id/button3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llExtra"
-            app:layout_constraintVertical_bias="0.711" />
+            app:layout_constraintVertical_bias="0.917" />
 
         <!--
         <Button

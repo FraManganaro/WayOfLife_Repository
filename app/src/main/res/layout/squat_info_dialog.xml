@@ -22,8 +22,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/candara"
-                android:text="SQUAT"
-                android:textSize="15sp"/>
+                android:text="@string/info_squat"
+                android:textSize="16sp"/>
         </LinearLayout>
     </ScrollView>
 
