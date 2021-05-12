@@ -26,8 +26,6 @@ public class ProfileDialog extends AppCompatDialogFragment {
     private TextInputEditText altezzaET;
     private TextInputEditText sessoET;
 
-
-
     private LinearLayout llNome;
 
     private String nickname;

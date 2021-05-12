@@ -170,6 +170,14 @@ public class RunningActivity extends AppCompatActivity {
             startTraining();
         }
     }
+    @Override
+    public void onBackPressed() {
+        InfoDialog infoDialog = new InfoDialog();
+        infoDialog.setType("workout");
+        infoDialog.show(getSupportFragmentManager(), "Dialog informativo");
+        cycle = false;
+        continueFindLocation = false;
+    }
 
     /**
      * Metodo che permette di avviare il conteggio dei secondi e di aggiornare la posizine dinamicamente

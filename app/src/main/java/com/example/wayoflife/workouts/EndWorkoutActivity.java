@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.wayoflife.DatabaseHelper;
 
+import com.example.wayoflife.dialog.InfoDialog;
 import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.util.CustomerModel;
 import com.example.wayoflife.R;
@@ -86,6 +87,7 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         n_flessioni = getIntent().getIntExtra(Constants.FLESSIONI, 0);
         n_squat = getIntent().getIntExtra(Constants.SQUAT, 0);
 
+        /** Controllo che TextView attivare e disattivare in base ai parametri che ricevo */
         if(chilometri != 0.0f) {
             tvExtraText.setText("Chilometri fatti: ");
             tvExtra.setText(chilometri + " km");
@@ -120,6 +122,12 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
             tvExtraSquat.setVisibility(View.INVISIBLE);
             tvExtraTextSquat.setVisibility(View.INVISIBLE);
         }
+    }
+    @Override
+    public void onBackPressed() {
+        InfoDialog infoDialog = new InfoDialog();
+        infoDialog.setType("workout");
+        infoDialog.show(getSupportFragmentManager(), "Dialog informativo");
     }
 
     public void saveWorkout(View v){
@@ -275,5 +283,4 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
                 break;
         }
     }
-
 }

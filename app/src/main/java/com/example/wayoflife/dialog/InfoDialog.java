@@ -37,7 +37,29 @@ public class InfoDialog extends AppCompatDialogFragment {
         } else if(classeDerivazione.equalsIgnoreCase("squat")) {
             view = inflater.inflate(R.layout.squat_info_dialog, null);
 
-        }else {
+        }else if(classeDerivazione.equalsIgnoreCase("workout")) {
+            view = inflater.inflate(R.layout.endworkout_info_dialog, null);
+
+            builder.setView(view)
+                    .setTitle("Vuoi abbandonare l'allenamento?")
+                    .setPositiveButton("Torna alla Home", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(view.getContext(), HomeActivity.class);
+                            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            getActivity().finish();
+                        }
+                    })
+                    .setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+
+            return builder.create();
+
+        } else {
             view = inflater.inflate(R.layout.gps_info_dialog, null);
 
             builder.setView(view)
@@ -55,6 +77,7 @@ public class InfoDialog extends AppCompatDialogFragment {
                             Intent intent = new Intent(view.getContext(), HomeActivity.class);
                             intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
+                            getActivity().finish();
                         }
                     });
 

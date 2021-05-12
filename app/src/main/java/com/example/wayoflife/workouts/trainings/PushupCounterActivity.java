@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wayoflife.dialog.InfoDialog;
 import com.example.wayoflife.util.Calories;
 import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.R;
@@ -151,6 +152,14 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        cycle = false;
+        updateCalories = false;
+    }
+    @Override
+    public void onBackPressed() {
+        InfoDialog infoDialog = new InfoDialog();
+        infoDialog.setType("workout");
+        infoDialog.show(getSupportFragmentManager(), "Dialog informativo");
         cycle = false;
         updateCalories = false;
     }

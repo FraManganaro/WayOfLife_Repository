@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wayoflife.R;
+import com.example.wayoflife.dialog.InfoDialog;
 import com.example.wayoflife.util.Calories;
 import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.workouts.EndWorkoutActivity;
@@ -133,8 +134,8 @@ public class SquatActivity extends AppCompatActivity implements SensorEventListe
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-//                                Log.d(TAG, "Secondi = " + secondCounter);
-//                                Log.d(TAG, "Calorie = " + calorie + calorieRicevute);
+                                Log.d(TAG, "Secondi = " + secondCounter);
+                                Log.d(TAG, "Calorie = " + calorie + calorieRicevute);
 
                                 secondCounter++;
                                 updateCalories();
@@ -170,6 +171,14 @@ public class SquatActivity extends AppCompatActivity implements SensorEventListe
         cycle = false;
         updateCalories = false;
     }
+    @Override
+    public void onBackPressed() {
+        InfoDialog infoDialog = new InfoDialog();
+        infoDialog.setType("workout");
+        infoDialog.show(getSupportFragmentManager(), "Dialog informativo");
+        cycle = false;
+        updateCalories = false;
+    }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -193,14 +202,12 @@ public class SquatActivity extends AppCompatActivity implements SensorEventListe
                     Log.d(TAG, "Norma: " + (norma - gravityEarth));
                 }
 
-//                Log.d(TAG, "Prima IF - DISCESA: " + discesa);
                 if(Math.abs(norma - gravityEarth) > SOGLIA && !discesa){
                     discesa = true;
                     Log.d(TAG, "Dopo IF - DISCESA: " + discesa);
                     return;
                 }
 
-//                Log.d(TAG, "Prima IF - SALITA: " + salita);
                 if(Math.abs(norma - gravityEarth) > SOGLIA){
                     salita = true;
                     Log.d(TAG, "Dopo IF - SALITA: " + salita);
