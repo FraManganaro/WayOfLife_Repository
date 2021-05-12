@@ -11,9 +11,10 @@ public class CustomerModel {
     private float chilometri;
     private int n_flessioni;
     private int state;
+    private int like;
 
     /** Costruttore completo */
-    public CustomerModel(String nome, String data, String durata, float chilometri, String tipologia, int calorie, int n_flessioni, int state) {
+    public CustomerModel(String nome, String data, String durata, float chilometri, String tipologia, int calorie, int n_flessioni, int state, int like) {
         this.nome = nome;
         this.data = data;
         this.durata = durata;
@@ -22,6 +23,7 @@ public class CustomerModel {
         this.calorie = calorie;
         this.n_flessioni = n_flessioni;
         this.state = state;
+        this.like = like;
     }
 
     /** Costruttore per attività extra */
@@ -34,6 +36,7 @@ public class CustomerModel {
         this.chilometri = -1;
         this.n_flessioni = -1;
         this.state = state;
+        this.like = 0;
     }
 
     /** Costruttore per Freestyle o Pushup */
@@ -46,6 +49,7 @@ public class CustomerModel {
         this.chilometri = -1;
         this.n_flessioni = n_flessioni;
         this.state = state;
+        this.like = 0;
     }
 
     /** Costruttore per Corsa, Ciclismo, Camminata */
@@ -58,6 +62,7 @@ public class CustomerModel {
         this.calorie = calorie;
         this.n_flessioni = -1;
         this.state = state;
+        this.like = 0;
     }
 
     public CustomerModel() {
@@ -136,6 +141,14 @@ public class CustomerModel {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
     }
 
 }
