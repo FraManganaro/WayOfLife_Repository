@@ -23,6 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String CALORIE_COLUMN = "calorie";
     public static final String CHILOMETRI_COLUMN = "chilometri";
     public static final String NUM_FLESSIONI_COLUMN = "numFlessioni";
+    public static final String NUM_SQUAT_COLUMN = "numSquat";
     public static final String STATO_FINE_ALLENAMENTO_COLUMN = "statoFineAllenamento";
     public static final String LIKE_ALLENAMENTO_COLUMN = "statoFineAllenamento";
 
@@ -41,6 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " " + CALORIE_COLUMN + " INTEGER," +
                 " " + CHILOMETRI_COLUMN + " FLOAT," +
                 " " + NUM_FLESSIONI_COLUMN + " INTEGER," +
+                " " + NUM_SQUAT_COLUMN + " INTEGER," +
                 " " + STATO_FINE_ALLENAMENTO_COLUMN + " INTEGER," +
                 " " + LIKE_ALLENAMENTO_COLUMN + " INTEGER)";
         db.execSQL(createTable);
@@ -68,6 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(TIPOLOGIA_COLUMN, customerModel.getTipologia());
         cv.put(CALORIE_COLUMN, customerModel.getCalorie());
         cv.put(STATO_FINE_ALLENAMENTO_COLUMN, customerModel.getState());
+        cv.put(LIKE_ALLENAMENTO_COLUMN, customerModel.getLike());
 
         //Dati da verificare se sono presenti negli allenamenti
         //Se == -1, vuol dire che non sono stati inseriti nella fine dell'allenamento
@@ -81,8 +84,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             cv.put(NUM_FLESSIONI_COLUMN, -1);
 
+        if(customerModel.getN_squat() != -1)
+            cv.put(NUM_SQUAT_COLUMN, customerModel.getN_squat());
+        else
+            cv.put(NUM_SQUAT_COLUMN, -1);
+
         db.insert(TABLE_NAME, null, cv);
         db.close();
+
 
         return true;
     }
@@ -142,7 +151,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String customerDurata = cursor.getString(3);
                 String customerTipologia = cursor.getString(4);
                 int customerCalorie = cursor.getInt(5);
-                int customerState = cursor.getInt(8);
+                int customerState = cursor.getInt(9);
 
                 CustomerModel model = new CustomerModel(customerNome, customerNData, customerDurata, customerTipologia, customerCalorie, customerState);
                 returnList.add(model);
@@ -176,10 +185,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int customerCalorie = cursor.getInt(5);
         float customerChilometri = cursor.getFloat(6);
         int customerFlessioni = cursor.getInt(7);
-        int customerState = cursor.getInt(8);
-        int customerLike = cursor.getInt(9);
+        int customerSquat = cursor.getInt(8);
+        int customerState = cursor.getInt(9);
+        int customerLike = cursor.getInt(10);
 
-        customerModel = new CustomerModel(customerNome, customerNData, customerDurata, customerChilometri, customerTipologia, customerCalorie, customerFlessioni, customerState, customerLike);
+        customerModel = new CustomerModel(customerNome, customerNData, customerSquat, customerDurata, customerChilometri, customerTipologia, customerCalorie, customerFlessioni, customerState, customerLike);
 
         cursor.close();
         sqLiteDatabase.close();
@@ -207,7 +217,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String customerDurata = cursor.getString(3);
                 String customerTipologia = cursor.getString(4);
                 int customerCalorie = cursor.getInt(5);
-                int customerState = cursor.getInt(8);
+                int customerState = cursor.getInt(9);
 
                 CustomerModel model = new CustomerModel(customerNome, customerNData, customerDurata, customerTipologia, customerCalorie, customerState);
                 returnList.add(model);

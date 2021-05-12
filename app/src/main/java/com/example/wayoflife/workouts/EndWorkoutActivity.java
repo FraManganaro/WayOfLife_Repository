@@ -150,9 +150,9 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
                 customerModel = new CustomerModel(nome, data, durata, chilometri, tipologiaAllenamento, calorie, state);
             }
             else{
-                if (tipologiaAllenamento.equals("Pushup") || tipologiaAllenamento.equals("Freestyle")){
+                if (tipologiaAllenamento.equals("Pushup") || tipologiaAllenamento.equals("Freestyle") || tipologiaAllenamento.equals("Squat")){
                     //uso il costruttore senza chilometri, con flessioni
-                    customerModel = new CustomerModel(nome, data, durata, tipologiaAllenamento, calorie, n_flessioni, state);
+                    customerModel = new CustomerModel(nome, data, n_squat, durata, tipologiaAllenamento, calorie, n_flessioni, state);
                 }
                 else{
                     //uso il costruttore senza chilometri e flessioni

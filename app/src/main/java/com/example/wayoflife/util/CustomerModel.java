@@ -5,6 +5,7 @@ public class CustomerModel {
     //Variabili
     private String nome;
     private String data;
+    private int n_squat;
     private String durata;
     private String tipologia;
     private int calorie;
@@ -14,9 +15,10 @@ public class CustomerModel {
     private int like;
 
     /** Costruttore completo */
-    public CustomerModel(String nome, String data, String durata, float chilometri, String tipologia, int calorie, int n_flessioni, int state, int like) {
+    public CustomerModel(String nome, String data, int n_squat, String durata, float chilometri, String tipologia, int calorie, int n_flessioni, int state, int like) {
         this.nome = nome;
         this.data = data;
+        this.n_squat = n_squat;
         this.durata = durata;
         this.chilometri = chilometri;
         this.tipologia = tipologia;
@@ -30,6 +32,7 @@ public class CustomerModel {
     public CustomerModel(String nome, String data, String durata, String tipologia, int calorie, int state) {
         this.nome = nome;
         this.data = data;
+        this.n_squat = -1;
         this.durata = durata;
         this.tipologia = tipologia;
         this.calorie = calorie;
@@ -40,9 +43,10 @@ public class CustomerModel {
     }
 
     /** Costruttore per Freestyle o Pushup */
-    public CustomerModel(String nome, String data, String durata, String tipologia, int calorie, int n_flessioni, int state) {
+    public CustomerModel(String nome, String data, int n_squat, String durata, String tipologia, int calorie, int n_flessioni, int state) {
         this.nome = nome;
         this.data = data;
+        this.n_squat = n_squat;
         this.durata = durata;
         this.tipologia = tipologia;
         this.calorie = calorie;
@@ -56,6 +60,7 @@ public class CustomerModel {
     public CustomerModel(String nome, String data, String durata, float chilometri, String tipologia, int calorie, int state) {
         this.nome = nome;
         this.data = data;
+        this.n_squat = -1;
         this.durata = durata;
         this.chilometri = chilometri;
         this.tipologia = tipologia;
@@ -93,6 +98,14 @@ public class CustomerModel {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public int getN_squat() {
+        return n_squat;
+    }
+
+    public void setN_squat(int n_squat) {
+        this.n_squat = n_squat;
     }
 
     public String getDurata() {

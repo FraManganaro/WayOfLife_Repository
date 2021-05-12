@@ -74,7 +74,7 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
 
     public void prova(){
         CustomerModel customerModel1 = new CustomerModel("Run1", "10/05/2020", "1 ora 15 minuti", 10,"Corsa", 200, 5);
-        CustomerModel customerModel2 = new CustomerModel("Pushup1", "22/05/2020", "15 minuti", "Pushup", 25, 100, 5);
+        CustomerModel customerModel2 = new CustomerModel("Pushup1", "22/05/2020", 0, "15 minuti", "Pushup", 25, 100, 5);
         CustomerModel customerModel3 = new CustomerModel("Calcio", "08/06/2020", "2 ora 15 minuti","Calcio", 200, 5);
         DatabaseHelper db = new DatabaseHelper(WorkoutHistoryActivity.this);
         db.addWorkout(customerModel1);
