@@ -148,18 +148,6 @@ public class DashboardActivity extends AppCompatActivity {
                 bottomSheetDialog.show();
             }
         });
-
-//        /** Gestisco il bottone che fornisce le informazioni all'utente */
-//        Chip chipP = findViewById(R.id.chipInfoPushup);
-//        chipP.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) { infoDialog(); }
-//        });
-//        Chip chipS = findViewById(R.id.chipInfoSquat);
-//        chipS.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) { infoDialog(); }
-//        });
     }
 
     /**
