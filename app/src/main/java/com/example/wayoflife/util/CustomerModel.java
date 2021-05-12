@@ -42,7 +42,7 @@ public class CustomerModel {
         this.like = 0;
     }
 
-    /** Costruttore per Freestyle o Pushup */
+    /** Costruttore per Freestyle, Pushup e Squat */
     public CustomerModel(String nome, String data, int n_squat, String durata, String tipologia, int calorie, int n_flessioni, int state) {
         this.nome = nome;
         this.data = data;
