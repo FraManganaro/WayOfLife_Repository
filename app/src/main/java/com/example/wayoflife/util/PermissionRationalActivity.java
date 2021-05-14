@@ -1,4 +1,4 @@
-package com.example.wayoflife;
+package com.example.wayoflife.util;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.example.wayoflife.R;
 
 import java.util.Arrays;
 

@@ -30,7 +30,7 @@ import android.widget.TextView;
 import com.example.wayoflife.BuildConfig;
 import com.example.wayoflife.dialog.InfoDialog;
 import com.example.wayoflife.util.Constants;
-import com.example.wayoflife.PermissionRationalActivity;
+import com.example.wayoflife.util.PermissionRationalActivity;
 import com.example.wayoflife.R;
 import com.example.wayoflife.workouts.trainings.RunningActivity;
 import com.example.wayoflife.workouts.WorkoutHistoryActivity;
@@ -65,10 +65,12 @@ public class HomeActivity extends AppCompatActivity {
      */
     private boolean runningQOrLater = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
 
+    /** Variabili di controllo di stato */
     private boolean activityTrackingEnabled;
     private boolean walkingStatus;
     private boolean runningStatus;
     private boolean cyclingStatus;
+    private boolean notificationStatus;
 
     private List<ActivityTransition> activityTransitionList;
 
@@ -79,8 +81,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private PendingIntent mActivityTransitionsPendingIntent;
     private HomeActivity.TransitionsReceiver mTransitionsReceiver;
-
-
 
 
     /**
@@ -279,6 +279,15 @@ public class HomeActivity extends AppCompatActivity {
         /** Inizializzo il canale per le notifiche */
         createNotificationChannel();
 
+        notificationStatus = true;
+        SharedPreferences sharedPref = getSharedPreferences(
+                Constants.HOME_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(Constants.NOTIFICATION_STATUS, notificationStatus);
+        editor.apply();
+
+
         /** Creo un PendingIntent che posso triggerare quando uno ActivityTransition accorre */
         Intent intent = new Intent(TRANSITIONS_RECEIVER_ACTION);
         mActivityTransitionsPendingIntent =
@@ -344,7 +353,6 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void saveInformation(){
         SharedPreferences sharedPref = getSharedPreferences(
-                //Nome del file
                 Constants.HOME_INFO_FILENAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -355,6 +363,8 @@ public class HomeActivity extends AppCompatActivity {
         editor.putBoolean(Constants.WALKING_STATUS, walkingStatus);
         editor.putBoolean(Constants.RUNNING_STATUS, runningStatus);
         editor.putBoolean(Constants.CYCLING_STATUS, cyclingStatus);
+
+        editor.putBoolean(Constants.NOTIFICATION_STATUS, notificationStatus);
 
         editor.apply();
     }
@@ -503,7 +513,6 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         printToScreen("Transitions Api could NOT be registered: " + e);
-                        Log.e(TAG, "Transitions Api could NOT be registered: " + e);
                     }
                 });
     }
@@ -543,7 +552,6 @@ public class HomeActivity extends AppCompatActivity {
      */
     public void onClickEnableOrDisableActivityRecognition(View view) {
 
-        // Enable/Disable activity tracking and ask for permissions if needed.
         if (activityRecognitionPermissionApproved()) {
 
             if (activityTrackingEnabled) {
@@ -556,8 +564,6 @@ public class HomeActivity extends AppCompatActivity {
             }
 
         } else {
-            // Request permission and start activity for result. If the permission is approved, we
-            // want to make sure we start activity recognition tracking.
             Intent startIntent = new Intent(this, PermissionRationalActivity.class);
             startActivityForResult(startIntent, 0);
         }
@@ -681,7 +687,14 @@ public class HomeActivity extends AppCompatActivity {
                         .setAutoCancel(true)
                         .build();
 
-                notificationManagerCompat.notify(1, notification);
+                /** Recupero informazioni relative alla notifica */
+                SharedPreferences sharedPrefHome = getSharedPreferences(
+                        Constants.HOME_INFO_FILENAME,
+                        Context.MODE_PRIVATE);
+                notificationStatus = sharedPrefHome.getBoolean(
+                        Constants.NOTIFICATION_STATUS, false);
+
+                if(notificationStatus) notificationManagerCompat.notify(1, notification);
             }
         }
     }

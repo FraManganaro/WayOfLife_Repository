@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.wayoflife.util.CustomerModel;
-import com.example.wayoflife.DatabaseHelper;
+import com.example.wayoflife.util.DatabaseHelper;
 import com.example.wayoflife.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;

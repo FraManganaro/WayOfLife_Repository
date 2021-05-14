@@ -11,6 +11,8 @@ public class Constants {
     public static final String RUNNING_STATUS = "RunningStatus";
     public static final String CYCLING_STATUS = "CyclingStatus";
 
+    public static final String NOTIFICATION_STATUS = "NotificationStatus";
+
     public static final String ATTIVITA_RILEVATA = "Attività Rilevata";
     public static final String TEMPO_PASSATO = "Tempo Passato";
     public static final String TEMPO_IN_SECONDI = "Tempo in Secondi";

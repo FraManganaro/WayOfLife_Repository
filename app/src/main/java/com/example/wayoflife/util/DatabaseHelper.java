@@ -1,4 +1,4 @@
-package com.example.wayoflife;
+package com.example.wayoflife.util;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String NUM_FLESSIONI_COLUMN = "numFlessioni";
     public static final String NUM_SQUAT_COLUMN = "numSquat";
     public static final String STATO_FINE_ALLENAMENTO_COLUMN = "statoFineAllenamento";
-    public static final String LIKE_ALLENAMENTO_COLUMN = "statoFineAllenamento";
+    public static final String LIKE_ALLENAMENTO_COLUMN = "likeAllenamento";
 
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, 1);

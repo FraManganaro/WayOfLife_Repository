@@ -8,7 +8,7 @@
     android:gravity="center_horizontal"
     android:onClick="increaseCounter"
     android:orientation="vertical"
-    tools:context=".workouts.trainings.PushupCounterActivity">
+    tools:context=".workouts.trainings.PushupActivity">
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"

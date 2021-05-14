@@ -24,7 +24,7 @@ import com.example.wayoflife.R;
 import com.example.wayoflife.workouts.EndWorkoutActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class PushupCounterActivity extends AppCompatActivity implements SensorEventListener {
+public class PushupActivity extends AppCompatActivity implements SensorEventListener {
 
     private static final String TAG = "PushupCounterActivity";
 
@@ -60,7 +60,7 @@ public class PushupCounterActivity extends AppCompatActivity implements SensorEv
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pushup_counter);
+        setContentView(R.layout.activity_pushup);
 
         pushupCounter = -1;
 

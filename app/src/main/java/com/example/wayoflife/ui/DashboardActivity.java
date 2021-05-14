@@ -3,7 +3,9 @@ package com.example.wayoflife.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -14,13 +16,12 @@ import android.widget.RelativeLayout;
 import com.example.wayoflife.dialog.InfoDialog;
 import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.R;
-import com.example.wayoflife.workouts.trainings.PushupCounterActivity;
+import com.example.wayoflife.workouts.trainings.PushupActivity;
 import com.example.wayoflife.workouts.trainings.SquatActivity;
 import com.example.wayoflife.workouts.trainings.TrainingActivity;
 import com.example.wayoflife.workouts.trainings.RunningActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.chip.Chip;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -82,6 +83,9 @@ public class DashboardActivity extends AppCompatActivity {
                                 Intent i = new Intent(getApplicationContext(), RunningActivity.class);
                                 i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 i.putExtra(Constants.ATTIVITA_RILEVATA, "Camminata");
+
+                                manageNotification();
+
                                 startActivity(i);
 
                                 bottomSheetDialog.dismiss();
@@ -94,6 +98,9 @@ public class DashboardActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 intent.putExtra(Constants.ATTIVITA_RILEVATA, "Basket");
+
+                                manageNotification();
+
                                 startActivity(intent);
 
                                 bottomSheetDialog.dismiss();
@@ -105,6 +112,9 @@ public class DashboardActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 intent.putExtra(Constants.ATTIVITA_RILEVATA, "Calcio");
+
+                                manageNotification();
+
                                 startActivity(intent);
 
                                 bottomSheetDialog.dismiss();
@@ -116,6 +126,9 @@ public class DashboardActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 intent.putExtra(Constants.ATTIVITA_RILEVATA, "Nuoto");
+
+                                manageNotification();
+
                                 startActivity(intent);
 
                                 bottomSheetDialog.dismiss();
@@ -127,6 +140,9 @@ public class DashboardActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 intent.putExtra(Constants.ATTIVITA_RILEVATA, "Scalini");
+
+                                manageNotification();
+
                                 startActivity(intent);
 
                                 bottomSheetDialog.dismiss();
@@ -138,6 +154,9 @@ public class DashboardActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 intent.putExtra(Constants.ATTIVITA_RILEVATA, "Tennis");
+
+                                manageNotification();
+
                                 startActivity(intent);
 
                                 bottomSheetDialog.dismiss();
@@ -155,9 +174,12 @@ public class DashboardActivity extends AppCompatActivity {
      * @param v
      */
     public void goToPushupCounter(View v){
-        Intent intent = new Intent(getApplicationContext(), PushupCounterActivity.class);
+        Intent intent = new Intent(getApplicationContext(), PushupActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(Constants.ATTIVITA_RILEVATA, "Pushup");
+
+        manageNotification();
+
         startActivity(intent);
     }
     /**
@@ -168,6 +190,9 @@ public class DashboardActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), SquatActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(Constants.ATTIVITA_RILEVATA, "Squat");
+
+        manageNotification();
+
         startActivity(intent);
     }
     /**
@@ -184,6 +209,7 @@ public class DashboardActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), RunningActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(Constants.ATTIVITA_RILEVATA, activity);
+
         startActivity(intent);
     }
     /**
@@ -194,6 +220,9 @@ public class DashboardActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), TrainingActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(Constants.ATTIVITA_RILEVATA, "Freestyle");
+
+        manageNotification();
+
         startActivity(intent);
     }
 
@@ -208,5 +237,19 @@ public class DashboardActivity extends AppCompatActivity {
         InfoDialog infoDialog = new InfoDialog();
         infoDialog.setType("squat");
         infoDialog.show(getSupportFragmentManager(), "Dialog informativo");
+    }
+
+    /** Modifico variabile che  gestisce le notifiche */
+    private void manageNotification(){
+
+        SharedPreferences sharedPref = getSharedPreferences(
+                Constants.HOME_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putBoolean(Constants.NOTIFICATION_STATUS, false);
+
+        editor.apply();
     }
 }

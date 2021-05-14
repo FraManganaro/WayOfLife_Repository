@@ -4,14 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.wayoflife.DatabaseHelper;
+import com.example.wayoflife.util.DatabaseHelper;
 
 import com.example.wayoflife.dialog.InfoDialog;
 import com.example.wayoflife.util.Constants;
@@ -151,7 +150,7 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
             }
             else{
                 if (tipologiaAllenamento.equals("Pushup") || tipologiaAllenamento.equals("Freestyle") || tipologiaAllenamento.equals("Squat")){
-                    //uso il costruttore senza chilometri, con flessioni
+                    //uso il costruttore senza chilometri, con flessioni e squat
                     customerModel = new CustomerModel(nome, data, n_squat, durata, tipologiaAllenamento, calorie, n_flessioni, state);
                 }
                 else{

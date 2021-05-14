@@ -90,6 +90,8 @@ public class RunningActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_running);
 
+        manageNotification();
+
         cycle = false;
         continueFindLocation = false;
         secondCounter = 0;
@@ -177,6 +179,19 @@ public class RunningActivity extends AppCompatActivity {
         infoDialog.show(getSupportFragmentManager(), "Dialog informativo");
         cycle = false;
         continueFindLocation = false;
+    }
+    /** Modifico variabile che  gestisce le notifiche */
+    private void manageNotification(){
+
+        SharedPreferences sharedPref = getSharedPreferences(
+                Constants.HOME_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putBoolean(Constants.NOTIFICATION_STATUS, false);
+
+        editor.apply();
     }
 
     /**

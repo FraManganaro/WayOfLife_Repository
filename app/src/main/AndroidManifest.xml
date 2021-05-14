@@ -15,7 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WayOfLife">
-        <activity android:name=".workouts.trainings.SquatActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -30,7 +29,10 @@
             android:name=".workouts.trainings.TrainingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".workouts.trainings.PushupCounterActivity"
+            android:name=".workouts.trainings.PushupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".workouts.trainings.SquatActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".workouts.WorkoutHistoryActivity"

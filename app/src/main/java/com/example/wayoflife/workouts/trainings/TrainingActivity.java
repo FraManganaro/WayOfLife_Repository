@@ -281,7 +281,7 @@ public class TrainingActivity extends AppCompatActivity {
      * @param v
      */
     public void goToPushupCounter(View v){
-        Intent intent = new Intent(getApplicationContext(), PushupCounterActivity.class);
+        Intent intent = new Intent(getApplicationContext(), PushupActivity.class);
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         intent.putExtra(Constants.ATTIVITA_RILEVATA, "Freestyle");
