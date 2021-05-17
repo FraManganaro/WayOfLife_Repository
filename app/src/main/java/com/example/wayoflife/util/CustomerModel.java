@@ -80,7 +80,12 @@ public class CustomerModel {
                 "Data: " + data + '\n' +
                 "Tipologia: " + tipologia + '\n' +
                 "Durata: " + durata + '\n' +
-                "Calorie: " + calorie + " kcal";
+                "Calorie: " + calorie + " kcal" + '\n' +
+                "Flessioni: " + n_flessioni + '\n' +
+                "Squat: " + n_squat + '\n' +
+                "Chilometri: " + chilometri + '\n' +
+                "Preferito: " + like + '\n' +
+                "Valutazione: " + state + "\n\n";
     }
 
     // Get e Set

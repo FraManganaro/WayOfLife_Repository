@@ -5,16 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.wayoflife.util.CustomerModel;
 import com.example.wayoflife.util.DatabaseHelper;
 import com.example.wayoflife.R;
+import com.example.wayoflife.util.MyArrayAdapter;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutHistoryActivity extends AppCompatActivity {
@@ -22,13 +26,13 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
     private final String TAG = "WorkoutHistoryActivity";
     private String data;
 
-    //Inizializzazioni variabili
     private Button btDate;
     private ListView listView;
 
     private DatabaseHelper databaseHelper;
     private List<CustomerModel> models;
     private ArrayAdapter arrayAdapter;
+    private MyArrayAdapter myArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +42,6 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
         btDate = findViewById(R.id.bt_calendar);
         listView = findViewById(R.id.list_view);
 
-//        prova();
-
         databaseHelper = new DatabaseHelper(WorkoutHistoryActivity.this);
         models = databaseHelper.getAllWorkout();
 
@@ -47,6 +49,7 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, models);
         listView.setAdapter(arrayAdapter);
 
+        manageListView();
 
         /** Gestione del calendario */
         MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
@@ -63,30 +66,38 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
             @Override
             public void onPositiveButtonClick(Object selection) {
                 data = materialDatePicker.getHeaderText();
-                Log.d(TAG, "onPositiveButtonClick: " + data);
+//                Log.d(TAG, "Prima della modifica: " + data);
                 modifyData();
-                Log.d(TAG, "onPositiveButtonClick: " + data);
+//                Log.d(TAG, "Dopo la modifica: " + data);
+
+                models = databaseHelper.getWorkoutForDate(data);
+                manageListView();
+            }
+        });
+    }
+
+    /** Metodo che gestisce la ListView */
+    private void manageListView(){
+        Log.d(TAG, "Controllo elementi del DB: "+ models.toString());
+
+        myArrayAdapter = new MyArrayAdapter(models, WorkoutHistoryActivity.this);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(WorkoutHistoryActivity.this, models.get(position).getTipologia(), Toast.LENGTH_LONG).show();   /** Al posto del TOAST mettere il fragment dove si vuole andare */
             }
         });
 
-
+        listView.setAdapter(myArrayAdapter);
     }
 
-    public void prova(){
-        CustomerModel customerModel1 = new CustomerModel("Run1", "10/05/2020", "1 ora 15 minuti", 10,"Corsa", 200, 5);
-        CustomerModel customerModel2 = new CustomerModel("Pushup1", "22/05/2020", 0, "15 minuti", "Pushup", 25, 100, 5);
-        CustomerModel customerModel3 = new CustomerModel("Calcio", "08/06/2020", "2 ora 15 minuti","Calcio", 200, 5);
-        DatabaseHelper db = new DatabaseHelper(WorkoutHistoryActivity.this);
-        db.addWorkout(customerModel1);
-        db.addWorkout(customerModel2);
-        db.addWorkout(customerModel3);
-    }
 
+    /**
+     * Modifico la data mettendola nel formato Giorno/Mese/Anno
+     */
     private void modifyData(){
         String[] t = data.split(" ");
-        Log.d(TAG, "modifyData: " + t[0]);
-        Log.d(TAG, "modifyData: " + t[1]);
-        Log.d(TAG, "modifyData: " + t[2]);
 
         if(Integer.parseInt(t[0]) < 10)
             t[0] = "0" + t[0];

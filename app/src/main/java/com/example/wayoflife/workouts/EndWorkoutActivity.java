@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -77,8 +78,10 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         tvCalorie.setText(calorie + " kcal");
 
         String tr = getIntent().getStringExtra(Constants.CHILOMETRI);
-        if (tr == null) {
+        Log.d(TAG, "onCreate: " + tr);
+        if (tr == null || tr.equals("0,00")) {
             chilometri = 0;
+            Log.d(TAG, "Chilometri 0");
         } else {
             chilometri = Float.parseFloat(tr);
         }
@@ -140,16 +143,19 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
 
         state = (int) slider.getValue();
 
-
         CustomerModel customerModel = null;
 
         try {
-            if(tipologiaAllenamento.equals("Corsa")  || tipologiaAllenamento.equals("Camminata") || tipologiaAllenamento.equals("Ciclismo")){
+            if(tipologiaAllenamento.equalsIgnoreCase("Corsa")  ||
+                    tipologiaAllenamento.equalsIgnoreCase("Camminata") ||
+                    tipologiaAllenamento.equalsIgnoreCase("Ciclismo")){
                 //uso il costruttore con chilometri, senza flessioni
                 customerModel = new CustomerModel(nome, data, durata, chilometri, tipologiaAllenamento, calorie, state);
             }
             else{
-                if (tipologiaAllenamento.equals("Pushup") || tipologiaAllenamento.equals("Freestyle") || tipologiaAllenamento.equals("Squat")){
+                if (tipologiaAllenamento.equalsIgnoreCase("Pushup") ||
+                        tipologiaAllenamento.equalsIgnoreCase("Freestyle") ||
+                        tipologiaAllenamento.equalsIgnoreCase("Squat")){
                     //uso il costruttore senza chilometri, con flessioni e squat
                     customerModel = new CustomerModel(nome, data, n_squat, durata, tipologiaAllenamento, calorie, n_flessioni, state);
                 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.wayoflife.util.CustomerModel;
 
@@ -117,9 +118,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String customerDurata = cursor.getString(3);
                 String customerTipologia = cursor.getString(4);
                 int customerCalorie = cursor.getInt(5);
-                int customerState = cursor.getInt(8);
+                float customerChilometri = cursor.getFloat(6);
+                int customerFlessioni = cursor.getInt(7);
+                int customerSquat = cursor.getInt(8);
+                int customerState = cursor.getInt(9);
+                int customerLike = cursor.getInt(10);
 
-                CustomerModel model = new CustomerModel(customerNome, customerNData, customerDurata, customerTipologia, customerCalorie, customerState);
+                CustomerModel model = new CustomerModel(customerNome, customerNData, customerSquat,
+                        customerDurata, customerChilometri, customerTipologia,
+                        customerCalorie, customerFlessioni, customerState, customerLike);
+
                 returnList.add(model);
 
             } while (cursor.moveToNext());
@@ -131,12 +139,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /*
-    Restituizione dei dati nel databese secondo una determinata data
+    Restituizione dei dati nel database secondo una determinata data
      */
     public List<CustomerModel> getWorkoutForDate(String data){
         //Variabili
+        data = "\"" + data + "\"";
+
         List<CustomerModel> returnList = new ArrayList<>();
-        String query = "SELECT * FROM " + TABLE_NAME + ", WHERE " + DATA_COLUMN + " = " + data;
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + DATA_COLUMN + " LIKE " + data;
 
         //Get Readable Database
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
@@ -151,9 +161,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String customerDurata = cursor.getString(3);
                 String customerTipologia = cursor.getString(4);
                 int customerCalorie = cursor.getInt(5);
+                float customerChilometri = cursor.getFloat(6);
+                int customerFlessioni = cursor.getInt(7);
+                int customerSquat = cursor.getInt(8);
                 int customerState = cursor.getInt(9);
+                int customerLike = cursor.getInt(10);
 
-                CustomerModel model = new CustomerModel(customerNome, customerNData, customerDurata, customerTipologia, customerCalorie, customerState);
+                CustomerModel model = new CustomerModel(customerNome, customerNData, customerSquat,
+                        customerDurata, customerChilometri, customerTipologia,
+                        customerCalorie, customerFlessioni, customerState, customerLike);
+
                 returnList.add(model);
 
             } while (cursor.moveToNext());
@@ -170,7 +187,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public CustomerModel getWorkoutId(int id){    //da controllare query
         //Variabili
         CustomerModel customerModel = null;
-        String query = "SELECT * FROM " + TABLE_NAME + ", WHERE " + ID_COLUMN + " = " + id;
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_COLUMN + " = " + id;
 
         //Get Readable Database
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
@@ -189,7 +206,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int customerState = cursor.getInt(9);
         int customerLike = cursor.getInt(10);
 
-        customerModel = new CustomerModel(customerNome, customerNData, customerSquat, customerDurata, customerChilometri, customerTipologia, customerCalorie, customerFlessioni, customerState, customerLike);
+        customerModel = new CustomerModel(customerNome, customerNData, customerSquat,
+                customerDurata, customerChilometri, customerTipologia, customerCalorie,
+                customerFlessioni, customerState, customerLike);
 
         cursor.close();
         sqLiteDatabase.close();
@@ -217,9 +236,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String customerDurata = cursor.getString(3);
                 String customerTipologia = cursor.getString(4);
                 int customerCalorie = cursor.getInt(5);
+                float customerChilometri = cursor.getFloat(6);
+                int customerFlessioni = cursor.getInt(7);
+                int customerSquat = cursor.getInt(8);
                 int customerState = cursor.getInt(9);
+                int customerLike = cursor.getInt(10);
 
-                CustomerModel model = new CustomerModel(customerNome, customerNData, customerDurata, customerTipologia, customerCalorie, customerState);
+                CustomerModel model = new CustomerModel(customerNome, customerNData, customerSquat,
+                        customerDurata, customerChilometri, customerTipologia,
+                        customerCalorie, customerFlessioni, customerState, customerLike);
+
                 returnList.add(model);
 
             } while (cursor.moveToNext());
