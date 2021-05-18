@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_green_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WayOfLife">
+        <activity android:name=".ui.TipsActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

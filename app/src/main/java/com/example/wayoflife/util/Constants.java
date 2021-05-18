@@ -27,4 +27,11 @@ public class Constants {
     public static final String PESO = "Peso";
     public static final String ALTEZZA = "Altezza";
     public static final String SESSO = "Sesso";
+
+    public static final String MASSA_GRASSA = "Massa Grassa";
+    public static final String INDICE_ATTIVITA = "Indice Attività";
+    public static final String EFFETTO_TERMICO = "Effetto Termico";
+    public static final String DURATA_ALLENAMENTO = "Durata Allenamento";
+    public static final String BILANCIO_ENERGETICO = "Bilancio Energetico";
+    public static final String NUMERO_ALLENAMENTI = "Numero Allenamenti";
 }
