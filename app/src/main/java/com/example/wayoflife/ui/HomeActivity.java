@@ -704,4 +704,9 @@ public class HomeActivity extends AppCompatActivity {
         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+    public void goToTipsActivity(View v){
+        Intent intent = new Intent(getApplicationContext(), TipsActivity.class);
+        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }

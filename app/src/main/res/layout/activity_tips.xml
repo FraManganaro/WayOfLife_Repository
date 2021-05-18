@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.TipsActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/peso">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPeso"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/candara"
+                        android:inputType="numberDecimal"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout2"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/percentuale_massa_grassa">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMassaGrassa"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/candara"
+                        android:inputType="numberDecimal"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout5"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/durata_allenamento">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etDurataAllenamento"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/candara"
+                        android:inputType="numberDecimal"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout7"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/numero_di_allenamenti">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNumeroAllenamenti"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/candara"
+                        android:inputType="numberDecimal"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout3"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/indice_di_attivita"
+                    android:paddingEnd="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etIndiceAttivita"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/candara"
+                        android:inputType="numberDecimal"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipInfoAttivita"
+                    android:layout_width="48dp"
+                    android:layout_height="36dp"
+                    android:fontFamily="@font/candara"
+                    android:text="@string/info"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    android:onClick="infoDialogIndiceAttivita"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout4"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/effetto_termico"
+                    android:paddingEnd="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEffettoTermico"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/candara"
+                        android:inputType="numberDecimal"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipInfoEffettoTermico"
+                    android:layout_width="48dp"
+                    android:layout_height="36dp"
+                    android:fontFamily="@font/candara"
+                    android:text="@string/info"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    android:onClick="infoDialogEffettoTermico"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout6"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/bilancio_energetico"
+                    android:paddingEnd="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etBilancioEnergetico"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/candara"
+                        android:inputType="numberDecimal"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipInfoBilancioEnergetico"
+                    android:layout_width="48dp"
+                    android:layout_height="36dp"
+                    android:fontFamily="@font/candara"
+                    android:text="@string/info"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    android:onClick="infoDialogBilancioEnergetico"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/obiettivo"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/carboidrati"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/proteine"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/grassi"/>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="saveData"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/ic_floppy_disk"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -49,7 +49,16 @@
     <string name="numero_di_squat">Numero di squat</string>
     <string name="squat">Squat</string>
     <string name="info_squat">Servizio che permette di rilevare in modo automatico quante squat vengono fatti utilizzando i sensori del dispositivo. In particolare viene utilizzato l\'accellerometro\n\nPer il corretto funzionamento: \n    Dispetendere le braccia tenendo in mano il telefono in modo che sia perpendicolare al terreno\n    Effettuare uno squat completo (fase di discesa + fase di salita) tenendo sempre le braccia tese\n\nIn questo modo gli squat verranno contati in modo automatico.\n\nIn alternativa, si ha anche la possibilità di aggiungere manualmente gli squat fatti, premendo in qualsiasi punto dello schermo.\nIn caso di errore, si ha la possibilità di decrementare il contatore totale utilizzando il bottone destinato (posto in basso a destra)</string>
-    <string name="gps">Per il completo funzionamento dell\'allenamento è necessario attivare la geolocalizzazione sul dispotivo.\n\nSenza la geolocalizzazione non sarà possibile ottenere i chilometri percorsi e il percorso che è stato fatto durante l\'allenamento!</string>
+    <string name="gps">Per il completo funzionamento dell\'allenamento è necessario attivare la geolocalizzazione sul dispositivo.\n\nSenza la geolocalizzazione non sarà possibile ottenere i chilometri percorsi e il percorso che è stato fatto durante l\'allenamento!</string>
     <string name="end_workout_info">Abbandonando questa pagina perderai tutti i progressi fatti fino a questo momento.\n\nSei sicuro di voler tornare indietro?</string>
     <string name="calorie">Calorie bruciate:</string>
+    <string name="percentuale_massa_grassa">Massa Grassa (%)</string>
+    <string name="durata_allenamento">Durata allenamento (in Min)</string>
+    <string name="effetto_termico">Effetto termico del Cibo</string>
+    <string name="indice_di_attivita">Indice di attività</string>
+    <string name="bilancio_energetico">Bilancio energetico</string>
+    <string name="numero_di_allenamenti">Numero settimanale allenamenti</string>
+    <string name="indice_attivita">Inserisci un valore da 1 a 1.4 in base al tuo livello di attività:\n\n1 = Sedentario (non cammini se non dentro casa), ti alleni 1-2 volte a settimana \n1.1 = Sedentario Plus (cammini poco), ti alleni 3 volte a settimana \n1.2 = Attivita\' Media (cammini 30min al giorno, lavori in piedi)\n1.3 = Attività Moderata (cammini per più di 1 ora al giorno), ti alleni 4-5 volte a settimana\n1.4 = Attività Elevata (cammini per più di 1 ora al giorno), ti alleni tutti i giorni</string>
+    <string name="effetto_termico_cibo">Inserisci fattore da 1 a 1.25 in base alla qualità della tua dieta: \n\n1 = Mangi abbastanza di tutto, a volte male, cibi confezionati, a volte non arrivi alla tua quota proteica \n1.1 = Mangi 80% pulito, 20% sporco, arrivando sempre alla tua quota proteica \n1.25 = Mangi sempre pulito, sgarri meno di una volta a settimana, sorpassando spesso la tua quota proteica</string>
+    <string name="bilancio_energetico_complessivo">Indice per decidere il tuo obiettivo di trasformazione fisica: \n\n0.7 = 30% deficit calorico, definizione aggressiva \n0.8 = 20% deficit calorico, definizione \n1 = mantenimento \n1.05 = 5% surplus calorico, fase di massa magra \n1.15 = 10% surplus, fase di massa piu\' spinta</string>
 </resources>

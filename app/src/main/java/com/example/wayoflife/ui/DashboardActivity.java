@@ -232,7 +232,7 @@ public class DashboardActivity extends AppCompatActivity {
         infoDialog.setType("pushup");
         infoDialog.show(getSupportFragmentManager(), "Dialog informativo");
     }
-    /** Metodo che gestisce il Dialog contenente le informazioni ssugli Squat */
+    /** Metodo che gestisce il Dialog contenente le informazioni sugli Squat */
     public void infoDialogSquat(View v){
         InfoDialog infoDialog = new InfoDialog();
         infoDialog.setType("squat");

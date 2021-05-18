@@ -113,7 +113,8 @@
                     android:background="@drawable/background_home_button_red"
                     android:elevation="5dp"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:onClick="goToTipsActivity">
 
                     <ImageView
                         android:layout_width="60dp"
