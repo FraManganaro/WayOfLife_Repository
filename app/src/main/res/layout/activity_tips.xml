@@ -7,11 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.TipsActivity"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/image_background_tips">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:fillViewport="true">
 
         <LinearLayout
@@ -21,17 +22,50 @@
             android:gravity="center">
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
+                android:padding="20dp"
+                android:background="@drawable/background_home_button_red"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginVertical="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/candara"
+                    android:gravity="center"
+                    android:text="Calcola il tuo intake calorico!"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:paddingEnd="15dp"
+                    android:textColor="@color/white"/>
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_fire"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:orientation="horizontal">
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:background="@drawable/background_white_corners">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="200dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/peso">
+                    android:hint="@string/peso"
+                    android:layout_marginEnd="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPeso"
@@ -42,18 +76,10 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp">
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout2"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="200dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/percentuale_massa_grassa">
 
@@ -71,7 +97,9 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp">
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/background_card_first_access_d1">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout5"
@@ -85,7 +113,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/candara"
-                        android:inputType="numberDecimal"/>
+                        android:inputType="number"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,7 +122,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp">
+                android:padding="10dp"
+                android:background="@drawable/background_card_first_access_d2">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout7"
@@ -108,7 +137,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/candara"
-                        android:inputType="numberDecimal"/>
+                        android:inputType="number"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,9 +147,12 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:paddingTop="10dp"
+                android:background="@drawable/background_card_first_access_d1">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout3"
@@ -155,9 +187,10 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/white">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout4"
@@ -191,9 +224,10 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@drawable/background_card_first_access_d2">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout6"
@@ -224,38 +258,265 @@
 
             </LinearLayout>
 
-            <TextView
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/obiettivo"/>
-            <TextView
-                android:layout_width="wrap_content"
+                android:onClick="saveData"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_floppy_disk"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/carboidrati"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/proteine"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/grassi"/>
+                android:background="@android:color/white"
+                android:layout_margin="20dp">
+
+                <!-- Table Heading -->
+
+                <TableRow
+                    android:background="@color/bluChiaro">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:textColor="@android:color/white"
+                        android:padding="10sp"
+                        android:textSize="14sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="@font/candara"
+                        android:textStyle="italic"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/obiettivo"
+                        android:textColor="@android:color/white"
+                        android:padding="10sp"
+                        android:textSize="14sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="@font/candara"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/minimo"
+                        android:textColor="@android:color/white"
+                        android:padding="10sp"
+                        android:textSize="14sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="@font/candara"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/massimo"
+                        android:textColor="@android:color/white"
+                        android:padding="10sp"
+                        android:textSize="14sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="@font/candara"
+                        android:textStyle="bold"/>
 
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                </TableRow>
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="saveData"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="25dp"
-                    android:src="@drawable/ic_floppy_disk"/>
+                <TableRow>
 
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/obiettivo_calorie"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="@font/candara"
+                        android:textStyle="bold"
+                        android:background="@color/bluChiaro"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/obiettivoCalorie"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/minimoCalorie"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/massimoCalorie"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/carboidrati"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="@font/candara"
+                        android:textStyle="bold"
+                        android:background="@color/bluChiaro"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/obiettivoCarbo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/minimoCarboidrati"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/massimoCarboidrati"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/proteine"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="@font/candara"
+                        android:textStyle="bold"
+                        android:background="@color/bluChiaro"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/obiettivoProteine"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/minimoProteine"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/massimoProteine"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/grassi"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="@font/candara"
+                        android:textStyle="bold"
+                        android:background="@color/bluChiaro"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/obiettivoGrassi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/minimoGrassi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/massimoGrassi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"
+                        android:padding="10sp"
+                        android:textSize="15sp"
+                        android:layout_weight="4"
+                        android:gravity="center_horizontal"/>
+
+                </TableRow>
+
+            </TableLayout>
 
         </LinearLayout>
 

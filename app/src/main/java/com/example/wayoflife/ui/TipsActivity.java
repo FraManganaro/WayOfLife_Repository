@@ -10,11 +10,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.wayoflife.R;
-import com.example.wayoflife.dialog.InfoDialog;
 import com.example.wayoflife.dialog.TipsDialog;
 import com.example.wayoflife.util.Constants;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.text.DecimalFormat;
 
 public class TipsActivity extends AppCompatActivity {
 
@@ -45,6 +46,8 @@ public class TipsActivity extends AppCompatActivity {
     private double obiettivoCaloricoGiornaliero;
     private double obiettivoCaloricoSettimanale;
 
+    private int kcal;
+
     private TextInputEditText pesoET;
     private TextInputEditText massaGrassaET;
     private TextInputEditText indiceAttivitaET;
@@ -53,10 +56,18 @@ public class TipsActivity extends AppCompatActivity {
     private TextInputEditText bilancioEnergeticoET;
     private TextInputEditText numeroAllenamentiET;
 
-    private TextView obiettivo;
-    private TextView proteine;
-    private TextView carboidrati;
-    private TextView grassi;
+    private TextView obiettivoCalorie;
+    private TextView obiettivoProteine;
+    private TextView obiettivoCarboidrati;
+    private TextView obiettivoGrassi;
+    private TextView minimoCalorie;
+    private TextView minimoCarboidrati;
+    private TextView minimoProteine;
+    private TextView minimoGrassi;
+    private TextView massimoCalorie;
+    private TextView massimoCarboidrati;
+    private TextView massimoProteine;
+    private TextView massimoGrassi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +82,20 @@ public class TipsActivity extends AppCompatActivity {
         bilancioEnergeticoET = findViewById(R.id.etBilancioEnergetico);
         numeroAllenamentiET = findViewById(R.id.etNumeroAllenamenti);
 
-        obiettivo = findViewById(R.id.obiettivo);
-        carboidrati = findViewById(R.id.carboidrati);
-        proteine = findViewById(R.id.proteine);
-        grassi = findViewById(R.id.grassi);
+        obiettivoCalorie = findViewById(R.id.obiettivoCalorie);
+        obiettivoCarboidrati = findViewById(R.id.obiettivoCarbo);
+        obiettivoProteine = findViewById(R.id.obiettivoProteine);
+        obiettivoGrassi = findViewById(R.id.obiettivoGrassi);
+
+        minimoCalorie = findViewById(R.id.minimoCalorie);
+        minimoCarboidrati = findViewById(R.id.minimoCarboidrati);
+        minimoProteine = findViewById(R.id.minimoProteine);
+        minimoGrassi = findViewById(R.id.minimoGrassi);
+
+        massimoCalorie = findViewById(R.id.massimoCalorie);
+        massimoCarboidrati = findViewById(R.id.massimoCarboidrati);
+        massimoProteine = findViewById(R.id.massimoProteine);
+        massimoGrassi = findViewById(R.id.massimoGrassi);
 
         resumeDoubleInformation();
     }
@@ -147,9 +168,9 @@ public class TipsActivity extends AppCompatActivity {
             massaGrassaET.setText("" + massaGrassa);
             indiceAttivitaET.setText("" + indiceAttivita);
             effettoTermicoET.setText("" + effettoTermico);
-            durataAllenamentoET.setText("" + durataAllenamento);
+            durataAllenamentoET.setText("" + ((int) durataAllenamento));
             bilancioEnergeticoET.setText("" + bilancioEnergetico);
-            numeroAllenamentiET.setText("" + numeroAllenamenti);
+            numeroAllenamentiET.setText("" + ((int) numeroAllenamenti));
 
             calculateCalories();
         }
@@ -167,6 +188,16 @@ public class TipsActivity extends AppCompatActivity {
 
         obiettivoCaloricoSettimanale = obiettivoCaloricoGiornaliero * 7;
 
+        SharedPreferences sharedPref = getSharedPreferences(
+                Constants.PROFILE_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        kcal = (int) obiettivoCaloricoGiornaliero;
+        editor.putString(Constants.KCAL, "" + kcal);
+
+        editor.apply();
+
         Log.d(TAG, "massaMagra: " + massaMagra + "\n");
         Log.d(TAG, "metabolismoBasale: " + metabolismoBasale + "\n");
         Log.d(TAG, "calorieBruciateConAllenamento: " + calorieBruciateConAllenamento + "\n");
@@ -180,14 +211,33 @@ public class TipsActivity extends AppCompatActivity {
     }
 
     private void updateTable(){
-        obiettivo.setText("" + obiettivoCaloricoGiornaliero);
         double pro = peso * 1.85;
-        double grass = (obiettivoCaloricoGiornaliero * 0.25) / 9;
-        double carbo = (obiettivoCaloricoGiornaliero - pro * 4 - grass * 9) / 4.0;
+        double grass = (kcal * 0.25) / 9;
+        double carbo = (kcal - pro * 4 - grass * 9) / 4.0;
 
-        proteine.setText("Proteine " + pro);
-        carboidrati.setText("Carbo " + carbo);
-        grassi.setText("Grassi " + grass);
+        double grassMin = ((kcal - 50) * 0.25) / 9;
+        double carboMin = ((kcal - 50) - pro * 4 - grassMin * 9) / 4.0;
+
+        double proMax = peso * 2;
+        double grassMax = ((kcal + 50) * 0.25) / 9;
+        double carboMax = ((kcal + 50) - proMax * 4 - grassMax * 9) / 4.0;
+
+        DecimalFormat numberFormat = new DecimalFormat("0.0");
+
+        obiettivoCalorie.setText("" + kcal);
+        obiettivoCarboidrati.setText("" + numberFormat.format(carbo));
+        obiettivoProteine.setText("" + numberFormat.format(pro));
+        obiettivoGrassi.setText("" + numberFormat.format(grass));
+
+        minimoCalorie.setText("" + (kcal - 50));
+        minimoCarboidrati.setText("" + numberFormat.format(carboMin));
+        minimoProteine.setText("" + numberFormat.format(pro));
+        minimoGrassi.setText("" + numberFormat.format(grassMin));
+
+        massimoCalorie.setText("" + (kcal + 50));
+        massimoCarboidrati.setText("" + numberFormat.format(carboMax));
+        massimoProteine.setText("" + numberFormat.format(proMax));
+        massimoGrassi.setText("" + numberFormat.format(grassMax));
     }
 
     /** Metodo che gestisce il Dialog contenente le informazioni sull'Indice di attività */

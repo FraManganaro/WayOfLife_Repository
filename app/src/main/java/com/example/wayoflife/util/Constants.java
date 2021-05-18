@@ -34,4 +34,5 @@ public class Constants {
     public static final String DURATA_ALLENAMENTO = "Durata Allenamento";
     public static final String BILANCIO_ENERGETICO = "Bilancio Energetico";
     public static final String NUMERO_ALLENAMENTI = "Numero Allenamenti";
+    public static final String KCAL = "Calorie giornaliere";
 }

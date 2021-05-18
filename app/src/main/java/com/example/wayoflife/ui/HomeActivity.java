@@ -319,6 +319,25 @@ public class HomeActivity extends AppCompatActivity {
         // Registro il BroadcastReceiver per ascoltare le attività
         registerReceiver(mTransitionsReceiver, new IntentFilter(TRANSITIONS_RECEIVER_ACTION));
     }
+
+    @Override
+    protected void onResume() {
+        SharedPreferences sharedPrefProfile = getSharedPreferences(
+                Constants.PROFILE_INFO_FILENAME,
+                Context.MODE_PRIVATE);
+
+        int calorie = Integer.parseInt(
+                sharedPrefProfile.getString(Constants.KCAL, "0"));
+
+        TextView tvCalorie = findViewById(R.id.calorieTv);
+
+        if(calorie != 0){
+            tvCalorie.setText(calorie + " kcal");
+        }
+
+        super.onResume();
+    }
+
     @Override
     protected void onPause() {
         // Disable activity transitions when user leaves the app.
@@ -395,6 +414,15 @@ public class HomeActivity extends AppCompatActivity {
 
         nicknameUtente = sharedPrefProfile.getString(
                 Constants.NICKNAME, "Nickname");
+
+        double calorie = Double.parseDouble(sharedPrefProfile.getString(
+                Constants.KCAL, "0.0"));
+
+        TextView tvCalorie = findViewById(R.id.calorieTv);
+
+        if(calorie != 0.0){
+            tvCalorie.setText(calorie + "kcal");
+        }
 
         TextView tvNickname = findViewById(R.id.salutoUtente);
         tvNickname.setText("Ciao " + nicknameUtente + " !");

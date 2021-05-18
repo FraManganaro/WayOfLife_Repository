@@ -106,7 +106,7 @@ public class TrainingActivity extends AppCompatActivity {
             squatButton.setVisibility(View.INVISIBLE);
             tvPushup.setVisibility(View.INVISIBLE);
             tvSquat.setVisibility(View.INVISIBLE);
-            constraintLayout.setBackground(getDrawable(R.drawable.prova3)); //DA CAMBIARE
+            constraintLayout.setBackground(getDrawable(R.drawable.image_background_extra)); //DA CAMBIARE
         }
 
 

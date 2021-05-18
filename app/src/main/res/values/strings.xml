@@ -36,7 +36,7 @@
     <string name="zero">0</string>
     <string name="infoPushup">Servizio che permette di rilevare in modo automatico quante flessioni vengono fatte utilizzando il sensore di prossimità del telefono (posto in prossimità della fotocamera posteriore)\n\nPer il corretto funzionamento: \n    Mettere il telefono per terra, con lo schermo direzionato verso l\'alto, mettendolo all\'altezza del petto.\n    Iniziare l\'esercizio ponendosi sopra al dispositivo\n    Iniziare la discesa portando il petto verso il dispositivo posizionato a terra\n    Sollevarsi completando il movimento e allontanandosi dal pavimento.\n\nIn questo modo le flessioni verranno contate in modo automatico.\n\nIn alternativa, si ha anche la possibilità di aggiungere manualmente le flessioni fatte, premendo in qualsiasi punto dello schermo.\nIn caso di errore, si ha la possibilità di decrementare il contatore totale utilizzando il bottone destinato (posto in basso a destra).</string>
     <string name="history">Cronologia Workout</string>
-    <string name="cercaData">Seleziona data</string>
+    <string name="cercaData">DATA</string>
     <string name="benvenuti_su">Benvenuti su</string>
     <string name="prossimo">Prossimo</string>
     <string name="datiProfilo">Inserisci i dati per completare il profilo!</string>
@@ -61,4 +61,12 @@
     <string name="indice_attivita">Inserisci un valore da 1 a 1.4 in base al tuo livello di attività:\n\n1 = Sedentario (non cammini se non dentro casa), ti alleni 1-2 volte a settimana \n1.1 = Sedentario Plus (cammini poco), ti alleni 3 volte a settimana \n1.2 = Attivita\' Media (cammini 30min al giorno, lavori in piedi)\n1.3 = Attività Moderata (cammini per più di 1 ora al giorno), ti alleni 4-5 volte a settimana\n1.4 = Attività Elevata (cammini per più di 1 ora al giorno), ti alleni tutti i giorni</string>
     <string name="effetto_termico_cibo">Inserisci fattore da 1 a 1.25 in base alla qualità della tua dieta: \n\n1 = Mangi abbastanza di tutto, a volte male, cibi confezionati, a volte non arrivi alla tua quota proteica \n1.1 = Mangi 80% pulito, 20% sporco, arrivando sempre alla tua quota proteica \n1.25 = Mangi sempre pulito, sgarri meno di una volta a settimana, sorpassando spesso la tua quota proteica</string>
     <string name="bilancio_energetico_complessivo">Indice per decidere il tuo obiettivo di trasformazione fisica: \n\n0.7 = 30% deficit calorico, definizione aggressiva \n0.8 = 20% deficit calorico, definizione \n1 = mantenimento \n1.05 = 5% surplus calorico, fase di massa magra \n1.15 = 10% surplus, fase di massa piu\' spinta</string>
+    <string name="kcal_da_calcolare">Kcal da calcolare</string>
+    <string name="carboidrati">Carboidrati</string>
+    <string name="proteine">Proteine</string>
+    <string name="grassi">Grassi</string>
+    <string name="obiettivo">Obiettivo</string>
+    <string name="minimo">Minimo</string>
+    <string name="massimo">Massimo</string>
+    <string name="obiettivo_calorie">Calorie</string>
 </resources>
