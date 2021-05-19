@@ -12,11 +12,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:gravity="center"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="15dp"
-        android:padding="20dp"
+        android:padding="10dp"
         android:background="@drawable/background_home_button_blue"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
@@ -26,7 +26,6 @@
             android:id="@+id/history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
             android:text="@string/history"
             android:fontFamily="@font/candara"
             android:textAlignment="center"
@@ -34,14 +33,47 @@
             android:textStyle="bold"
             android:textColor="@color/white"/>
 
-        <Button
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            android:id="@+id/bt_calendar"
-            android:text="@string/cercaData"
-            android:background="@drawable/background_home_button_red"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Filtra allenamenti :"
+                android:fontFamily="@font/candara"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:layout_marginEnd="25dp"/>
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/background_white_corners"
+                android:padding="10dp"
+                android:id="@+id/bt_favorites"
+                android:src="@drawable/ic_heart_filled"
+                android:layout_marginEnd="25dp"
+                android:elevation="5dp"/>
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/background_white_corners"
+                android:padding="10dp"
+                android:id="@+id/bt_calendar"
+                android:src="@drawable/ic_calendar"
+                android:elevation="5dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

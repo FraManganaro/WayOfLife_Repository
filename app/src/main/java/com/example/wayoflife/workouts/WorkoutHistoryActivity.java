@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,7 +27,8 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
     private final String TAG = "WorkoutHistoryActivity";
     private String data;
 
-    private Button btDate;
+    private ImageView btDate;
+    private ImageView btFavorites;
     private ListView listView;
 
     private DatabaseHelper databaseHelper;
@@ -40,6 +42,7 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_workout_history);
 
         btDate = findViewById(R.id.bt_calendar);
+        btFavorites = findViewById(R.id.bt_favorites);
         listView = findViewById(R.id.list_view);
 
         databaseHelper = new DatabaseHelper(WorkoutHistoryActivity.this);
@@ -66,11 +69,20 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
             @Override
             public void onPositiveButtonClick(Object selection) {
                 data = materialDatePicker.getHeaderText();
-//                Log.d(TAG, "Prima della modifica: " + data);
                 modifyData();
-//                Log.d(TAG, "Dopo la modifica: " + data);
+                Log.d(TAG, "Dopo la modifica: " + data);
 
+                Toast.makeText(WorkoutHistoryActivity.this, ("Allenamenti in data - " + data), Toast.LENGTH_LONG).show();
                 models = databaseHelper.getWorkoutForDate(data);
+                manageListView();
+            }
+        });
+
+        btFavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(WorkoutHistoryActivity.this, "Allenamenti preferiti!", Toast.LENGTH_LONG).show();
+                models = databaseHelper.getWorkoutForLike();
                 manageListView();
             }
         });
@@ -85,7 +97,7 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(WorkoutHistoryActivity.this, models.get(position).getTipologia(), Toast.LENGTH_LONG).show();   /** Al posto del TOAST mettere il fragment dove si vuole andare */
+                Toast.makeText(WorkoutHistoryActivity.this, models.get(position).getTipologia(), Toast.LENGTH_LONG).show();
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentWorkout, new WorkoutFragment()).commit();
             }
         });

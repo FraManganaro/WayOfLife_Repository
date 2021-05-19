@@ -47,6 +47,13 @@ public class MyArrayAdapter extends BaseAdapter {
         ((TextView) convertView.findViewById(R.id.durata)).setText("Durata: " +getItem(position).getDurata());
         ((TextView) convertView.findViewById(R.id.calorie)).setText("Calorie: " + getItem(position).getCalorie());
 
+        int like = workoutList.get(position).getLike();
+        if(like == 1) {
+            ((ImageView) convertView.findViewById(R.id.favorites)).setVisibility(View.VISIBLE);
+        } else {
+            ((ImageView) convertView.findViewById(R.id.favorites)).setVisibility(View.INVISIBLE);
+        }
+
         String tipologia = workoutList.get(position).getTipologia();
 
         switch(tipologia){

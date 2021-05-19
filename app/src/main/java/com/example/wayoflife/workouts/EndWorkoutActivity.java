@@ -18,6 +18,7 @@ import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.util.CustomerModel;
 import com.example.wayoflife.R;
 import com.example.wayoflife.ui.HomeActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -41,6 +42,9 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
     private int n_flessioni;
     private int n_squat;
     private int state;
+    private int like;
+
+    private FloatingActionButton favoritesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,9 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         TextView tvExtraSquat = findViewById(R.id.tvExtraSquat);
         TextView tvExtraText = findViewById(R.id.tvExtraText);
         TextView tvExtraTextSquat = findViewById(R.id.tvExtraTextSquat);
+
+        favoritesButton = findViewById(R.id.favorites_button);
+        like = 0;
 
         /** Recupero data odierna */
         Date date = new Date();
@@ -132,6 +139,16 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         infoDialog.show(getSupportFragmentManager(), "Dialog informativo");
     }
 
+    public void updateLike(View v){
+        if(like == 0) {
+            favoritesButton.setImageDrawable(getDrawable(R.drawable.ic_heart_filled));
+            like = 1;
+        } else {
+            favoritesButton.setImageDrawable(getDrawable(R.drawable.ic_heart_empty));
+            like = 0;
+        }
+    }
+
     public void saveWorkout(View v){
         TextInputEditText nomeET = findViewById(R.id.etNome);
         Slider slider = findViewById(R.id.slider);
@@ -150,18 +167,18 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
                     tipologiaAllenamento.equalsIgnoreCase("Camminata") ||
                     tipologiaAllenamento.equalsIgnoreCase("Ciclismo")){
                 //uso il costruttore con chilometri, senza flessioni
-                customerModel = new CustomerModel(nome, data, durata, chilometri, tipologiaAllenamento, calorie, state);
+                customerModel = new CustomerModel(nome, data, durata, chilometri, tipologiaAllenamento, calorie, state, like);
             }
             else{
                 if (tipologiaAllenamento.equalsIgnoreCase("Pushup") ||
                         tipologiaAllenamento.equalsIgnoreCase("Freestyle") ||
                         tipologiaAllenamento.equalsIgnoreCase("Squat")){
                     //uso il costruttore senza chilometri, con flessioni e squat
-                    customerModel = new CustomerModel(nome, data, n_squat, durata, tipologiaAllenamento, calorie, n_flessioni, state);
+                    customerModel = new CustomerModel(nome, data, n_squat, durata, tipologiaAllenamento, calorie, n_flessioni, state, like);
                 }
                 else{
                     //uso il costruttore senza chilometri e flessioni
-                    customerModel = new CustomerModel(nome, data, durata, tipologiaAllenamento, calorie, state);
+                    customerModel = new CustomerModel(nome, data, durata, tipologiaAllenamento, calorie, state, like);
                 }
             }
         }catch (Exception e){

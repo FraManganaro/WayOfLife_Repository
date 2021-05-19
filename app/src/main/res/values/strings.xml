@@ -69,4 +69,6 @@
     <string name="minimo">Minimo</string>
     <string name="massimo">Massimo</string>
     <string name="obiettivo_calorie">Calorie</string>
+    <string name="intake">Calcola il tuo intake calorico!</string>
+    <string name="fabbisogno_giornaliero">Inserisci i dati e calcola il tuo fabbisogno calorico giornaliero!</string>
 </resources>
