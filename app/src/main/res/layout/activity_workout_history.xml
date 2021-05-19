@@ -30,7 +30,7 @@
             android:text="@string/history"
             android:fontFamily="@font/candara"
             android:textAlignment="center"
-            android:textSize="30sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/white"/>
 
