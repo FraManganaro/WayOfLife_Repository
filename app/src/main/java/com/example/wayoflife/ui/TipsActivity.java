@@ -21,6 +21,7 @@ public class TipsActivity extends AppCompatActivity {
 
     public static final String TAG = "TipsActivity";
 
+    /** Variabili per gestione dei box di input */
     private String pesoS;
     private String massaGrassaS;
     private String indiceAttivitaS;
@@ -28,7 +29,6 @@ public class TipsActivity extends AppCompatActivity {
     private String durataAllenamentoS;
     private String bilancioEnergeticoS;
     private String numeroAllenamentiS;
-
     private double peso;
     private double massaGrassa;
     private double indiceAttivita;
@@ -37,6 +37,7 @@ public class TipsActivity extends AppCompatActivity {
     private double bilancioEnergetico;
     private double numeroAllenamenti;
 
+    /** Variabili per i calcoli delle calorie */
     private double massaMagra;
     private double metabolismoBasale;
     private double calorieBruciateConAllenamento;
@@ -48,6 +49,7 @@ public class TipsActivity extends AppCompatActivity {
 
     private int kcal;
 
+    /** Collegamenti con layout */
     private TextInputEditText pesoET;
     private TextInputEditText massaGrassaET;
     private TextInputEditText indiceAttivitaET;
@@ -100,7 +102,9 @@ public class TipsActivity extends AppCompatActivity {
         resumeDoubleInformation();
     }
 
-    /** Chiamata con il bottone SALVA nel layout */
+    /**
+     * Chiamata con il bottone SALVA nel layout
+     */
     public void saveData(View v) {
         pesoS = pesoET.getText().toString();
         massaGrassaS = massaGrassaET.getText().toString();
@@ -121,7 +125,9 @@ public class TipsActivity extends AppCompatActivity {
         }
     }
 
-    /** Salvo le informazioni appena prese dall'interfaccia */
+    /**
+     * Salvo le informazioni appena prese dall'interfaccia
+     */
     private void saveInformation(){
         SharedPreferences sharedPref = getSharedPreferences(
                 Constants.PROFILE_INFO_FILENAME,
@@ -139,6 +145,9 @@ public class TipsActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    /**
+     * Considero le variabili in double così da poter effettuare i calcoli
+     */
     private void resumeDoubleInformation(){
         SharedPreferences sharedPref = getSharedPreferences(
                 Constants.PROFILE_INFO_FILENAME,
@@ -176,17 +185,28 @@ public class TipsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Consideando i dati ricevuti in input calcolo i parametri necessari per il calcolo finale
+     */
     private void calculateCalories(){
         massaMagra = peso * ( 1 - massaGrassa / 100.0);
+
         metabolismoBasale = 370 + (21.6 * massaMagra);
+
         calorieBruciateConAllenamento = 0.1 * peso * durataAllenamento;
+
         calorieBruciateSenzaAllenamento = indiceAttivita * effettoTermico * metabolismoBasale;
-        dispendioCaloricoGiornateAllenamento = (metabolismoBasale * indiceAttivita + calorieBruciateConAllenamento) * effettoTermico;
+
+        dispendioCaloricoGiornateAllenamento = (metabolismoBasale * indiceAttivita + calorieBruciateConAllenamento)
+                * effettoTermico;
+
         calorieMantenimentiSettimanali = (calorieBruciateSenzaAllenamento *
                 ( 7 - numeroAllenamenti ) + dispendioCaloricoGiornateAllenamento * numeroAllenamenti);
+
         obiettivoCaloricoGiornaliero = (calorieMantenimentiSettimanali * bilancioEnergetico) / 7;
 
         obiettivoCaloricoSettimanale = obiettivoCaloricoGiornaliero * 7;
+
 
         SharedPreferences sharedPref = getSharedPreferences(
                 Constants.PROFILE_INFO_FILENAME,
@@ -198,18 +218,12 @@ public class TipsActivity extends AppCompatActivity {
 
         editor.apply();
 
-        Log.d(TAG, "massaMagra: " + massaMagra + "\n");
-        Log.d(TAG, "metabolismoBasale: " + metabolismoBasale + "\n");
-        Log.d(TAG, "calorieBruciateConAllenamento: " + calorieBruciateConAllenamento + "\n");
-        Log.d(TAG, "calorieBruciateSenzaAllenamento: " + calorieBruciateSenzaAllenamento + "\n");
-        Log.d(TAG, "dispendioCaloricoGiornateAllenamento: " + dispendioCaloricoGiornateAllenamento + "\n");
-        Log.d(TAG, "calorieMantenimentiSettimanali: " + calorieMantenimentiSettimanali + "\n");
-        Log.d(TAG, "obiettivoCaloricoGiornaliero: " + obiettivoCaloricoGiornaliero + "\n");
-        Log.d(TAG, "obiettivoCaloricoSettimanale: " + obiettivoCaloricoSettimanale + "\n");
-
         updateTable();
     }
 
+    /**
+     * Metodo che gestisce l'aaggiornamento della tabella e dei dati contenuti in essa
+     */
     private void updateTable(){
         double pro = peso * 1.85;
         double grass = (kcal * 0.25) / 9;

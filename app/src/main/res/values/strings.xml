@@ -6,7 +6,7 @@
     <string name="nome">Nome</string>
     <string name="cognome">Cognome</string>
     <string name="sesso">Sesso (M/F)</string>
-    <string name="activityRecognition">ActivityRecognition</string>
+    <string name="activityRecognition">Activity Recognition</string>
     <string name="conferma">Conferma</string>
     <string name="fineAllenamento">Fine Allenamento</string>
     <string name="ciclismo">Ciclismo</string>

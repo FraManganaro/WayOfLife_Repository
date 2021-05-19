@@ -39,7 +39,7 @@ public class TipsDialog extends AppCompatDialogFragment {
         }
 
         builder.setView(view)
-                .setTitle("Informazioni:")
+                .setTitle("Informazioni sul calcolatore:")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

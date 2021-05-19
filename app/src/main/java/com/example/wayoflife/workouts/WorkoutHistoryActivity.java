@@ -86,6 +86,7 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(WorkoutHistoryActivity.this, models.get(position).getTipologia(), Toast.LENGTH_LONG).show();   /** Al posto del TOAST mettere il fragment dove si vuole andare */
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentWorkout, new WorkoutFragment()).commit();
             }
         });
 

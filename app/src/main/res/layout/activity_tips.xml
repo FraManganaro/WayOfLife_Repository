@@ -34,6 +34,11 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginVertical="10dp">
 
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_fire"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -42,13 +47,8 @@
                     android:text="Calcola il tuo intake calorico!"
                     android:textSize="22sp"
                     android:textStyle="bold"
-                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
                     android:textColor="@color/white"/>
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/ic_fire"/>
 
             </LinearLayout>
 
@@ -264,7 +264,7 @@
                 android:onClick="saveData"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/ic_floppy_disk"/>
+                android:src="@drawable/ic_down_arrow"/>
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -351,7 +351,8 @@
                         android:padding="10sp"
                         android:textSize="15sp"
                         android:layout_weight="4"
-                        android:gravity="center_horizontal"/>
+                        android:gravity="center_horizontal"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/minimoCalorie"
@@ -361,7 +362,8 @@
                         android:padding="10sp"
                         android:textSize="15sp"
                         android:layout_weight="4"
-                        android:gravity="center_horizontal"/>
+                        android:gravity="center_horizontal"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/massimoCalorie"
@@ -371,7 +373,8 @@
                         android:padding="10sp"
                         android:textSize="15sp"
                         android:layout_weight="4"
-                        android:gravity="center_horizontal"/>
+                        android:gravity="center_horizontal"
+                        android:textStyle="bold"/>
 
                 </TableRow>
 
