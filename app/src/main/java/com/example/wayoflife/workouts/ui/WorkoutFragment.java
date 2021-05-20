@@ -1,4 +1,4 @@
-package com.example.wayoflife.workouts;
+package com.example.wayoflife.workouts.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

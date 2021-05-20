@@ -25,7 +25,7 @@
         <activity android:name=".ui.TipsActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".workouts.EndWorkoutActivity"
+            android:name=".workouts.ui.EndWorkoutActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".workouts.trainings.TrainingActivity"
@@ -37,7 +37,7 @@
             android:name=".workouts.trainings.SquatActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".workouts.WorkoutHistoryActivity"
+            android:name=".workouts.ui.WorkoutHistoryActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ProfileActivity"

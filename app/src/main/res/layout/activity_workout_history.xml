@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".workouts.WorkoutHistoryActivity"
+    tools:context=".workouts.ui.WorkoutHistoryActivity"
     android:background="@drawable/image_background_history">
 
     <LinearLayout

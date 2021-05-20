@@ -21,7 +21,7 @@ import com.example.wayoflife.R;
 import com.example.wayoflife.dialog.InfoDialog;
 import com.example.wayoflife.util.Calories;
 import com.example.wayoflife.util.Constants;
-import com.example.wayoflife.workouts.EndWorkoutActivity;
+import com.example.wayoflife.workouts.ui.EndWorkoutActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SquatActivity extends AppCompatActivity implements SensorEventListener {

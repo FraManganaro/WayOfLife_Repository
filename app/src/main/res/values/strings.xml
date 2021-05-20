@@ -71,4 +71,6 @@
     <string name="obiettivo_calorie">Calorie</string>
     <string name="intake">Calcola il tuo intake calorico!</string>
     <string name="fabbisogno_giornaliero">Inserisci i dati e calcola il tuo fabbisogno calorico giornaliero!</string>
+    <string name="valutazione_allenamento">Inserisci una valutazione all\'allenamento:</string>
+    <string name="nome_allenamento">Inserisci un nome all\'allenamento:</string>
 </resources>

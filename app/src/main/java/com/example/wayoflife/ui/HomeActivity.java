@@ -33,7 +33,7 @@ import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.util.PermissionRationalActivity;
 import com.example.wayoflife.R;
 import com.example.wayoflife.workouts.trainings.RunningActivity;
-import com.example.wayoflife.workouts.WorkoutHistoryActivity;
+import com.example.wayoflife.workouts.ui.WorkoutHistoryActivity;
 import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.ActivityTransition;
 import com.google.android.gms.location.ActivityTransitionEvent;

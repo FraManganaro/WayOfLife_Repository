@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wayoflife.R;
 import com.example.wayoflife.dialog.TipsDialog;
 import com.example.wayoflife.util.Constants;
+import com.example.wayoflife.workouts.ui.WorkoutHistoryActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -106,6 +108,7 @@ public class TipsActivity extends AppCompatActivity {
      * Chiamata con il bottone SALVA nel layout
      */
     public void saveData(View v) {
+
         pesoS = pesoET.getText().toString();
         massaGrassaS = massaGrassaET.getText().toString();
         indiceAttivitaS = indiceAttivitaET.getText().toString();
@@ -122,6 +125,7 @@ public class TipsActivity extends AppCompatActivity {
         } else {
             saveInformation();
             resumeDoubleInformation();
+            Toast.makeText(TipsActivity.this, "Tabella aggiornata!" , Toast.LENGTH_LONG).show();
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.wayoflife.workouts;
+package com.example.wayoflife.workouts.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -126,8 +126,10 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
 
         } else {
             tvExtra.setVisibility(View.INVISIBLE);
-            llExtra.setVisibility(View.INVISIBLE);
-            tvExtraText.setVisibility(View.INVISIBLE);
+//            llExtra.setVisibility(View.INVISIBLE);
+//            tvExtraText.setVisibility(View.INVISIBLE);
+            tvExtraText.setText("Nessun elemento extra da mostrare!");
+            tvExtraText.setTextColor(getColor(R.color.black));
             tvExtraSquat.setVisibility(View.INVISIBLE);
             tvExtraTextSquat.setVisibility(View.INVISIBLE);
         }
