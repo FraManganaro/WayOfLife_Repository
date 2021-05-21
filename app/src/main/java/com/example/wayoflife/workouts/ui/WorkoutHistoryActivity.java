@@ -115,39 +115,51 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
 
         switch(t[1]){
             case "gen":
+            case "Gen":
                 data = t[0] + "/" + "01" + "/" + t[2];
                 break;
             case "feb":
+            case "Feb":
                 data = t[0] + "/" + "02" + "/" + t[2];
                 break;
             case "mar":
-                data = t[0] + "/" + "03" + "/" + t[2];
+            case "Mar":
+                data= t[0] + "/" + "03" + "/" + t[2];
                 break;
             case "apr":
+            case "Apr":
                 data = t[0] + "/" + "04" + "/" + t[2];
                 break;
             case "mag":
+            case "Mag":
                 data = t[0] + "/" + "05" + "/" + t[2];
                 break;
             case "giu":
+            case "Giu":
                 data = t[0] + "/" + "06" + "/" + t[2];
                 break;
             case "lug":
+            case "Lug":
                 data = t[0] + "/" + "07" + "/" + t[2];
                 break;
             case "ago":
-                data = t[0] + "/" + "08" + "/" + t[2];
+            case "Ago":
+                data= t[0] + "/" + "08" + "/" + t[2];
                 break;
             case "set":
+            case "Set":
                 data = t[0] + "/" + "09" + "/" + t[2];
                 break;
             case "ott":
+            case "Ott":
                 data = t[0] + "/" + "10" + "/" + t[2];
                 break;
             case "nov":
+            case "Nov":
                 data = t[0] + "/" + "11" + "/" + t[2];
                 break;
             case "dic":
+            case "Dic":
                 data = t[0] + "/" + "12" + "/" + t[2];
                 break;
         }
