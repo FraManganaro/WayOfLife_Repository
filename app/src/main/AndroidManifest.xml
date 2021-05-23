@@ -22,8 +22,9 @@
         <activity
             android:name=".workouts.trainings.RunningActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.TipsActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.TipsActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".workouts.ui.EndWorkoutActivity"
             android:screenOrientation="portrait" />

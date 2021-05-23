@@ -20,6 +20,9 @@ public class Constants {
     public static final String SQUAT = "Squat";
     public static final String CALORIE = "Calorie";
     public static final String CHILOMETRI = "Chilometri";
+    public static final String NOME_ALLENAMENTO = "Nome Allenamento";
+    public static final String DATA = "Data";
+    public static final String LIKE = "Like";
 
     public static final String NOME = "Nome";
     public static final String COGNOME = "Cognome";
