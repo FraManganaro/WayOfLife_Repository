@@ -2,6 +2,7 @@ package com.example.wayoflife.workouts.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.wayoflife.util.Constants;
 import com.example.wayoflife.util.CustomerModel;
 import com.example.wayoflife.util.DatabaseHelper;
 import com.example.wayoflife.R;
@@ -96,7 +98,23 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(WorkoutHistoryActivity.this, models.get(position).getTipologia(), Toast.LENGTH_LONG).show();
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentWorkout, new WorkoutFragment()).commit();
+
+                Intent intent = new Intent(getApplicationContext(), WorkoutInformation.class);
+
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                intent.putExtra(Constants.ATTIVITA_RILEVATA, models.get(position).getTipologia());
+                intent.putExtra(Constants.NOME_ALLENAMENTO, models.get(position).getNome());
+                intent.putExtra(Constants.DATA, models.get(position).getData());
+                intent.putExtra(Constants.DURATA_ALLENAMENTO, models.get(position).getDurata());
+                intent.putExtra(Constants.CALORIE, models.get(position).getCalorie());
+                intent.putExtra(Constants.CHILOMETRI, models.get(position).getChilometri());
+                intent.putExtra(Constants.FLESSIONI, models.get(position).getN_flessioni());
+                intent.putExtra(Constants.SQUAT, models.get(position).getN_squat());
+                intent.putExtra(Constants.ACTIVITY_TRACKING_STATUS, models.get(position).getState());
+                intent.putExtra(Constants.LIKE, models.get(position).getLike());
+
+                startActivity(intent);
             }
         });
 
