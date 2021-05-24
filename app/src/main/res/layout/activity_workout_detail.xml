@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView
+    android:id="@+id/scrollView"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".workouts.ui.WorkoutInformation"
+    tools:context=".workouts.ui.WorkoutDetailActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_above="@+id/constraintLayout"
@@ -54,7 +55,7 @@
                 android:layout_height="100dp"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginTop="-50dp" >
+                android:layout_marginTop="-55dp" >
 
                 <ImageView
                     android:id="@+id/iconaAllenamento"
@@ -65,8 +66,8 @@
 
                 <ImageView
                     android:id="@+id/iconeStatus"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@drawable/ic_max"/>
 
             </LinearLayout>
@@ -78,8 +79,8 @@
                 android:gravity="center">
 
                 <LinearLayout
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
+                    android:layout_width="170dp"
+                    android:layout_height="120dp"
                     android:background="@drawable/background_white_corners"
                     android:gravity="center_horizontal"
                     android:layout_marginEnd="30dp"
@@ -102,13 +103,13 @@
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="20dp"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
+                    android:layout_width="170dp"
+                    android:layout_height="120dp"
                     android:background="@drawable/background_white_corners"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
@@ -130,7 +131,7 @@
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="20dp"/>
 
                 </LinearLayout>
 
@@ -143,8 +144,8 @@
                 android:gravity="center">
 
                 <LinearLayout
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
+                    android:layout_width="170dp"
+                    android:layout_height="120dp"
                     android:background="@drawable/background_white_corners"
                     android:gravity="center_horizontal"
                     android:layout_marginEnd="30dp"
@@ -167,24 +168,25 @@
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="20dp"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
+                    android:layout_width="170dp"
+                    android:layout_height="120dp"
                     android:background="@drawable/background_white_corners"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="60dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvExtraText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/pushup"
@@ -193,6 +195,7 @@
                             android:textSize="16dp"/>
 
                         <TextView
+                            android:id="@+id/tvExtra"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/zero"
@@ -205,11 +208,12 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="60dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvExtraTextSquat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/squat"
@@ -218,6 +222,7 @@
                             android:textSize="16dp"/>
 
                         <TextView
+                            android:id="@+id/tvExtraSquat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/zero"
@@ -232,35 +237,50 @@
 
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/home_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_bin"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/save_button"
-                    app:layout_constraintHorizontal_bias="0.901"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.659" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/button_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getBack"
+                android:src="@drawable/ic_left_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_favorites"
+                app:layout_constraintHorizontal_bias="0.056"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.636" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/save_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_heart_empty"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.954"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.644" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/button_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="deleteWorkout"
+                android:src="@drawable/ic_bin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_favorites"
+                app:layout_constraintHorizontal_bias="0.901"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.659" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/button_favorites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="addFavorites"
+                android:src="@drawable/ic_heart_empty"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.954"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.644" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

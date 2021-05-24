@@ -1,18 +1,15 @@
-package com.example.wayoflife.util;
+package com.example.wayoflife.workouts.util;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import com.example.wayoflife.util.CustomerModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class WorkoutDatabase extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "workout";
     private static final String TABLE_NAME = "history";
@@ -28,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String STATO_FINE_ALLENAMENTO_COLUMN = "statoFineAllenamento";
     public static final String LIKE_ALLENAMENTO_COLUMN = "likeAllenamento";
 
-    public DatabaseHelper(Context context){
+    public WorkoutDatabase(Context context){
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -55,38 +52,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    /*
-     Aggiunta di un nuovo allenamento nel database
+    /**
+     * Aggiungo un elemento al DB
      */
-    public boolean addWorkout(CustomerModel customerModel){
+    public boolean addWorkout(WorkoutModel workoutModel){
         // Get WriteAble Database
         SQLiteDatabase db = this.getWritableDatabase();
 
         //Add Values into Database
         ContentValues cv = new ContentValues();
 
-        cv.put(NOME_COLUMN, customerModel.getNome());
-        cv.put(DATA_COLUMN, customerModel.getData());
-        cv.put(DURATA_COLUMN, customerModel.getDurata());
-        cv.put(TIPOLOGIA_COLUMN, customerModel.getTipologia());
-        cv.put(CALORIE_COLUMN, customerModel.getCalorie());
-        cv.put(STATO_FINE_ALLENAMENTO_COLUMN, customerModel.getState());
-        cv.put(LIKE_ALLENAMENTO_COLUMN, customerModel.getLike());
+        cv.put(NOME_COLUMN, workoutModel.getNome());
+        cv.put(DATA_COLUMN, workoutModel.getData());
+        cv.put(DURATA_COLUMN, workoutModel.getDurata());
+        cv.put(TIPOLOGIA_COLUMN, workoutModel.getTipologia());
+        cv.put(CALORIE_COLUMN, workoutModel.getCalorie());
+        cv.put(STATO_FINE_ALLENAMENTO_COLUMN, workoutModel.getState());
+        cv.put(LIKE_ALLENAMENTO_COLUMN, workoutModel.getLike());
 
         //Dati da verificare se sono presenti negli allenamenti
         //Se == -1, vuol dire che non sono stati inseriti nella fine dell'allenamento
-        if(customerModel.getChilometri() != -1)
-            cv.put(CHILOMETRI_COLUMN, customerModel.getChilometri());
+        if(workoutModel.getChilometri() != -1)
+            cv.put(CHILOMETRI_COLUMN, workoutModel.getChilometri());
         else
             cv.put(CHILOMETRI_COLUMN, -1);
 
-        if(customerModel.getN_flessioni() != -1)
-            cv.put(NUM_FLESSIONI_COLUMN, customerModel.getN_flessioni());
+        if(workoutModel.getN_flessioni() != -1)
+            cv.put(NUM_FLESSIONI_COLUMN, workoutModel.getN_flessioni());
         else
             cv.put(NUM_FLESSIONI_COLUMN, -1);
 
-        if(customerModel.getN_squat() != -1)
-            cv.put(NUM_SQUAT_COLUMN, customerModel.getN_squat());
+        if(workoutModel.getN_squat() != -1)
+            cv.put(NUM_SQUAT_COLUMN, workoutModel.getN_squat());
         else
             cv.put(NUM_SQUAT_COLUMN, -1);
 
@@ -97,12 +94,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    /*
-    Restituzione lista di tutti gli elementi presenti nel database
+    /**
+     * Lista completa degli allenamenti presenti nel DB
      */
-    public List<CustomerModel> getAllWorkout(){
+    public List<WorkoutModel> getAllWorkout(){
         //Variabili
-        List<CustomerModel> returnList = new ArrayList<>();
+        List<WorkoutModel> returnList = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_NAME;
 
         //Get Readable Database
@@ -113,6 +110,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()){
             do {
+                int id = cursor.getInt(0);
                 String customerNome = cursor.getString(1);
                 String customerNData = cursor.getString(2);
                 String customerDurata = cursor.getString(3);
@@ -124,7 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int customerState = cursor.getInt(9);
                 int customerLike = cursor.getInt(10);
 
-                CustomerModel model = new CustomerModel(customerNome, customerNData, customerSquat,
+                WorkoutModel model = new WorkoutModel(id, customerNome, customerNData, customerSquat,
                         customerDurata, customerChilometri, customerTipologia,
                         customerCalorie, customerFlessioni, customerState, customerLike);
 
@@ -138,14 +136,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    /*
-    Restituizione dei dati nel database secondo una determinata data
+    /**
+     * Query per allenamenti in data -data-
      */
-    public List<CustomerModel> getWorkoutForDate(String data){
+    public List<WorkoutModel> getWorkoutForDate(String data){
         //Variabili
         data = "\"" + data + "\"";
 
-        List<CustomerModel> returnList = new ArrayList<>();
+        List<WorkoutModel> returnList = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + DATA_COLUMN + " LIKE " + data;
 
         //Get Readable Database
@@ -156,6 +154,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()){
             do {
+                int id = cursor.getInt(0);
                 String customerNome = cursor.getString(1);
                 String customerNData = cursor.getString(2);
                 String customerDurata = cursor.getString(3);
@@ -167,7 +166,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int customerState = cursor.getInt(9);
                 int customerLike = cursor.getInt(10);
 
-                CustomerModel model = new CustomerModel(customerNome, customerNData, customerSquat,
+                WorkoutModel model = new WorkoutModel(id, customerNome, customerNData, customerSquat,
                         customerDurata, customerChilometri, customerTipologia,
                         customerCalorie, customerFlessioni, customerState, customerLike);
 
@@ -181,46 +180,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    /*
-    Restituisce il dato completo nel database che corrisponde al "id" passato
+    /**
+     * Query per allenamenti preferiti
      */
-    public CustomerModel getWorkoutId(int id){    //da controllare query
+    public List<WorkoutModel> getWorkoutForLike(){
         //Variabili
-        CustomerModel customerModel = null;
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_COLUMN + " = " + id;
-
-        //Get Readable Database
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-
-        //Create Cursor to Select All Values
-        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
-
-        String customerNome = cursor.getString(1);
-        String customerNData = cursor.getString(2);
-        String customerDurata = cursor.getString(3);
-        String customerTipologia = cursor.getString(4);
-        int customerCalorie = cursor.getInt(5);
-        float customerChilometri = cursor.getFloat(6);
-        int customerFlessioni = cursor.getInt(7);
-        int customerSquat = cursor.getInt(8);
-        int customerState = cursor.getInt(9);
-        int customerLike = cursor.getInt(10);
-
-        customerModel = new CustomerModel(customerNome, customerNData, customerSquat,
-                customerDurata, customerChilometri, customerTipologia, customerCalorie,
-                customerFlessioni, customerState, customerLike);
-
-        cursor.close();
-        sqLiteDatabase.close();
-        return customerModel;
-    }
-
-    /*
-    Restituisce tutti i dati che hanno like=1
-     */
-    public List<CustomerModel> getWorkoutForLike(){
-        //Variabili
-        List<CustomerModel> returnList = new ArrayList<>();
+        List<WorkoutModel> returnList = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + LIKE_ALLENAMENTO_COLUMN + " = 1";
 
         //Get Readable Database
@@ -231,6 +196,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()){
             do {
+                int id = cursor.getInt(0);
                 String customerNome = cursor.getString(1);
                 String customerNData = cursor.getString(2);
                 String customerDurata = cursor.getString(3);
@@ -242,7 +208,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int customerState = cursor.getInt(9);
                 int customerLike = cursor.getInt(10);
 
-                CustomerModel model = new CustomerModel(customerNome, customerNData, customerSquat,
+                WorkoutModel model = new WorkoutModel(id, customerNome, customerNData, customerSquat,
                         customerDurata, customerChilometri, customerTipologia,
                         customerCalorie, customerFlessioni, customerState, customerLike);
 
@@ -256,13 +222,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    /*
-    Eliminare campo tramite id (true = messaggio di avvenuta eliminazione)
+    /**
+     * Eliminare un elemento del DB dato un id
      */
     public boolean deleteWorkout(int id){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String query = "DELETE * FROM " + TABLE_NAME + ", WHERE " + ID_COLUMN + " = " + id;
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + ID_COLUMN + " LIKE " + id;
+        db.execSQL(query);
+        db.close();
+
+        return true;
+    }
+
+    /**
+     * Aggiornare campo preferiti
+     */
+    public boolean updateFavorites(int numb, int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_NAME + " SET " + LIKE_ALLENAMENTO_COLUMN + " = " + numb + " WHERE " + ID_COLUMN + " LIKE " + id;
         db.execSQL(query);
         db.close();
 

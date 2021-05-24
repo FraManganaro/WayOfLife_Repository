@@ -187,7 +187,7 @@ public class HomeActivity extends AppCompatActivity {
                     .build());
         }
 
-        /** solo per i test -> da rimuovere */
+        /** solo per i test
         activityTransitionList.add(new ActivityTransition.Builder()
                 .setActivityType(DetectedActivity.STILL)
                 .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
@@ -204,6 +204,7 @@ public class HomeActivity extends AppCompatActivity {
                 .setActivityType(DetectedActivity.IN_VEHICLE)
                 .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
                 .build());
+         */
 
         return activityTransitionList;
     }

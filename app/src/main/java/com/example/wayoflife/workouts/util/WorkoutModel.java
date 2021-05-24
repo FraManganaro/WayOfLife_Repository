@@ -1,8 +1,9 @@
-package com.example.wayoflife.util;
+package com.example.wayoflife.workouts.util;
 
-public class CustomerModel {
+public class WorkoutModel {
 
     //Variabili
+    private int id;
     private String nome;
     private String data;
     private int n_squat;
@@ -15,7 +16,7 @@ public class CustomerModel {
     private int like;
 
     /** Costruttore completo */
-    public CustomerModel(String nome, String data, int n_squat, String durata, float chilometri, String tipologia, int calorie, int n_flessioni, int state, int like) {
+    public WorkoutModel(String nome, String data, int n_squat, String durata, float chilometri, String tipologia, int calorie, int n_flessioni, int state, int like) {
         this.nome = nome;
         this.data = data;
         this.n_squat = n_squat;
@@ -29,7 +30,7 @@ public class CustomerModel {
     }
 
     /** Costruttore per attività extra */
-    public CustomerModel(String nome, String data, String durata, String tipologia, int calorie, int state, int like) {
+    public WorkoutModel(String nome, String data, String durata, String tipologia, int calorie, int state, int like) {
         this.nome = nome;
         this.data = data;
         this.n_squat = -1;
@@ -43,7 +44,7 @@ public class CustomerModel {
     }
 
     /** Costruttore per Freestyle, Pushup e Squat */
-    public CustomerModel(String nome, String data, int n_squat, String durata, String tipologia, int calorie, int n_flessioni, int state, int like) {
+    public WorkoutModel(String nome, String data, int n_squat, String durata, String tipologia, int calorie, int n_flessioni, int state, int like) {
         this.nome = nome;
         this.data = data;
         this.n_squat = n_squat;
@@ -57,7 +58,7 @@ public class CustomerModel {
     }
 
     /** Costruttore per Corsa, Ciclismo, Camminata */
-    public CustomerModel(String nome, String data, String durata, float chilometri, String tipologia, int calorie, int state, int like) {
+    public WorkoutModel(String nome, String data, String durata, float chilometri, String tipologia, int calorie, int state, int like) {
         this.nome = nome;
         this.data = data;
         this.n_squat = -1;
@@ -70,7 +71,19 @@ public class CustomerModel {
         this.like = like;
     }
 
-    public CustomerModel() {
+    /** Costruttore con ID */
+    public WorkoutModel(int id, String nome, String data, int n_squat, String durata, float chilometri, String tipologia, int calorie, int n_flessioni, int state, int like) {
+        this.id = id;
+        this.nome = nome;
+        this.data = data;
+        this.n_squat = n_squat;
+        this.durata = durata;
+        this.chilometri = chilometri;
+        this.tipologia = tipologia;
+        this.calorie = calorie;
+        this.n_flessioni = n_flessioni;
+        this.state = state;
+        this.like = like;
     }
 
     // ToString
@@ -85,6 +98,7 @@ public class CustomerModel {
                 "Squat: " + n_squat + '\n' +
                 "Chilometri: " + chilometri + '\n' +
                 "Preferito: " + like + '\n' +
+                "Id: " + id + '\n' +
                 "Valutazione: " + state + "\n\n";
     }
 
@@ -167,6 +181,14 @@ public class CustomerModel {
 
     public void setLike(int like) {
         this.like = like;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

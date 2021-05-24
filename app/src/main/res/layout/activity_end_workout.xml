@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:layout_above="@+id/constraintLayout"
     android:layout_marginBottom="0dp"
-    android:background="@drawable/prova2">
+    android:background="@drawable/image_background_endworkout">
 
 <LinearLayout
     android:layout_height="match_parent"
@@ -292,20 +292,20 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/home_button"
+            android:id="@+id/button_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="returnHome"
             android:src="@drawable/ic_home"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/save_button"
+            app:layout_constraintEnd_toStartOf="@+id/button_favorites"
             app:layout_constraintHorizontal_bias="0.915"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.485" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/save_button"
+            android:id="@+id/button_favorites"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="saveWorkout"

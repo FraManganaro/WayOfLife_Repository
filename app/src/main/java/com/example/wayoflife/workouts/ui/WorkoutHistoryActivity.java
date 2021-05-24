@@ -13,10 +13,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.wayoflife.util.Constants;
-import com.example.wayoflife.util.CustomerModel;
-import com.example.wayoflife.util.DatabaseHelper;
+import com.example.wayoflife.workouts.util.WorkoutModel;
+import com.example.wayoflife.workouts.util.WorkoutDatabase;
 import com.example.wayoflife.R;
-import com.example.wayoflife.util.MyArrayAdapter;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
@@ -29,12 +28,13 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
 
     private ImageView btDate;
     private ImageView btFavorites;
+    private ImageView btAll;
     private ListView listView;
 
-    private DatabaseHelper databaseHelper;
-    private List<CustomerModel> models;
+    private WorkoutDatabase workoutDatabase;
+    private List<WorkoutModel> models;
     private ArrayAdapter arrayAdapter;
-    private MyArrayAdapter myArrayAdapter;
+    private MyListViewElement myListViewElement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +43,13 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
 
         btDate = findViewById(R.id.bt_calendar);
         btFavorites = findViewById(R.id.bt_favorites);
+        btAll = findViewById(R.id.bt_all);
         listView = findViewById(R.id.list_view);
 
-        databaseHelper = new DatabaseHelper(WorkoutHistoryActivity.this);
-        models = databaseHelper.getAllWorkout();
+        workoutDatabase = new WorkoutDatabase(WorkoutHistoryActivity.this);
+        models = workoutDatabase.getAllWorkout();
 
-        arrayAdapter = new ArrayAdapter<CustomerModel>(WorkoutHistoryActivity.this,
+        arrayAdapter = new ArrayAdapter<WorkoutModel>(WorkoutHistoryActivity.this,
                 android.R.layout.simple_list_item_1, models);
         listView.setAdapter(arrayAdapter);
 
@@ -73,7 +74,7 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
                 Log.d(TAG, "Dopo la modifica: " + data);
 
                 Toast.makeText(WorkoutHistoryActivity.this, ("Allenamenti in data - " + data), Toast.LENGTH_LONG).show();
-                models = databaseHelper.getWorkoutForDate(data);
+                models = workoutDatabase.getWorkoutForDate(data);
                 manageListView();
             }
         });
@@ -82,43 +83,65 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(WorkoutHistoryActivity.this, "Allenamenti preferiti!", Toast.LENGTH_LONG).show();
-                models = databaseHelper.getWorkoutForLike();
+                models = workoutDatabase.getWorkoutForLike();
                 manageListView();
             }
         });
+
+        btAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(WorkoutHistoryActivity.this, "Lista completa allenamenti!", Toast.LENGTH_LONG).show();
+                models = workoutDatabase.getAllWorkout();
+                manageListView();
+            }
+        });
+    }
+    @Override
+    protected void onResume() {
+        workoutDatabase = new WorkoutDatabase(WorkoutHistoryActivity.this);
+        models = workoutDatabase.getAllWorkout();
+
+        arrayAdapter = new ArrayAdapter<WorkoutModel>(WorkoutHistoryActivity.this,
+                android.R.layout.simple_list_item_1, models);
+        listView.setAdapter(arrayAdapter);
+
+        manageListView();
+
+        super.onResume();
     }
 
     /** Metodo che gestisce la ListView */
     private void manageListView(){
         Log.d(TAG, "Controllo elementi del DB: "+ models.toString());
 
-        myArrayAdapter = new MyArrayAdapter(models, WorkoutHistoryActivity.this);
+        myListViewElement = new MyListViewElement(models, WorkoutHistoryActivity.this);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(WorkoutHistoryActivity.this, models.get(position).getTipologia(), Toast.LENGTH_LONG).show();
-
-                Intent intent = new Intent(getApplicationContext(), WorkoutInformation.class);
+                Intent intent = new Intent(getApplicationContext(), WorkoutDetailActivity.class);
 
                 intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
+                intent.putExtra(Constants.ID, models.get(position).getId());
                 intent.putExtra(Constants.ATTIVITA_RILEVATA, models.get(position).getTipologia());
                 intent.putExtra(Constants.NOME_ALLENAMENTO, models.get(position).getNome());
                 intent.putExtra(Constants.DATA, models.get(position).getData());
                 intent.putExtra(Constants.DURATA_ALLENAMENTO, models.get(position).getDurata());
-                intent.putExtra(Constants.CALORIE, models.get(position).getCalorie());
-                intent.putExtra(Constants.CHILOMETRI, models.get(position).getChilometri());
+                intent.putExtra(Constants.CALORIE, "" + models.get(position).getCalorie());
+                intent.putExtra(Constants.CHILOMETRI, "" + models.get(position).getChilometri());
                 intent.putExtra(Constants.FLESSIONI, models.get(position).getN_flessioni());
                 intent.putExtra(Constants.SQUAT, models.get(position).getN_squat());
-                intent.putExtra(Constants.ACTIVITY_TRACKING_STATUS, models.get(position).getState());
-                intent.putExtra(Constants.LIKE, models.get(position).getLike());
+                intent.putExtra(Constants.STATE,"" +  models.get(position).getState());
+                intent.putExtra(Constants.LIKE, "" + models.get(position).getLike());
 
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
-        listView.setAdapter(myArrayAdapter);
+        listView.setAdapter(myListViewElement);
     }
 
 

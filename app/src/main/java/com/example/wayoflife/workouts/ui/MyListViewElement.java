@@ -1,7 +1,6 @@
-package com.example.wayoflife.util;
+package com.example.wayoflife.workouts.ui;
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -9,15 +8,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wayoflife.R;
+import com.example.wayoflife.workouts.util.WorkoutModel;
 
 import java.util.List;
 
-public class MyArrayAdapter extends BaseAdapter {
+public class MyListViewElement extends BaseAdapter {
 
-    private List<CustomerModel> workoutList;
+    private List<WorkoutModel> workoutList;
     private Activity activity;
 
-    public MyArrayAdapter(List<CustomerModel> workoutList, Activity activity) {
+    public MyListViewElement(List<WorkoutModel> workoutList, Activity activity) {
         this.workoutList = workoutList;
         this.activity = activity;
     }
@@ -26,7 +26,7 @@ public class MyArrayAdapter extends BaseAdapter {
     public int getCount() { return workoutList.size(); }
 
     @Override
-    public CustomerModel getItem(int position) {
+    public WorkoutModel getItem(int position) {
         return workoutList.get(position);
     }
 

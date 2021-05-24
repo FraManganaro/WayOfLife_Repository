@@ -2,7 +2,6 @@ package com.example.wayoflife.util;
 
 public class Constants {
     public static final String PROFILE_INFO_FILENAME = "Elementi salvati del profilo";
-    public static final String DASHBOARD_INFO_FILENAME = "Elementi salvati della dashboard";
     public static final String HOME_INFO_FILENAME = "Elementi salvati della home";
 
     public static final String ACTIVITY_TRACKING_STATUS = "ActivityTrackingStatus";
@@ -23,6 +22,8 @@ public class Constants {
     public static final String NOME_ALLENAMENTO = "Nome Allenamento";
     public static final String DATA = "Data";
     public static final String LIKE = "Like";
+    public static final String STATE = "State";
+    public static final String ID = "Id";
 
     public static final String NOME = "Nome";
     public static final String COGNOME = "Cognome";

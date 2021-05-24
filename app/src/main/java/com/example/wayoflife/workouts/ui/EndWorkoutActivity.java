@@ -7,15 +7,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.wayoflife.util.DatabaseHelper;
+import com.example.wayoflife.workouts.util.WorkoutDatabase;
 
 import com.example.wayoflife.dialog.InfoDialog;
 import com.example.wayoflife.util.Constants;
-import com.example.wayoflife.util.CustomerModel;
+import com.example.wayoflife.workouts.util.WorkoutModel;
 import com.example.wayoflife.R;
 import com.example.wayoflife.ui.HomeActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -56,7 +55,6 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         TextView tvCalorie = findViewById(R.id.tvCalorie);
         TextView tipoAllenamento = findViewById(R.id.tipoAllenamento);
 
-        LinearLayout llExtra = findViewById(R.id.llExtra);
         TextView tvExtra = findViewById(R.id.tvExtra);
         TextView tvExtraSquat = findViewById(R.id.tvExtraSquat);
         TextView tvExtraText = findViewById(R.id.tvExtraText);
@@ -85,7 +83,6 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         tvCalorie.setText(calorie + " kcal");
 
         String tr = getIntent().getStringExtra(Constants.CHILOMETRI);
-        Log.d(TAG, "onCreate: " + tr);
         if (tr == null || tr.equals("0,00")) {
             chilometri = 0;
             Log.d(TAG, "Chilometri 0");
@@ -126,8 +123,6 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
 
         } else {
             tvExtra.setVisibility(View.INVISIBLE);
-//            llExtra.setVisibility(View.INVISIBLE);
-//            tvExtraText.setVisibility(View.INVISIBLE);
             tvExtraText.setText("Nessun elemento extra da mostrare!");
             tvExtraText.setTextColor(getColor(R.color.black));
             tvExtraSquat.setVisibility(View.INVISIBLE);
@@ -162,25 +157,25 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
 
         state = (int) slider.getValue();
 
-        CustomerModel customerModel = null;
+        WorkoutModel workoutModel = null;
 
         try {
             if(tipologiaAllenamento.equalsIgnoreCase("Corsa")  ||
                     tipologiaAllenamento.equalsIgnoreCase("Camminata") ||
                     tipologiaAllenamento.equalsIgnoreCase("Ciclismo")){
                 //uso il costruttore con chilometri, senza flessioni
-                customerModel = new CustomerModel(nome, data, durata, chilometri, tipologiaAllenamento, calorie, state, like);
+                workoutModel = new WorkoutModel(nome, data, durata, chilometri, tipologiaAllenamento, calorie, state, like);
             }
             else{
                 if (tipologiaAllenamento.equalsIgnoreCase("Pushup") ||
                         tipologiaAllenamento.equalsIgnoreCase("Freestyle") ||
                         tipologiaAllenamento.equalsIgnoreCase("Squat")){
                     //uso il costruttore senza chilometri, con flessioni e squat
-                    customerModel = new CustomerModel(nome, data, n_squat, durata, tipologiaAllenamento, calorie, n_flessioni, state, like);
+                    workoutModel = new WorkoutModel(nome, data, n_squat, durata, tipologiaAllenamento, calorie, n_flessioni, state, like);
                 }
                 else{
                     //uso il costruttore senza chilometri e flessioni
-                    customerModel = new CustomerModel(nome, data, durata, tipologiaAllenamento, calorie, state, like);
+                    workoutModel = new WorkoutModel(nome, data, durata, tipologiaAllenamento, calorie, state, like);
                 }
             }
         }catch (Exception e){
@@ -188,8 +183,8 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
                     "Errore nel salvataggio", Toast.LENGTH_SHORT).show();
         }
 
-        DatabaseHelper db = new DatabaseHelper(EndWorkoutActivity.this);
-        boolean success = db.addWorkout(customerModel);
+        WorkoutDatabase db = new WorkoutDatabase(EndWorkoutActivity.this);
+        boolean success = db.addWorkout(workoutModel);
         if (success){
             Toast.makeText(EndWorkoutActivity.this,
                     "Allenamento salvato!", Toast.LENGTH_SHORT).show();
