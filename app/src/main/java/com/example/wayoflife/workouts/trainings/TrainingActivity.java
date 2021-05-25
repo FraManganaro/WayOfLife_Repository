@@ -165,6 +165,8 @@ public class TrainingActivity extends AppCompatActivity {
 
         switch(attivitaDiProvenienza){
             case "Freestyle":
+            case "Squat":
+            case "Pushup":
                 calorie = (int) (Calories.FREESTYLE * peso * secondCounter)/3600;
                 break;
             case "Basket":

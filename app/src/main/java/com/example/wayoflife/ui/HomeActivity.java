@@ -196,6 +196,8 @@ public class HomeActivity extends AppCompatActivity {
                 .setActivityType(DetectedActivity.STILL)
                 .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
                 .build());
+         */
+
         activityTransitionList.add(new ActivityTransition.Builder()
                 .setActivityType(DetectedActivity.IN_VEHICLE)
                 .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
@@ -204,7 +206,7 @@ public class HomeActivity extends AppCompatActivity {
                 .setActivityType(DetectedActivity.IN_VEHICLE)
                 .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
                 .build());
-         */
+
 
         return activityTransitionList;
     }
@@ -634,12 +636,13 @@ public class HomeActivity extends AppCompatActivity {
                     if(toTransitionType(event.getTransitionType())
                             .equalsIgnoreCase("ENTER")){
                         enterActivity = toActivityString(event.getActivityType());
+
                     }
 
                 }
             }
 
-            if(enterActivity!=null) {
+            if(enterActivity!=null && enterActivity!="IN_VEHICLE") {
                 /** Creo l'intent che mi permetterà di viaggiare da un'activity all'altra */
 
                 Intent intentOut = new Intent(
