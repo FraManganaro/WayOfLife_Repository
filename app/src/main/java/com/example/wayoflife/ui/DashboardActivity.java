@@ -72,8 +72,8 @@ public class DashboardActivity extends AppCompatActivity {
                         R.style.BottomSheetTheme);
 
                 View sheetView = LayoutInflater.from(
-                        getApplicationContext()).inflate(R.layout.workout_extra_bottom_sheet,
-                        (ViewGroup) findViewById(R.id.workoutBottomSheet));
+                        getApplicationContext()).inflate(R.layout.bs_workout_extra,
+                        (ViewGroup) findViewById(R.id.indiceAttivitaBS));
 
                 /** Gestione dell'allenamento camminata */
                 sheetView.findViewById(R.id.rlCamminata).setOnClickListener(

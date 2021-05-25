@@ -53,14 +53,14 @@
     <string name="end_workout_info">Abbandonando questa pagina perderai tutti i progressi fatti fino a questo momento.\n\nSei sicuro di voler tornare indietro?</string>
     <string name="calorie">Calorie bruciate:</string>
     <string name="percentuale_massa_grassa">Massa Grassa (%)</string>
-    <string name="durata_allenamento">Durata allenamento (in Min)</string>
-    <string name="effetto_termico">Effetto termico del Cibo</string>
-    <string name="indice_di_attivita">Indice di attività</string>
-    <string name="bilancio_energetico">Bilancio energetico</string>
-    <string name="numero_di_allenamenti">Numero settimanale allenamenti</string>
-    <string name="indice_attivita">Inserisci un valore da 1 a 1.4 in base al tuo livello di attività:\n\n1 = Sedentario (non cammini se non dentro casa), ti alleni 1-2 volte a settimana \n1.1 = Sedentario Plus (cammini poco), ti alleni 3 volte a settimana \n1.2 = Attività Media (cammini 30min al giorno, lavori in piedi)\n1.3 = Attività Moderata (cammini per più di 1 ora al giorno), ti alleni 4-5 volte a settimana\n1.4 = Attività Elevata (cammini per più di 1 ora al giorno), ti alleni tutti i giorni</string>
-    <string name="effetto_termico_cibo">Inserisci fattore da 1 a 1.25 in base alla qualità della tua dieta: \n\n1 = Mangi abbastanza di tutto, a volte male, cibi confezionati, a volte non arrivi alla tua quota proteica \n1.1 = Mangi 80% pulito, 20% sporco, arrivando sempre alla tua quota proteica \n1.25 = Mangi sempre pulito, sgarri meno di una volta a settimana, sorpassando spesso la tua quota proteica</string>
-    <string name="bilancio_energetico_complessivo">Indice per decidere il tuo obiettivo di trasformazione fisica: \n\n0.7 = 30% deficit calorico, definizione aggressiva \n0.8 = 20% deficit calorico, definizione \n1 = mantenimento \n1.05 = 5% surplus calorico, fase di massa magra \n1.15 = 10% surplus, fase di massa piu\' spinta</string>
+    <string name="durata_allenamento">Durata allenamento\n(in Min)</string>
+    <string name="effetto_termico">Effetto Termico del Cibo</string>
+    <string name="indice_di_attivita">Indice di Attività</string>
+    <string name="bilancio_energetico">Bilancio Energetico</string>
+    <string name="numero_di_allenamenti">Numero allenamenti\n(Settimanali)</string>
+    <string name="indice_attivita">Il valore di \"Indice di attività\" indica quando tendo a muoverti durante la settimana.\nConsidera se svolgi un lavoro in piedi, oppure se cammini spesso durante la giornata.\n\nQuesti parametri influenzeranno i valori che risulteranno successivamente dalla tabella dei macronutrienti.</string>
+    <string name="effetto_termico_cibo">Il termine \"Effetto Termico del Cibo\" indica la qualità dell\'alimentazione che quotidianamente tieni.\nIn base alla voce che selezionerai cambieranno i valori visualizzati nella tabella sottostante. \n\nQuesto perché un alimentazione diversa porta a un diverso metabolismo e quindi a un conseguente consumo calorico differente durante la giornata.</string>
+    <string name="bilancio_energetico_complessivo">"Con il termine \"bilancio energetico\" si intente l'obiettivo che si ha la necessità di raggiungere con questo piano alimentare.\nSe si ha la necessità diprendere peso allora si può optare per una fase di massa.\nSe, invece, si vuole perdere peso o si vuole perdere massa grassa allora é consigliabile fare una fase di definizione o definizione aggressiva.\n\nQualsiasi valore si scelga é consigliabile tenere i valori invariati per almeno 3/4 settimane. "</string>
     <string name="kcal_da_calcolare">Kcal da calcolare</string>
     <string name="carboidrati">Carboidrati</string>
     <string name="proteine">Proteine</string>
@@ -73,4 +73,35 @@
     <string name="fabbisogno_giornaliero">Inserisci i dati e calcola il tuo fabbisogno calorico giornaliero!</string>
     <string name="valutazione_allenamento">Inserisci una valutazione all\'allenamento:</string>
     <string name="nome_allenamento">Inserisci un nome all\'allenamento:</string>
+    <string name="scegli_indice_attivita">Scegli il tuo Indice di Attività</string>
+    <string name="sedentario">Sedentario</string>
+    <string name="sedentario_text">Non cammini se non dentro casa.\nTi alleni 1/2 volte a settimana.</string>
+    <string name="sedentario_plus">Sedentario Plus</string>
+    <string name="sedentario_plus_text">Cammini poco.\nTi alleni 3 volte a settimana.</string>
+    <string name="attivita_media">Attività Media</string>
+    <string name="attivita_media_text">Cammini almeno 30 minuti al giorno.\nLavori in piedi.\nTi alleni 3 volte a settimana.</string>
+    <string name="attivita_moderata">Attività Moderata</string>
+    <string name="attivita_moderata_text">Cammini per più di 1 ora al giorno.\nTi alleni 4/5 volte a settimana.</string>
+    <string name="attivita_elevata">Attività Elevata</string>
+    <string name="attivita_elevata_text">Cammini per più di 1 ora al giorno.\nTi alleni tutti i giorni.</string>
+    <string name="indica_la_tua_alimentazione">Indica la tua Alimentazione</string>
+    <string name="mangi_di_tutto">Mangi di Tutto</string>
+    <string name="mangi_di_tutto_text">A volte mangi male (cibi confezionati)\nA volte non arrivi alla tua quota proteica.</string>
+    <string name="mangi_mediamente_pulito">Mangi mediamente Pulito</string>
+    <string name="mangi_mediamente_pulito_text">80% pulito e 20% sporco\nArrivi sempre alla quota proteica</string>
+    <string name="mangi_pulito">Mangi Pulito</string>
+    <string name="mangi_pulito_text">Sgarri meno di una volta a settimana\nSorpassi spesso la quota proteica</string>
+    <string name="scegli_obiettivo">Scegli il tuo Obiettivo</string>
+    <string name="definizione_aggressiva">Definizione Aggressiva</string>
+    <string name="definizione_aggressiva_text">30% di deficit calorico</string>
+    <string name="definizione">Definizione</string>
+    <string name="definizione_text">20% di deficit calorico</string>
+    <string name="mantenimento">Mantenimento</string>
+    <string name="mantenimento_text">No deficit - No surplus</string>
+    <string name="massa_magra">Massa Magra</string>
+    <string name="massa_magra_text">5% di surplus calorico</string>
+    <string name="massa_spinta">Massa Spinta</string>
+    <string name="massa_spinta_text">10% di surplus calorico</string>
+    <string name="min">Min</string>
+    <string name="settimanali">Settimanali</string>
 </resources>

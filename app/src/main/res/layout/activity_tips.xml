@@ -82,7 +82,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="150dp"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/peso"
                     android:layout_marginEnd="10dp">
@@ -99,7 +99,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout2"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="150dp"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/percentuale_massa_grassa">
 
@@ -118,48 +118,73 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/background_card_first_access_d1">
+                android:orientation="horizontal"
+                android:background="@drawable/background_white_corners"
+                android:layout_marginTop="5dp">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout5"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="200dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/durata_allenamento">
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginEnd="10dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etDurataAllenamento"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/candara"
-                        android:inputType="number"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/durata_allenamento"
+                        android:fontFamily="@font/candara"/>
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout5"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="170dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/min">
 
-            </LinearLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etDurataAllenamento"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/candara"
+                            android:inputType="number"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:background="@drawable/background_card_first_access_d2">
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout7"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="200dp"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/numero_di_allenamenti">
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etNumeroAllenamenti"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/candara"
-                        android:inputType="number"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/numero_di_allenamenti"
+                        android:fontFamily="@font/candara"/>
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout7"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="170dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/settimanali">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etNumeroAllenamenti"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/candara"
+                            android:inputType="number"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -169,37 +194,51 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:gravity="center"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginTop="5dp"
                 android:paddingTop="10dp"
                 android:background="@drawable/background_card_first_access_d1">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout3"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/indice_di_attivita"
-                    android:paddingEnd="10dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etIndiceAttivita"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/candara"
-                        android:inputType="numberDecimal"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipInfoAttivita"
-                    android:layout_width="48dp"
-                    android:layout_height="36dp"
+                <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="@string/indice_di_attivita"
                     android:fontFamily="@font/candara"
-                    android:text="@string/info"
-                    android:textSize="12sp"
-                    android:textStyle="italic"
-                    android:onClick="infoDialogIndiceAttivita"/>
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/IAText"
+                        android:layout_width="180dp"
+                        android:layout_height="50dp"
+                        android:paddingEnd="10dp"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:text="Indice di Attività"
+                        android:fontFamily="@font/candara"
+                        android:textColor="@color/black"
+                        android:onClick="indiceAttivita"
+                        android:background="@drawable/background_white_corners"
+                        android:elevation="5dp"
+                        android:clickable="true"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipInfoAttivita"
+                        android:layout_width="48dp"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/candara"
+                        android:text="@string/info"
+                        android:textSize="12sp"
+                        android:textStyle="italic"
+                        android:onClick="infoDialogIndiceAttivita"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -209,35 +248,48 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:gravity="center"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:background="@color/white">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout4"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/effetto_termico"
-                    android:paddingEnd="10dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etEffettoTermico"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/candara"
-                        android:inputType="numberDecimal"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipInfoEffettoTermico"
-                    android:layout_width="48dp"
-                    android:layout_height="36dp"
+                <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="@string/effetto_termico"
                     android:fontFamily="@font/candara"
-                    android:text="@string/info"
-                    android:textSize="12sp"
-                    android:textStyle="italic"
-                    android:onClick="infoDialogEffettoTermico"/>
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ETText"
+                        android:layout_width="180dp"
+                        android:layout_height="50dp"
+                        android:paddingEnd="10dp"
+                        android:layout_margin="10dp"
+                        android:onClick="effettoTermico"
+                        android:background="@drawable/background_white_corners"
+                        android:elevation="5dp"
+                        android:gravity="center"
+                        android:text="Effetto Termico del Cibo"
+                        android:fontFamily="@font/candara"
+                        android:textColor="@color/black"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipInfoEffettoTermico"
+                        android:layout_width="48dp"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/candara"
+                        android:text="@string/info"
+                        android:textSize="12sp"
+                        android:textStyle="italic"
+                        android:onClick="infoDialogEffettoTermico"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -246,35 +298,49 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:gravity="center"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:background="@drawable/background_card_first_access_d2">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout6"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/bilancio_energetico"
-                    android:paddingEnd="10dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etBilancioEnergetico"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/candara"
-                        android:inputType="numberDecimal"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipInfoBilancioEnergetico"
-                    android:layout_width="48dp"
-                    android:layout_height="36dp"
+                <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="@string/bilancio_energetico"
                     android:fontFamily="@font/candara"
-                    android:text="@string/info"
-                    android:textSize="12sp"
-                    android:textStyle="italic"
-                    android:onClick="infoDialogBilancioEnergetico"/>
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/BEText"
+                        android:layout_width="180dp"
+                        android:layout_height="50dp"
+                        android:paddingEnd="10dp"
+                        android:layout_margin="10dp"
+                        android:onClick="bilancioEnergetico"
+                        android:background="@drawable/background_white_corners"
+                        android:elevation="5dp"
+                        android:gravity="center"
+                        android:text="Bilancio Energetico"
+                        android:fontFamily="@font/candara"
+                        android:textColor="@color/black"/>
+
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipInfoBilancioEnergetico"
+                        android:layout_width="48dp"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/candara"
+                        android:text="@string/info"
+                        android:textSize="12sp"
+                        android:textStyle="italic"
+                        android:onClick="infoDialogBilancioEnergetico"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 

@@ -6,30 +6,31 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wayoflife.R;
 import com.example.wayoflife.dialog.TipsDialog;
 import com.example.wayoflife.util.Constants;
-import com.example.wayoflife.workouts.ui.WorkoutHistoryActivity;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.w3c.dom.Text;
+
 import java.text.DecimalFormat;
 
-public class TipsActivity extends AppCompatActivity {
+public class TipsActivity extends AppCompatActivity /* implements PopupMenu.OnMenuItemClickListener */ {
 
     public static final String TAG = "TipsActivity";
 
     /** Variabili per gestione dei box di input */
     private String pesoS;
     private String massaGrassaS;
-    private String indiceAttivitaS;
-    private String effettoTermicoS;
     private String durataAllenamentoS;
-    private String bilancioEnergeticoS;
     private String numeroAllenamentiS;
     private double peso;
     private double massaGrassa;
@@ -54,10 +55,7 @@ public class TipsActivity extends AppCompatActivity {
     /** Collegamenti con layout */
     private TextInputEditText pesoET;
     private TextInputEditText massaGrassaET;
-    private TextInputEditText indiceAttivitaET;
-    private TextInputEditText effettoTermicoET;
     private TextInputEditText durataAllenamentoET;
-    private TextInputEditText bilancioEnergeticoET;
     private TextInputEditText numeroAllenamentiET;
 
     private TextView obiettivoCalorie;
@@ -73,6 +71,8 @@ public class TipsActivity extends AppCompatActivity {
     private TextView massimoProteine;
     private TextView massimoGrassi;
 
+    private BottomSheetDialog bottomSheetDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,10 +80,7 @@ public class TipsActivity extends AppCompatActivity {
 
         pesoET = findViewById(R.id.etPeso);
         massaGrassaET = findViewById(R.id.etMassaGrassa);
-        indiceAttivitaET = findViewById(R.id.etIndiceAttivita);
-        effettoTermicoET = findViewById(R.id.etEffettoTermico);
         durataAllenamentoET = findViewById(R.id.etDurataAllenamento);
-        bilancioEnergeticoET = findViewById(R.id.etBilancioEnergetico);
         numeroAllenamentiET = findViewById(R.id.etNumeroAllenamenti);
 
         obiettivoCalorie = findViewById(R.id.obiettivoCalorie);
@@ -101,7 +98,176 @@ public class TipsActivity extends AppCompatActivity {
         massimoProteine = findViewById(R.id.massimoProteine);
         massimoGrassi = findViewById(R.id.massimoGrassi);
 
+        indiceAttivita = 0.0;
+        effettoTermico = 0.0;
+        bilancioEnergetico = 0.0;
+
         resumeDoubleInformation();
+    }
+
+    /** Controllo del primo BottomSheet */
+    public void indiceAttivita(View v){
+        TextView tv = findViewById(R.id.IAText);
+
+        bottomSheetDialog = new BottomSheetDialog(TipsActivity.this,
+                R.style.BottomSheetTheme);
+
+        View sheetView = LayoutInflater.from(
+                getApplicationContext()).inflate(R.layout.bs_indice_attivita,
+                (ViewGroup) findViewById(R.id.indiceAttivitaBS));
+
+        sheetView.findViewById(R.id.sedentario).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        indiceAttivita = 1;
+                        tv.setText("Sedentario");
+                        bottomSheetDialog.cancel();
+                    }
+                });
+        sheetView.findViewById(R.id.sedentarioPlus).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        indiceAttivita = 1.1;
+                        tv.setText("Sedentario Plus");
+                        bottomSheetDialog.cancel();
+                    }
+                });
+        sheetView.findViewById(R.id.att_media).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        indiceAttivita = 1.2;
+                        tv.setText("Attività Media");
+                        bottomSheetDialog.cancel();
+                    }
+                });
+        sheetView.findViewById(R.id.att_moderata).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        indiceAttivita = 1.3;
+                        tv.setText("Attività Moderata");
+                        bottomSheetDialog.cancel();
+                    }
+                });
+        sheetView.findViewById(R.id.att_elevata).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        indiceAttivita = 1.4;
+                        tv.setText("Attività Elevata");
+                        bottomSheetDialog.cancel();
+                    }
+                });
+
+        bottomSheetDialog.setContentView(sheetView);
+        bottomSheetDialog.show();
+    }
+
+    /** Controllo del secondo BottomSheet */
+    public void effettoTermico(View v){
+        TextView tv = findViewById(R.id.ETText);
+
+        bottomSheetDialog = new BottomSheetDialog(TipsActivity.this,
+                R.style.BottomSheetTheme);
+
+        View sheetView = LayoutInflater.from(
+                getApplicationContext()).inflate(R.layout.bs_effetto_termico,
+                (ViewGroup) findViewById(R.id.effettoTermicoBS));
+
+        sheetView.findViewById(R.id.tutto).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        effettoTermico = 1;
+                        tv.setText("Mangi di Tutto");
+                        bottomSheetDialog.cancel();
+                    }
+                });
+        sheetView.findViewById(R.id.medio).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        effettoTermico = 1.1;
+                        tv.setText("Mangi mediamente Pulito");
+                        bottomSheetDialog.cancel();
+                    }
+                });
+        sheetView.findViewById(R.id.pulito).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        effettoTermico = 1.25;
+                        tv.setText("Mangi Pulito");
+                        bottomSheetDialog.cancel();
+                    }
+                });
+
+        bottomSheetDialog.setContentView(sheetView);
+        bottomSheetDialog.show();
+    }
+
+    /** Controllo del terzo BottomSheet */
+    public void bilancioEnergetico(View v){
+        TextView tv = findViewById(R.id.BEText);
+
+        bottomSheetDialog = new BottomSheetDialog(TipsActivity.this,
+                R.style.BottomSheetTheme);
+
+        View sheetView = LayoutInflater.from(
+                getApplicationContext()).inflate(R.layout.bs_bilancio_energetico,
+                (ViewGroup) findViewById(R.id.bilancioEnergeticoBS));
+
+        sheetView.findViewById(R.id.definizioneAggressiva).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bilancioEnergetico = 0.7;
+                        tv.setText("Definizione Aggressiva");
+                        bottomSheetDialog.cancel();
+                    }
+                });
+        sheetView.findViewById(R.id.definizione).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bilancioEnergetico = 0.8;
+                        tv.setText("Definizione");
+                        bottomSheetDialog.cancel();
+                    }
+                });
+        sheetView.findViewById(R.id.mantenimento).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bilancioEnergetico = 1;
+                        tv.setText("Mantenimento");
+                        bottomSheetDialog.cancel();
+                    }
+                });
+        sheetView.findViewById(R.id.massa).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bilancioEnergetico = 1.05;
+                        tv.setText("Massa Magra");
+                        bottomSheetDialog.cancel();
+                    }
+                });
+        sheetView.findViewById(R.id.massaSpinta).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bilancioEnergetico = 1.15;
+                        tv.setText("Massa Spinta");
+                        bottomSheetDialog.cancel();
+                    }
+                });
+
+        bottomSheetDialog.setContentView(sheetView);
+        bottomSheetDialog.show();
     }
 
     /**
@@ -111,21 +277,19 @@ public class TipsActivity extends AppCompatActivity {
 
         pesoS = pesoET.getText().toString();
         massaGrassaS = massaGrassaET.getText().toString();
-        indiceAttivitaS = indiceAttivitaET.getText().toString();
-        effettoTermicoS = effettoTermicoET.getText().toString();
         durataAllenamentoS = durataAllenamentoET.getText().toString();
-        bilancioEnergeticoS = bilancioEnergeticoET.getText().toString();
         numeroAllenamentiS = numeroAllenamentiET.getText().toString();
 
-        if (pesoS.isEmpty() || massaGrassaS.isEmpty()  || effettoTermicoS.isEmpty()  ||
-                durataAllenamentoS.isEmpty()  || bilancioEnergeticoS.isEmpty()  ||
-                numeroAllenamentiS.isEmpty() || indiceAttivitaS.isEmpty()) {
+        if (pesoS.isEmpty() || massaGrassaS.isEmpty()  || indiceAttivita == 0.0 ||
+                durataAllenamentoS.isEmpty()  || bilancioEnergetico == 0.0 ||
+                numeroAllenamentiS.isEmpty() || effettoTermico == 0.0) {
             Snackbar.make(findViewById(android.R.id.content), "Inserisci tutti i dati",
                     Snackbar.LENGTH_SHORT).show();
         } else {
             saveInformation();
             resumeDoubleInformation();
-            Toast.makeText(TipsActivity.this, "Tabella aggiornata!" , Toast.LENGTH_LONG).show();
+            Toast.makeText(TipsActivity.this, "Tabella aggiornata!\nScorri per visualizzarla"
+                    , Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -140,11 +304,12 @@ public class TipsActivity extends AppCompatActivity {
 
         editor.putString(Constants.PESO, pesoS);
         editor.putString(Constants.MASSA_GRASSA, massaGrassaS);
-        editor.putString(Constants.INDICE_ATTIVITA, indiceAttivitaS);
-        editor.putString(Constants.EFFETTO_TERMICO, effettoTermicoS);
         editor.putString(Constants.DURATA_ALLENAMENTO, durataAllenamentoS);
-        editor.putString(Constants.BILANCIO_ENERGETICO, bilancioEnergeticoS);
         editor.putString(Constants.NUMERO_ALLENAMENTI, numeroAllenamentiS);
+
+        editor.putString(Constants.INDICE_ATTIVITA, "" + indiceAttivita);
+        editor.putString(Constants.EFFETTO_TERMICO, "" + effettoTermico);
+        editor.putString(Constants.BILANCIO_ENERGETICO, "" + bilancioEnergetico);
 
         editor.apply();
     }
@@ -179,13 +344,61 @@ public class TipsActivity extends AppCompatActivity {
                 numeroAllenamenti == 0.0 && indiceAttivita == 0.0)){
 
             massaGrassaET.setText("" + massaGrassa);
-            indiceAttivitaET.setText("" + indiceAttivita);
-            effettoTermicoET.setText("" + effettoTermico);
             durataAllenamentoET.setText("" + ((int) durataAllenamento));
-            bilancioEnergeticoET.setText("" + bilancioEnergetico);
             numeroAllenamentiET.setText("" + ((int) numeroAllenamenti));
 
+            updateTextView();
+
             calculateCalories();
+        }
+    }
+
+    /** Aggiornamento dei TextView relativi ai parametri sottostanti */
+    private void updateTextView(){
+        TextView et = findViewById(R.id.ETText);
+        TextView be = findViewById(R.id.BEText);
+        TextView ia = findViewById(R.id.IAText);
+
+        if(indiceAttivita == 1.0){
+            ia.setText("Sedentario");
+        }
+        if(indiceAttivita == 1.1){
+            ia.setText("Sedentario Plus");
+        }
+        if(indiceAttivita == 1.2){
+            ia.setText("Attività Media");
+        }
+        if(indiceAttivita == 1.3){
+            ia.setText("Attività Moderata");
+        }
+        if(indiceAttivita == 1.4){
+            ia.setText("Attività Elevata");
+        }
+
+        if(effettoTermico == 1){
+            et.setText("Mangi di Tutto");
+        }
+        if(effettoTermico == 1.1){
+            et.setText("Mangi mediamente Pulito");
+        }
+        if(effettoTermico == 1.25){
+            et.setText("Mangi Pulito");
+        }
+
+        if(bilancioEnergetico == 0.7){
+            be.setText("Definizione Aggressiva");
+        }
+        if(bilancioEnergetico == 0.8){
+            be.setText("Definizione");
+        }
+        if(bilancioEnergetico == 1){
+            be.setText("Mantenimento");
+        }
+        if(bilancioEnergetico == 1.05){
+            be.setText("Massa Magra");
+        }
+        if(bilancioEnergetico == 1.15){
+            be.setText("Massa Spinta");
         }
     }
 
