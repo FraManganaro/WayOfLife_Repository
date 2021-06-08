@@ -488,7 +488,7 @@ public class HomeActivity extends AppCompatActivity {
         saveInformation();
         resumeInformation();
 
-        printToScreen("ManageRunning: \n\n" + activityTransitionList.toString() + "\n\n");
+        printToScreen("ManageCycling: \n\n" + activityTransitionList.toString() + "\n\n");
     }
 
     /** Metodo che gestisce il Dialog contenente le informazioni sull'ActivityTransition */
@@ -628,9 +628,7 @@ public class HomeActivity extends AppCompatActivity {
                             " (" + toTransitionType(event.getTransitionType()) + ")" + "   " +
                             new SimpleDateFormat("HH:mm:ss", Locale.ITALIAN).format(new Date());
 
-
-                    /** Stampo nella console transizione di ingresso e di uscite */
-                    printToScreen(info);
+//                    printToScreen(info);
 
                     /** Salvo solo la transazione di INGRESSO */
                     if(toTransitionType(event.getTransitionType())

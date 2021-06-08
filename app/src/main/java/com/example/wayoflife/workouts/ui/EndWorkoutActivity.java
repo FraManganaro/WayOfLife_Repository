@@ -83,10 +83,13 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         tvCalorie.setText(calorie + " kcal");
 
         String tr = getIntent().getStringExtra(Constants.CHILOMETRI);
+        Log.d(TAG, "onCreate: "+ tr);
         if (tr == null || tr.equals("0,00")) {
             chilometri = 0;
-            Log.d(TAG, "Chilometri 0");
         } else {
+//            String s[] = tr.split(",");
+//            String fin = s[0] + "." + s[1];
+//            chilometri = Float.parseFloat(fin);
             chilometri = Float.parseFloat(tr);
         }
 

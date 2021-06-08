@@ -78,7 +78,7 @@ public class RunningActivity extends AppCompatActivity {
     private boolean gpsStatus;
     private Context context;
 
-    /** Variabili per aggiornamento posizione e calorie */
+    /** Variabili per aggiornamento posizione e calorie */ 
     private Thread t;
     private boolean continueFindLocation;
     private boolean cycle;
