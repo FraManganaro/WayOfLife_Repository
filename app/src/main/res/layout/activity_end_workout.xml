@@ -158,7 +158,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/candara"
                         android:text="@string/durata"
-                        android:textSize="16dp"/>
+                        android:textSize="16sp"/>
 
                     <TextView
                         android:id="@+id/tvTempo"
@@ -166,7 +166,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/candara"
                         android:gravity="center"
-                        android:text="0"
+                        android:text="@string/zero"
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:textColor="@color/black"
@@ -185,7 +185,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/candara"
                         android:gravity="center"
-                        android:text="0"
+                        android:text="@string/zero"
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:textColor="@color/black"/>
@@ -215,7 +215,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/candara"
                         android:text="@string/pushup"
-                        android:textSize="16dp"/>
+                        android:textSize="16sp"/>
 
                     <TextView
                         android:id="@+id/tvExtra"
@@ -223,7 +223,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/candara"
                         android:gravity="center"
-                        android:text="0"
+                        android:text="@string/zero"
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:textColor="@color/black"
@@ -235,7 +235,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/candara"
                         android:text="@string/squat"
-                        android:textSize="16dp"/>
+                        android:textSize="16sp"/>
 
                     <TextView
                         android:id="@+id/tvExtraSquat"
@@ -243,7 +243,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/candara"
                         android:gravity="center"
-                        android:text="0"
+                        android:text="@string/zero"
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:textColor="@color/black"/>

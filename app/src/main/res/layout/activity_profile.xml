@@ -70,7 +70,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_marginLeft="10dp"
-                android:text="Profilo Utente"
+                android:text="@string/profilo_utente"
                 android:textStyle="italic"
                 android:textSize="18sp"
                 android:textColor="@color/white"/>
@@ -120,7 +120,7 @@
                                 android:text="@string/nome"
                                 android:fontFamily="@font/candara"
                                 android:textStyle="bold"
-                                android:textSize="17dp"
+                                android:textSize="17sp"
                                 android:layout_marginTop="5dp"
                                 android:textColor="@color/black"/>
 
@@ -139,7 +139,7 @@
                                 android:text="@string/cognome"
                                 android:fontFamily="@font/candara"
                                 android:textStyle="bold"
-                                android:textSize="17dp"
+                                android:textSize="17sp"
                                 android:textColor="@color/black"/>
 
                             <TextView
@@ -187,13 +187,13 @@
                                 android:text="@string/peso"
                                 android:fontFamily="@font/candara"
                                 android:textStyle="bold"
-                                android:textSize="17dp"
+                                android:textSize="17sp"
                                 android:textColor="@color/black"/>
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Peso in KG"
+                                android:text="@string/peso_in_kg"
                                 android:fontFamily="@font/candara"
                                 android:textStyle="italic"
                                 android:id="@+id/tvPeso"/>
@@ -233,7 +233,7 @@
                                 android:text="@string/altezza"
                                 android:fontFamily="@font/candara"
                                 android:textStyle="bold"
-                                android:textSize="17dp"
+                                android:textSize="17sp"
                                 android:textColor="@color/black"/>
 
                             <TextView
@@ -280,7 +280,7 @@
                                 android:text="@string/sesso"
                                 android:fontFamily="@font/candara"
                                 android:textStyle="bold"
-                                android:textSize="17dp"
+                                android:textSize="17sp"
                                 android:textColor="@color/black"/>
 
                             <TextView

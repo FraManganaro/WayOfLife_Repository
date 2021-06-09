@@ -33,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/candara"
-                    android:text="NomeAllenamento"
+                    android:text="@string/nomeallenamento"
                     android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintVertical_bias="0.263"
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="italic"
                     android:textSize="15sp"
-                    android:text="Tipologia Allenamento"
+                    android:text="@string/tipologiaallenamento"
                     android:textColor="@color/white"/>
 
             </LinearLayout>
@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/data"
                         android:fontFamily="@font/candara"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_marginTop="10dp"/>
 
                     <TextView
@@ -120,7 +120,7 @@
                         android:text="@string/durata"
                         android:fontFamily="@font/candara"
                         android:layout_marginTop="10dp"
-                        android:textSize="16dp"/>
+                        android:textSize="16sp"/>
 
                     <TextView
                         android:id="@+id/durataWorkout"
@@ -157,7 +157,7 @@
                         android:text="@string/calorie"
                         android:fontFamily="@font/candara"
                         android:layout_marginTop="10dp"
-                        android:textSize="16dp"/>
+                        android:textSize="16sp"/>
 
                     <TextView
                         android:id="@+id/calorieWorkout"
@@ -192,7 +192,7 @@
                             android:text="@string/pushup"
                             android:fontFamily="@font/candara"
                             android:layout_marginEnd="5dp"
-                            android:textSize="16dp"/>
+                            android:textSize="16sp"/>
 
                         <TextView
                             android:id="@+id/tvExtra"
@@ -219,7 +219,7 @@
                             android:text="@string/squat"
                             android:fontFamily="@font/candara"
                             android:layout_marginEnd="5dp"
-                            android:textSize="16dp"/>
+                            android:textSize="16sp"/>
 
                         <TextView
                             android:id="@+id/tvExtraSquat"

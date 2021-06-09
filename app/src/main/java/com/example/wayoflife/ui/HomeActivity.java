@@ -343,7 +343,6 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        // Disable activity transitions when user leaves the app.
         // Rimuovere il commento per stoppare riconoscimento quando si esce dall'activity
 //        if (activityTrackingEnabled) { disableActivityTransitions(); }
 
@@ -351,7 +350,6 @@ public class HomeActivity extends AppCompatActivity {
     }
     @Override
     protected void onStop() {
-        // Unregister activity transition receiver when user leaves the app.
         // Rimuovere il commento per stoppare riconoscimento quando si esce dall'activity
 //        unregisterReceiver(mTransitionsReceiver);
 

@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/candara"
-        android:text="Inserire solo i dati che si vuole cambiare"
+        android:text="@string/dati_da_cambiare"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:layout_marginTop="15dp"/>

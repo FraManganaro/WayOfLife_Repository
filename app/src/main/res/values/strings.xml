@@ -104,4 +104,12 @@
     <string name="massa_spinta_text">10% di surplus calorico</string>
     <string name="min">Min</string>
     <string name="settimanali">Settimanali</string>
+    <string name="tips">Tips</string>
+    <string name="profilo_utente">Profilo Utente</string>
+    <string name="peso_in_kg">Peso in KG</string>
+    <string name="numero_di_flessioni">Numero di flessioni</string>
+    <string name="nomeallenamento">NomeAllenamento</string>
+    <string name="tipologiaallenamento">Tipologia Allenamento</string>
+    <string name="trattino">-</string>
+    <string name="dati_da_cambiare">Inserire solo i dati che si vuole cambiare</string>
 </resources>

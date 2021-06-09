@@ -64,14 +64,6 @@ public class ProfileActivity extends AppCompatActivity implements ProfileDialog.
             }
         });
 
-//        frameLayout = findViewById(R.id.aggiornaDatiProfilo);
-//        frameLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openDialog();
-//            }
-//        });
-
         FloatingActionButton fb = findViewById(R.id.floatingButton);
         fb.setOnClickListener(new View.OnClickListener() {
             @Override
