@@ -73,6 +73,7 @@ public class RunningActivity extends AppCompatActivity {
     private LatLng l1;
     private LatLng l2;
     private boolean stopped;
+    private boolean count;
     private float distance;
 
     /** Disegnare linee sulla mappa */
@@ -105,6 +106,7 @@ public class RunningActivity extends AppCompatActivity {
 
         distance = 0;
         stopped = false;
+        count = true;
 
         polylineOptions = new PolylineOptions();
 
@@ -173,16 +175,24 @@ public class RunningActivity extends AppCompatActivity {
                     if (l1 != null && l2 != null && !(l1.equals(l2))) {
                         float[] results = new float[1];
                         Location.distanceBetween(l1.latitude, l1.longitude, l2.latitude, l2.longitude, results);
-                        distance += results[0] / 1000;
+                        
+                        if(!stopped) {
 
-                        polylineOptions.add(l2).color(R.color.red);
+                            if(count) {
+                                distance += results[0] / 1000;
 
-                        Log.d(TAG, "distance (float) = " + distance);
-                        DecimalFormat numberFormat = new DecimalFormat("0.00");
-                        chilometriTV.setText(numberFormat.format(distance) + " km");
+                                polylineOptions.add(l2).color(R.color.red);
+                            } else {
+                                count = true;
+                            }
 
-                        l1 = l2;
+                            Log.d(TAG, "distance (float) = " + distance);
+                            DecimalFormat numberFormat = new DecimalFormat("0.00");
+                            chilometriTV.setText(numberFormat.format(distance) + " km");
+                        }
                     }
+
+                    l1 = l2;
                 }
             }
         };
@@ -351,6 +361,8 @@ public class RunningActivity extends AppCompatActivity {
 
             continueFindLocation = false;
 
+            stopped = true;
+
             LocationServices.getFusedLocationProviderClient(this)
                     .removeLocationUpdates(locationCallback);
 
@@ -362,7 +374,8 @@ public class RunningActivity extends AppCompatActivity {
 
             continueFindLocation = true;
 
-            stopped = true;
+            stopped = false;
+            count = false;
 
             @SuppressLint("MissingPermission") Task<Void> services =
                     LocationServices.getFusedLocationProviderClient(RunningActivity.this)
