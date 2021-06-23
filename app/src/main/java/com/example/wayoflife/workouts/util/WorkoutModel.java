@@ -15,7 +15,7 @@ public class WorkoutModel {
     private int state;
     private int like;
 
-    /** Costruttore completo */
+    /** Costruttore completo (senza ID) */
     public WorkoutModel(String nome, String data, int n_squat, String durata, float chilometri, String tipologia, int calorie, int n_flessioni, int state, int like) {
         this.nome = nome;
         this.data = data;
@@ -71,7 +71,7 @@ public class WorkoutModel {
         this.like = like;
     }
 
-    /** Costruttore con ID */
+    /** Costruttore completo (con ID) */
     public WorkoutModel(int id, String nome, String data, int n_squat, String durata, float chilometri, String tipologia, int calorie, int n_flessioni, int state, int like) {
         this.id = id;
         this.nome = nome;

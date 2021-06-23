@@ -87,10 +87,13 @@ public class EndWorkoutActivity<databaseHelper> extends AppCompatActivity {
         if (tr == null || tr.equals("0,00")) {
             chilometri = 0;
         } else {
-//            String s[] = tr.split(",");
-//            String fin = s[0] + "." + s[1];
-//            chilometri = Float.parseFloat(fin);
-            chilometri = Float.parseFloat(tr);
+            if(tr.contains(",")) {
+                String s[] = tr.split(",");
+                String fin = s[0] + "." + s[1];
+                chilometri = Float.parseFloat(fin);
+            } else {
+                chilometri = Float.parseFloat(tr);
+            }
         }
 
         n_flessioni = getIntent().getIntExtra(Constants.FLESSIONI, 0);

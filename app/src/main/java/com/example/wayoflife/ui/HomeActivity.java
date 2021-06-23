@@ -291,7 +291,7 @@ public class HomeActivity extends AppCompatActivity {
         editor.apply();
 
 
-        /** Creo un PendingIntent che posso triggerare quando uno ActivityTransition accorre */
+        /** Creo un PendingIntent che posso triggerare quando un ActivityTransition accorre */
         Intent intent = new Intent(TRANSITIONS_RECEIVER_ACTION);
         mActivityTransitionsPendingIntent =
                 PendingIntent.getBroadcast(HomeActivity.this, 0, intent, 0);
@@ -500,7 +500,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        // Start activity recognition if the permission was approved.
+        // Start activity recognition se si ha il permesso
         if (activityRecognitionPermissionApproved() && !activityTrackingEnabled) {
             enableActivityTransitions();
         }
@@ -512,15 +512,12 @@ public class HomeActivity extends AppCompatActivity {
      * {@link BroadcastReceiver}
      */
     private void enableActivityTransitions() {
-        // TODO: Create request and listen for activity changes.
-
         // Costruisco la lista delle transazioni da riconoscere
         activityTransitionList = buildTransition();
 
         //Creo richiesta passando come oggetto la lista precedentemente creata
         ActivityTransitionRequest request = new ActivityTransitionRequest(activityTransitionList);
 
-        // Register for Transitions Updates.
         //Chiamo il requestActivityTransitionUpdate passando la RICHIESTA appena inizializzata e l'intent dell'onCreate
         Task<Void> task =
                 ActivityRecognition.getClient(this)
@@ -550,7 +547,7 @@ public class HomeActivity extends AppCompatActivity {
      * {@link BroadcastReceiver}
      */
     private void disableActivityTransitions() {
-        // Stop listening for activity changes.
+        // Mi fermo, non ascolto più se ci sono cambiamenti
 
         Snackbar.make(findViewById(android.R.id.content), "ActivityTracker disattivato",
                 Snackbar.LENGTH_SHORT).show();
