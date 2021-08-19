@@ -1,3 +1,5 @@
+# WayOfLife
+
 L’applicazione sviluppata può essere categorizzata come un “fitness tracker” ovvero un’applicazione devota ad essere utilizzata da tutte quelle persone che hanno necessità di tracciare i propri allenamenti.
 **WayOfLife** permette all’utente di tracciare a 360 gradi i propri allenamenti e di avere un recap completo di tutte le attività svolte nel tempo. In particolare, si ha la possibilità di tracciare undici allenamenti: *Camminata, Corsa, Ciclismo. Flessioni, Squat, Freestyle, Basket, Calcio, Nuoto, Scalini e Tennis*.
 
